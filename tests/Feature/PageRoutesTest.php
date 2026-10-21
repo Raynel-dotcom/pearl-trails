@@ -2,16 +2,19 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class PageRoutesTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_home_page_loads_successfully(): void
     {
         $response = $this->get('/');
         $response->assertStatus(200);
         $response->assertSee('Pearl Trails');
-        $response->assertSee('Welcome to Pearl Trails');
+        $response->assertSee('Your Uganda. Your Budget. Your Adventure.');
     }
 
     public function test_destinations_page_loads_successfully(): void
@@ -32,8 +35,7 @@ class PageRoutesTest extends TestCase
     {
         $response = $this->get('/interest/wildlife');
         $response->assertStatus(200);
-        $response->assertSee('Explore by Interest');
-        $response->assertSee('Wildlife');
+        $response->assertSee('Explore Uganda');
     }
 
     public function test_saved_page_loads_successfully(): void
@@ -43,10 +45,19 @@ class PageRoutesTest extends TestCase
         $response->assertSee('Saved Trips');
     }
 
-    public function test_about_page_loads_successfully(): void
+    public function test_browse_pages_load_successfully(): void
     {
-        $response = $this->get('/about');
-        $response->assertStatus(200);
-        $response->assertSee('About Pearl Trails');
+        $this->get('/stays')->assertStatus(200)->assertSee('Where to Stay');
+        $this->get('/eat')->assertStatus(200)->assertSee('Where to Eat');
+        $this->get('/recreation')->assertStatus(200)->assertSee('Recreation & Fun Activities');
+    }
+
+    public function test_static_pages_load_successfully(): void
+    {
+        $this->get('/about')->assertStatus(200)->assertSee('About Pearl Trails');
+        $this->get('/contact')->assertStatus(200)->assertSee('Contact Pearl Trails');
+        $this->get('/privacy')->assertStatus(200)->assertSee('Privacy Policy');
+        $this->get('/terms')->assertStatus(200)->assertSee('Terms of Service');
+        $this->get('/list-your-business')->assertStatus(200)->assertSee('List Your Business');
     }
 }

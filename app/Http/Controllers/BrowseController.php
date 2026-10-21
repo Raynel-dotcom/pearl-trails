@@ -21,7 +21,7 @@ class BrowseController extends Controller
      */
     public function stays(Request $request)
     {
-        return $this->renderBrowsePage('stay', 'Stays & Lodges in Uganda', 'Find eco-lodges, safari camps, and backpacker hostels across Uganda.', $request);
+        return $this->renderBrowsePage('stay', 'Where to Stay in Uganda', 'Find eco-lodges, safari camps, and backpacker hostels across Uganda.', $request);
     }
 
     /**
