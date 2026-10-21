@@ -42,14 +42,22 @@
         </div>
     @endif
 
-    <!-- Filter Bar -->
+    <!-- Search & Filter Card -->
     <div class="filter-card">
         <form action="{{ url()->current() }}" method="GET" class="filters-form" id="browseFilterForm">
             <div class="filters-grid">
+                <!-- Keyword Search -->
+                <div class="filter-group filter-group-search">
+                    <label for="browseSearch">🔍 Search</label>
+                    <div class="filter-input-wrapper">
+                        <input type="text" name="q" id="browseSearch" value="{{ request('q') }}" placeholder="Search by name, site, or specialty..." class="filter-input">
+                    </div>
+                </div>
+
                 <!-- Destination Filter -->
                 <div class="filter-group">
-                    <label for="destSelect">Filter by Destination</label>
-                    <select name="destination" id="destSelect" onchange="document.getElementById('browseFilterForm').submit()">
+                    <label for="destSelect">📍 Destination</label>
+                    <select name="destination" id="destSelect" class="filter-select" onchange="document.getElementById('browseFilterForm').submit()">
                         <option value="">All Uganda Destinations</option>
                         @foreach($destinations as $d)
                             <option value="{{ $d->id }}" {{ $selectedDestinationId === $d->id ? 'selected' : '' }}>
@@ -61,28 +69,43 @@
 
                 <!-- Up to Price Filter -->
                 <div class="filter-group">
-                    <label for="priceSelect">Up to Price</label>
-                    <select name="max_price" id="priceSelect" onchange="document.getElementById('browseFilterForm').submit()">
-                        <option value="">Any Price</option>
+                    <label for="priceSelect">💰 Maximum Spend ({{ $currentCurrency }})</label>
+                    <select name="max_price" id="priceSelect" class="filter-select" onchange="document.getElementById('browseFilterForm').submit()">
+                        <option value="">Any Budget</option>
                         @if($currentCurrency === 'UGX')
-                            <option value="30000" {{ $maxPriceUgx === 30000 ? 'selected' : '' }}>Up to UGX 30,000</option>
-                            <option value="60000" {{ $maxPriceUgx === 60000 ? 'selected' : '' }}>Up to UGX 60,000</option>
-                            <option value="120000" {{ $maxPriceUgx === 120000 ? 'selected' : '' }}>Up to UGX 120,000</option>
-                            <option value="250000" {{ $maxPriceUgx === 250000 ? 'selected' : '' }}>Up to UGX 250,000</option>
-                            <option value="500000" {{ $maxPriceUgx === 500000 ? 'selected' : '' }}>Up to UGX 500,000</option>
+                            <option value="30000" {{ $maxPriceUgx === 30000 ? 'selected' : '' }}>Under UGX 30,000</option>
+                            <option value="60000" {{ $maxPriceUgx === 60000 ? 'selected' : '' }}>Under UGX 60,000</option>
+                            <option value="120000" {{ $maxPriceUgx === 120000 ? 'selected' : '' }}>Under UGX 120,000</option>
+                            <option value="250000" {{ $maxPriceUgx === 250000 ? 'selected' : '' }}>Under UGX 250,000</option>
+                            <option value="500000" {{ $maxPriceUgx === 500000 ? 'selected' : '' }}>Under UGX 500,000</option>
                         @else
-                            <option value="73000" {{ $maxPriceUgx === 73000 ? 'selected' : '' }}>Up to ~@price(73000)</option>
-                            <option value="182500" {{ $maxPriceUgx === 182500 ? 'selected' : '' }}>Up to ~@price(182500)</option>
-                            <option value="365000" {{ $maxPriceUgx === 365000 ? 'selected' : '' }}>Up to ~@price(365000)</option>
-                            <option value="730000" {{ $maxPriceUgx === 730000 ? 'selected' : '' }}>Up to ~@price(730000)</option>
+                            <option value="73000" {{ $maxPriceUgx === 73000 ? 'selected' : '' }}>Under ~@price(73000)</option>
+                            <option value="182500" {{ $maxPriceUgx === 182500 ? 'selected' : '' }}>Under ~@price(182500)</option>
+                            <option value="365000" {{ $maxPriceUgx === 365000 ? 'selected' : '' }}>Under ~@price(365000)</option>
+                            <option value="730000" {{ $maxPriceUgx === 730000 ? 'selected' : '' }}>Under ~@price(730000)</option>
                         @endif
                     </select>
                 </div>
+
+                <!-- Action Buttons -->
+                <div class="filter-actions-group">
+                    <button type="submit" class="btn btn-gold btn-filter-submit">
+                        Search
+                    </button>
+                    @if(request()->hasAny(['q', 'destination', 'max_price']))
+                        <a href="{{ url()->current() }}" class="btn btn-outline btn-filter-reset">
+                            Clear
+                        </a>
+                    @endif
+                </div>
             </div>
 
-            @if($selectedDestinationId || $maxPriceUgx)
+            @if($selectedDestinationId || $maxPriceUgx || request('q'))
                 <div class="active-filters-row">
-                    <span class="active-filters-label">Active Filter:</span>
+                    <span class="active-filters-label">Active Filters:</span>
+                    @if(request('q'))
+                        <span class="filter-tag">"{{ request('q') }}" <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}">✕</a></span>
+                    @endif
                     @if($selectedDestinationId)
                         @php $activeDest = $destinations->firstWhere('id', $selectedDestinationId); @endphp
                         <span class="filter-tag">{{ $activeDest->name ?? 'Destination' }} <a href="{{ request()->fullUrlWithQuery(['destination' => null]) }}">✕</a></span>
@@ -90,7 +113,7 @@
                     @if($maxPriceUgx)
                         <span class="filter-tag">Max @price($maxPriceUgx) <a href="{{ request()->fullUrlWithQuery(['max_price' => null]) }}">✕</a></span>
                     @endif
-                    <a href="{{ url()->current() }}" class="clear-filters-link">Reset Filters</a>
+                    <a href="{{ url()->current() }}" class="clear-filters-link">Reset All</a>
                 </div>
             @endif
         </form>

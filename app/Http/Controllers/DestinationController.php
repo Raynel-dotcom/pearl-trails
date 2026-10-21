@@ -23,6 +23,16 @@ class DestinationController extends Controller
     {
         $query = Destination::query();
 
+        // Search Keyword
+        if ($request->filled('q')) {
+            $term = trim($request->q);
+            $query->where(function ($q) use ($term) {
+                $q->where('name', 'like', "%{$term}%")
+                  ->orWhere('description', 'like', "%{$term}%")
+                  ->orWhere('region', 'like', "%{$term}%");
+            });
+        }
+
         // Filter: Region
         if ($request->filled('region')) {
             $query->where('region', $request->region);
