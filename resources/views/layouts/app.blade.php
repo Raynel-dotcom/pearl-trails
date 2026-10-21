@@ -28,64 +28,110 @@
                 <span class="logo-title">Pearl Trails</span>
             </a>
 
-            <!-- Currency Dropdown -->
-            <div class="currency-dropdown-wrapper">
-                <label for="currencySelect" class="sr-only">Currency</label>
-                <select id="currencySelect" class="currency-select" onchange="window.location.href='/currency/' + this.value">
-                    @foreach($supportedCurrencies ?? ['UGX', 'USD', 'EUR', 'GBP'] as $curr)
-                        <option value="{{ $curr }}" {{ ($currentCurrency ?? 'UGX') === $curr ? 'selected' : '' }}>
-                            {{ $curr }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <!-- Prominent "Plan My Trip" Button (Always Visible in Header) -->
-            <a href="{{ route('plan') }}" class="btn-plan-trip-header">
-                ✨ Plan My Trip
-            </a>
-
-            <!-- Hamburger Button (☰, changes to ✕ when open; visible <900px, hidden >=900px) -->
-            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
-                <span id="hamburgerIcon">☰</span>
-            </button>
-
-            <!-- Navigation Links Container -->
-            <nav class="nav-container" id="navContainer">
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
-                    <li><a href="{{ route('destinations') }}" class="nav-link {{ request()->routeIs('destinations*') ? 'active' : '' }}">Destinations</a></li>
-                    <li><a href="{{ route('plan') }}" class="nav-link {{ request()->routeIs('plan*') ? 'active' : '' }}">Plan My Trip</a></li>
-                    <li><a href="{{ route('interest') }}" class="nav-link {{ request()->routeIs('interest*') ? 'active' : '' }}">Explore by Interest</a></li>
-                    <li><a href="{{ route('stays') }}" class="nav-link {{ request()->routeIs('stays*') ? 'active' : '' }}">Stays</a></li>
-                    <li><a href="{{ route('eat') }}" class="nav-link {{ request()->routeIs('eat*') ? 'active' : '' }}">Eat</a></li>
-                    <li><a href="{{ route('recreation') }}" class="nav-link {{ request()->routeIs('recreation*') ? 'active' : '' }}">Recreation</a></li>
-                    <li><a href="{{ route('saved') }}" class="nav-link {{ request()->routeIs('saved*') ? 'active' : '' }}">Saved Trips</a></li>
-                    <li><a href="{{ route('list-business') }}" class="nav-link {{ request()->routeIs('list-business*') ? 'active' : '' }}">List Your Business</a></li>
-                    <li><a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about*') ? 'active' : '' }}">About</a></li>
-                    
-                    @auth
-                        @if(auth()->user()->isAdmin())
-                            <li><a href="{{ route('admin.listings') }}" class="nav-link {{ request()->routeIs('admin*') ? 'active' : '' }}">Admin</a></li>
-                        @elseif(auth()->user()->isVendor())
-                            <li><a href="{{ route('vendor.listings') }}" class="nav-link {{ request()->routeIs('vendor*') ? 'active' : '' }}">Dashboard</a></li>
-                        @endif
-                        <li>
-                            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                                @csrf
-                                <button type="submit" class="nav-link nav-logout-btn">Log Out</button>
-                            </form>
-                        </li>
-                    @else
-                        <li><a href="{{ route('login') }}" class="nav-link {{ request()->routeIs('login') ? 'active' : '' }}">Login</a></li>
-                    @endauth
-                </ul>
+            <!-- Primary Navigation Links (Clean, compact desktop row) -->
+            <nav class="nav-primary-desktop" aria-label="Main Navigation">
+                <a href="{{ route('destinations') }}" class="nav-link {{ request()->routeIs('destinations*') ? 'active' : '' }}">Destinations</a>
+                <a href="{{ route('stays') }}" class="nav-link {{ request()->routeIs('stays*') ? 'active' : '' }}">Stays</a>
+                <a href="{{ route('eat') }}" class="nav-link {{ request()->routeIs('eat*') ? 'active' : '' }}">Eat</a>
+                <a href="{{ route('recreation') }}" class="nav-link {{ request()->routeIs('recreation*') ? 'active' : '' }}">Recreation</a>
             </nav>
 
-            <!-- Theme Toggle Button -->
-            <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Light / Dark Theme" aria-label="Toggle Theme">
-                🌙
-            </button>
+            <!-- Header Right Controls -->
+            <div class="nav-actions-right">
+                <!-- Currency Dropdown -->
+                <div class="currency-dropdown-wrapper">
+                    <label for="currencySelect" class="sr-only">Currency</label>
+                    <select id="currencySelect" class="currency-select" onchange="window.location.href='/currency/' + this.value">
+                        @foreach($supportedCurrencies ?? ['UGX', 'USD', 'EUR', 'GBP'] as $curr)
+                            <option value="{{ $curr }}" {{ ($currentCurrency ?? 'UGX') === $curr ? 'selected' : '' }}>
+                                {{ $curr }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Prominent "Plan My Trip" Button -->
+                <a href="{{ route('plan') }}" class="btn-plan-trip-header">
+                    ✨ Plan My Trip
+                </a>
+
+                <!-- Theme Toggle Button -->
+                <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Light / Dark Theme" aria-label="Toggle Theme">
+                    🌙
+                </button>
+
+                <!-- Hamburger Menu Button -->
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+                    <span id="hamburgerIcon">☰</span>
+                    <span class="hamburger-label">Menu</span>
+                </button>
+            </div>
+
+            <!-- Hamburger Drawer Menu (Secondary links on desktop, all links on mobile) -->
+            <div class="nav-drawer" id="navDrawer" role="dialog" aria-label="Site Navigation">
+                <div class="drawer-header">
+                    <div class="drawer-brand">
+                        <span class="logo-emblem">🇺🇬</span>
+                        <span>Pearl Trails Menu</span>
+                    </div>
+                    <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Navigation Menu">✕</button>
+                </div>
+
+                <div class="drawer-content">
+                    <!-- Mobile-only Explore links -->
+                    <div class="drawer-section mobile-only-section">
+                        <span class="drawer-section-title">Explore</span>
+                        <a href="{{ route('home') }}" class="drawer-link {{ request()->routeIs('home') ? 'active' : '' }}">🏡 Home</a>
+                        <a href="{{ route('destinations') }}" class="drawer-link {{ request()->routeIs('destinations*') ? 'active' : '' }}">🗺️ Destinations</a>
+                        <a href="{{ route('stays') }}" class="drawer-link {{ request()->routeIs('stays*') ? 'active' : '' }}">🛏️ Where to Stay</a>
+                        <a href="{{ route('eat') }}" class="drawer-link {{ request()->routeIs('eat*') ? 'active' : '' }}">🍽️ Where to Eat</a>
+                        <a href="{{ route('recreation') }}" class="drawer-link {{ request()->routeIs('recreation*') ? 'active' : '' }}">🛶 Recreation & Fun</a>
+                    </div>
+
+                    <!-- Planning & Tools -->
+                    <div class="drawer-section">
+                        <span class="drawer-section-title">Planning Tools</span>
+                        <a href="{{ route('plan') }}" class="drawer-link {{ request()->routeIs('plan*') ? 'active' : '' }}">✨ Plan My Trip Wizard</a>
+                        <a href="{{ route('interest') }}" class="drawer-link {{ request()->routeIs('interest*') ? 'active' : '' }}">🏷️ Explore by Interest</a>
+                        <a href="{{ route('saved') }}" class="drawer-link {{ request()->routeIs('saved*') ? 'active' : '' }}">⭐ Saved Trips</a>
+                    </div>
+
+                    <!-- Business & Information -->
+                    <div class="drawer-section">
+                        <span class="drawer-section-title">Partners & Info</span>
+                        <a href="{{ route('list-your-business') }}" class="drawer-link {{ request()->routeIs('list-your-business*') || request()->routeIs('list-business*') ? 'active' : '' }}">🏪 List Your Business</a>
+                        <a href="{{ route('about') }}" class="drawer-link {{ request()->routeIs('about*') ? 'active' : '' }}">ℹ️ About Pearl Trails</a>
+                        <a href="{{ route('contact') }}" class="drawer-link {{ request()->routeIs('contact*') ? 'active' : '' }}">📬 Contact Us</a>
+                        <a href="{{ route('privacy') }}" class="drawer-link {{ request()->routeIs('privacy*') ? 'active' : '' }}">🔒 Privacy Policy</a>
+                        <a href="{{ route('terms') }}" class="drawer-link {{ request()->routeIs('terms*') ? 'active' : '' }}">📜 Terms of Service</a>
+                    </div>
+
+                    <!-- Account / Moderation -->
+                    <div class="drawer-section drawer-auth-section">
+                        <span class="drawer-section-title">My Account</span>
+                        @auth
+                            @if(auth()->user()->isAdmin())
+                                <a href="{{ route('admin.listings') }}" class="drawer-link {{ request()->routeIs('admin*') ? 'active' : '' }}">🛡️ Admin Moderation</a>
+                            @elseif(auth()->user()->isVendor())
+                                <a href="{{ route('vendor.listings') }}" class="drawer-link {{ request()->routeIs('vendor*') ? 'active' : '' }}">💼 Vendor Dashboard</a>
+                            @endif
+                            <a href="{{ route('profile.edit') }}" class="drawer-link {{ request()->routeIs('profile*') ? 'active' : '' }}">👤 Profile Settings</a>
+                            <form action="{{ route('logout') }}" method="POST" class="drawer-logout-form">
+                                @csrf
+                                <button type="submit" class="drawer-link drawer-logout-btn">🚪 Log Out ({{ auth()->user()->name }})</button>
+                            </form>
+                        @else
+                            <div class="drawer-auth-buttons">
+                                <a href="{{ route('login') }}" class="btn btn-outline btn-sm">Log In</a>
+                                <a href="{{ route('register') }}" class="btn btn-gold btn-sm">Sign Up</a>
+                            </div>
+                        @endauth
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backdrop Overlay -->
+            <div class="drawer-backdrop" id="drawerBackdrop"></div>
         </div>
     </header>
 
@@ -152,26 +198,51 @@
         });
         updateThemeIcon();
 
-        // Hamburger Navigation (<900px)
+        // Drawer & Hamburger Navigation
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const hamburgerIcon = document.getElementById('hamburgerIcon');
-        const navContainer = document.getElementById('navContainer');
+        const navDrawer = document.getElementById('navDrawer');
+        const drawerBackdrop = document.getElementById('drawerBackdrop');
+        const drawerCloseBtn = document.getElementById('drawerCloseBtn');
 
-        function toggleMenu() {
-            const isOpen = navContainer.classList.toggle('open');
-            hamburgerBtn.setAttribute('aria-expanded', isOpen);
-            hamburgerIcon.textContent = isOpen ? '✕' : '☰';
+        function openDrawer() {
+            navDrawer.classList.add('open');
+            drawerBackdrop.classList.add('open');
+            document.body.classList.add('drawer-active');
+            hamburgerBtn.setAttribute('aria-expanded', 'true');
+            if (hamburgerIcon) hamburgerIcon.textContent = '✕';
         }
 
-        hamburgerBtn.addEventListener('click', toggleMenu);
+        function closeDrawer() {
+            navDrawer.classList.remove('open');
+            drawerBackdrop.classList.remove('open');
+            document.body.classList.remove('drawer-active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            if (hamburgerIcon) hamburgerIcon.textContent = '☰';
+        }
 
-        // Closes when any nav link is tapped on mobile
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth < 900 && navContainer.classList.contains('open')) {
-                    toggleMenu();
-                }
-            });
+        function toggleDrawer() {
+            if (navDrawer.classList.contains('open')) {
+                closeDrawer();
+            } else {
+                openDrawer();
+            }
+        }
+
+        if (hamburgerBtn) hamburgerBtn.addEventListener('click', toggleDrawer);
+        if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+        if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navDrawer && navDrawer.classList.contains('open')) {
+                closeDrawer();
+            }
+        });
+
+        // Close drawer when any link inside is tapped
+        document.querySelectorAll('.drawer-link').forEach(link => {
+            link.addEventListener('click', closeDrawer);
         });
     </script>
 </body>
