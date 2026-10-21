@@ -48,6 +48,7 @@ class BrowseController extends Controller
         $destinations = Destination::orderBy('name')->get();
         $selectedDestinationId = $request->destination ? (int) $request->destination : null;
         $maxPriceUgx = $request->max_price ? (int) $request->max_price : null;
+        $search = $request->filled('q') ? trim($request->q) : null;
 
         // 1. Fetch Places
         $placesQuery = Place::with('destination')->where('category', $category);
@@ -56,6 +57,12 @@ class BrowseController extends Controller
         }
         if ($maxPriceUgx) {
             $placesQuery->where('price_ugx', '<=', $maxPriceUgx);
+        }
+        if ($search) {
+            $placesQuery->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%");
+            });
         }
         $places = $placesQuery->get();
 
@@ -79,6 +86,13 @@ class BrowseController extends Controller
         }
         if ($maxPriceUgx) {
             $listingsQuery->where('price_ugx', '<=', $maxPriceUgx);
+        }
+        if ($search) {
+            $listingsQuery->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%")
+                  ->orWhere('custom_location', 'like', "%{$search}%");
+            });
         }
         $listings = $listingsQuery->get();
 
