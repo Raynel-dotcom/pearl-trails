@@ -1,30 +1,33 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+    <x-slot name="title">Verify Email</x-slot>
+
+    <div class="auth-header-text">
+        <h2>Verify Your Email</h2>
+        <p>Thanks for joining Pearl Trails! Before getting started, please check your inbox and click the verification link we just emailed to you.</p>
     </div>
 
     @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+        <div class="auth-status-alert">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>A fresh verification link has been sent to your email address.</span>
         </div>
     @endif
 
-    <div class="mt-4 flex items-center justify-between">
+    <div class="auth-verify-actions">
         <form method="POST" action="{{ route('verification.send') }}">
             @csrf
-
-            <div>
-                <x-primary-button>
-                    {{ __('Resend Verification Email') }}
-                </x-primary-button>
-            </div>
+            <button type="submit" class="btn btn-gold btn-block auth-submit-btn">
+                Resend Verification Email
+            </button>
         </form>
 
-        <form method="POST" action="{{ route('logout') }}">
+        <form method="POST" action="{{ route('logout') }}" class="auth-footer-prompt">
             @csrf
-
-            <button type="submit" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                {{ __('Log Out') }}
+            <span>Signed into the wrong account?</span>
+            <button type="submit" class="auth-action-link" style="background: none; border: none; cursor: pointer; font-family: inherit; font-size: inherit; padding: 0;">
+                Log Out
             </button>
         </form>
     </div>
