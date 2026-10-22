@@ -17,6 +17,7 @@ class Listing extends Model
         'custom_location',
         'price_ugx',
         'description',
+        'image_path',
         'website',
         'contact',
         'status',

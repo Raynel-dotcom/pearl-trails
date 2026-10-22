@@ -45,7 +45,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Life jackets and helmets are mandatory for river adventures. Stick to certified rafting operators and avoid walking alone after dark along unlit river banks.',
                 'gradient_from' => '#0F4C3A',
                 'gradient_to' => '#1B7B59',
-                'image_path' => null,
+                'image_path' => 'images/destinations/boat-cruise-elephants.webp',
             ],
             [
                 'slug' => 'sipi-falls',
@@ -82,7 +82,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Always hire an accredited local guide for the 3-falls trek; steep cliffs have few guardrails.',
                 'gradient_from' => '#1B7B59',
                 'gradient_to' => '#D4AF37',
-                'image_path' => null,
+                'image_path' => 'images/destinations/murchison-falls.webp',
             ],
             [
                 'slug' => 'murchison-falls-np',
@@ -119,7 +119,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Do not exit safari vehicles in the savannah except at designated ranger viewpoints. Respect park speed limits.',
                 'gradient_from' => '#0F4C3A',
                 'gradient_to' => '#E68A00',
-                'image_path' => null,
+                'image_path' => 'images/destinations/murchison-falls.webp',
             ],
             [
                 'slug' => 'queen-elizabeth-np',
@@ -156,7 +156,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Stay vigilant when around lodge grounds at night; wild animals roam freely between savannah and water.',
                 'gradient_from' => '#14281F',
                 'gradient_to' => '#1B7B59',
-                'image_path' => null,
+                'image_path' => 'images/destinations/boat-cruise-elephants.webp',
             ],
             [
                 'slug' => 'bwindi',
@@ -193,7 +193,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Strict 7-meter distance from gorillas must be maintained. Do not trek if feeling unwell to protect primates from human viruses.',
                 'gradient_from' => '#0F4C3A',
                 'gradient_to' => '#083327',
-                'image_path' => null,
+                'image_path' => 'images/destinations/bwindi-gorilla-1.webp',
             ],
             [
                 'slug' => 'lake-bunyonyi',
@@ -230,7 +230,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'The lake is bilharzia-free and safe to swim in, but it is extremely deep (up to 900m). Always wear a life vest in canoes.',
                 'gradient_from' => '#1B7B59',
                 'gradient_to' => '#0F4C3A',
-                'image_path' => null,
+                'image_path' => 'images/destinations/boat-cruise-elephants.webp',
             ],
             [
                 'slug' => 'fort-portal',
@@ -267,7 +267,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Fort Portal is one of Uganda\'s safest and cleanest urban centres. Use registered taxi operators for out-of-town crater excursions.',
                 'gradient_from' => '#0F4C3A',
                 'gradient_to' => '#D4AF37',
-                'image_path' => null,
+                'image_path' => 'images/destinations/chimpanzee-trekking.webp',
             ],
             [
                 'slug' => 'rwenzori',
@@ -304,7 +304,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Never hike without certified park rangers and mountain guides. High-altitude mountain sickness requires immediate descent if symptoms arise.',
                 'gradient_from' => '#14281F',
                 'gradient_to' => '#526B5E',
-                'image_path' => null,
+                'image_path' => 'images/destinations/bwindi-gorilla-2.webp',
             ],
             [
                 'slug' => 'kidepo',
@@ -341,7 +341,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Stick to designated ranger tracks. High midday temperatures require hydration electrolytes.',
                 'gradient_from' => '#E68A00',
                 'gradient_to' => '#D4AF37',
-                'image_path' => null,
+                'image_path' => 'images/destinations/buffalo-herd-savanna.webp',
             ],
             [
                 'slug' => 'entebbe',
@@ -378,7 +378,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Entebbe is calm and secure with strong security presence. Be mindful of belongings at busy public lakeside beaches.',
                 'gradient_from' => '#0F4C3A',
                 'gradient_to' => '#1B7B59',
-                'image_path' => null,
+                'image_path' => 'images/destinations/boat-cruise-elephants.webp',
             ],
             [
                 'slug' => 'kampala',
@@ -415,7 +415,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Watch your pockets and bags in crowded markets like Owino and the Old Taxi Park. Use ride-hailing apps like SafeBoda or Uber at night.',
                 'gradient_from' => '#D4AF37',
                 'gradient_to' => '#0F4C3A',
-                'image_path' => null,
+                'image_path' => 'images/recreation centres/horseback-riding-spots-kampala.webp',
             ],
             [
                 'slug' => 'ssese-islands',
@@ -452,7 +452,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Only swim at designated resort beachfronts where water clarity and safety have been vetted.',
                 'gradient_from' => '#1B7B59',
                 'gradient_to' => '#0F4C3A',
-                'image_path' => null,
+                'image_path' => 'images/destinations/boat-cruise-elephants.webp',
             ],
             [
                 'slug' => 'lake-mburo-np',
@@ -489,7 +489,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Listen carefully to ranger briefing during walking or horse-riding excursions. Maintain safe distance from wildlife.',
                 'gradient_from' => '#0F4C3A',
                 'gradient_to' => '#E68A00',
-                'image_path' => null,
+                'image_path' => 'images/destinations/lake-mburo-zebras.webp',
             ],
         ];
 

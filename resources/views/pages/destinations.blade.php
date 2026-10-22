@@ -148,7 +148,11 @@
             @foreach($destinations as $dest)
                 <div class="dest-card">
                     <div class="dest-card-media">
-                        <x-scene-svg :destination="$dest" height="210px" />
+                        @if(!empty($dest->image_path))
+                            <img src="{{ asset($dest->image_path) }}" alt="{{ $dest->name }}" class="dest-card-img" loading="lazy">
+                        @else
+                            <x-scene-svg :destination="$dest" height="210px" />
+                        @endif
                         <span class="region-badge">{{ $dest->region }} Uganda</span>
                         <span class="duration-badge">{{ $dest->min_days }}-{{ $dest->max_days }} Days</span>
                     </div>

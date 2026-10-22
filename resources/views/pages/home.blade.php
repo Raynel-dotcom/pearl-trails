@@ -73,7 +73,11 @@
             @foreach($popularDestinations as $dest)
                 <div class="dest-card">
                     <div class="dest-card-media">
-                        <x-scene-svg :destination="$dest" height="200px" />
+                        @if(!empty($dest->image_path))
+                            <img src="{{ asset($dest->image_path) }}" alt="{{ $dest->name }}" class="dest-card-img" loading="lazy">
+                        @else
+                            <x-scene-svg :destination="$dest" height="200px" />
+                        @endif
                         <span class="region-badge">{{ $dest->region }} Uganda</span>
                         <span class="duration-badge">{{ $dest->min_days }}-{{ $dest->max_days }} Days</span>
                     </div>
@@ -119,6 +123,11 @@
         <div class="rec-strip-scroll">
             @foreach($recreationStrip as $rec)
                 <div class="rec-strip-card">
+                    @if(!empty($rec->image_path))
+                        <div class="rec-strip-media">
+                            <img src="{{ asset($rec->image_path) }}" alt="{{ $rec->name }}" class="rec-strip-img" loading="lazy">
+                        </div>
+                    @endif
                     <div class="rec-strip-top">
                         <span class="rec-type-badge">{{ $rec->type ?? 'Activity' }}</span>
                         <span class="rec-location-text">📍 {{ $rec->destination->name ?? 'Uganda' }}</span>

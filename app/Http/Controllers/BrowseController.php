@@ -109,6 +109,7 @@ class BrowseController extends Controller
                 'price_ugx' => $place->price_ugx,
                 'unit' => $place->unit,
                 'is_community' => false,
+                'image_path' => $place->image_path ?: $this->resolveFallbackImage($place->category, $place->name),
                 'website' => null,
                 'activities' => [],
                 'description' => $place->description,
@@ -133,6 +134,7 @@ class BrowseController extends Controller
                 'price_ugx' => $listing->price_ugx,
                 'unit' => $unit,
                 'is_community' => true,
+                'image_path' => $listing->image_path ?: $this->resolveFallbackImage($category, $listing->name),
                 'website' => $listing->website,
                 'activities' => $listing->activities,
                 'description' => $listing->description,
@@ -215,5 +217,45 @@ class BrowseController extends Controller
         session(['user_picks' => $picks]);
 
         return redirect()->back()->with('success', "Updated your pick for {$validated['category']}!");
+    }
+
+    /**
+     * Resolve fallback cover image if item has no explicit image_path.
+     */
+    protected function resolveFallbackImage(string $category, string $name = ''): string
+    {
+        $hotelImages = [
+            'images/hotels/hotel-cottages-pool.webp',
+            'images/hotels/hotel-room-canopy-bed.webp',
+            'images/hotels/igongo-country-hotel.webp',
+            'images/hotels/ishasha-wilderness-camp.webp',
+            'images/hotels/kyaninga-lodge-aerial.webp',
+            'images/hotels/kyaninga-lodge-room.webp',
+        ];
+
+        $restaurantImages = [
+            'images/restaurants/asian-fusion-restaurant.webp',
+            'images/restaurants/cafe-javas.webp',
+            'images/restaurants/la-cabana-restaurant.webp',
+            'images/restaurants/mediterraneo-restaurant-kampala.webp',
+            'images/restaurants/piato-restaurant.webp',
+            'images/restaurants/the-lawns-restaurant.webp',
+            'images/restaurants/ugandan-food-platter.webp',
+        ];
+
+        $recreationImages = [
+            'images/recreation centres/Forest-park-resort-Buloba-1.webp',
+            'images/recreation centres/Kavumba-Recreation-Center-Kids-Park-Wakiso-Uganda-TortoisePathcom-1.webp',
+            'images/recreation centres/horseback-riding-spots-kampala.webp',
+            'images/recreation centres/jinja-qaud-biking-1024x678-1.webp',
+        ];
+
+        $hash = abs(crc32($name));
+
+        return match ($category) {
+            'stay' => $hotelImages[$hash % count($hotelImages)],
+            'eat' => $restaurantImages[$hash % count($restaurantImages)],
+            default => $recreationImages[$hash % count($recreationImages)],
+        };
     }
 }

@@ -136,18 +136,34 @@
         <div class="browse-cards-grid">
             @foreach($items as $item)
                 <div class="browse-card {{ $item['fits_plan'] ? 'fits-plan-card' : '' }}">
-                    <div class="browse-card-header">
-                        <div class="browse-card-badges">
-                            <span class="type-badge">{{ $item['type'] }}</span>
-                            @if($item['is_community'])
-                                <span class="community-badge">Community Listing</span>
-                            @endif
-                            @if($item['fits_plan'])
-                                <span class="fits-plan-badge">Fits your plan</span>
-                            @endif
+                    @if(!empty($item['image_path']))
+                        <div class="browse-card-media">
+                            <img src="{{ asset($item['image_path']) }}" alt="{{ $item['name'] }}" class="browse-card-img" loading="lazy">
+                            <div class="browse-card-badges">
+                                <span class="type-badge">{{ $item['type'] }}</span>
+                                @if($item['is_community'])
+                                    <span class="community-badge">Community</span>
+                                @endif
+                                @if($item['fits_plan'])
+                                    <span class="fits-plan-badge">Fits plan</span>
+                                @endif
+                            </div>
+                            <span class="browse-dest-pill">📍 {{ $item['destination_name'] }}</span>
                         </div>
-                        <span class="browse-dest-pill">📍 {{ $item['destination_name'] }}</span>
-                    </div>
+                    @else
+                        <div class="browse-card-header">
+                            <div class="browse-card-badges">
+                                <span class="type-badge">{{ $item['type'] }}</span>
+                                @if($item['is_community'])
+                                    <span class="community-badge">Community Listing</span>
+                                @endif
+                                @if($item['fits_plan'])
+                                    <span class="fits-plan-badge">Fits your plan</span>
+                                @endif
+                            </div>
+                            <span class="browse-dest-pill">📍 {{ $item['destination_name'] }}</span>
+                        </div>
+                    @endif
 
                     <div class="browse-card-body">
                         <h3 class="browse-card-title">{{ $item['name'] }}</h3>

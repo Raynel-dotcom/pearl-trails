@@ -25,17 +25,19 @@ class PlaceSeeder extends Seeder
 
             foreach ($styleTypes as $style => $typeName) {
                 if (!empty($hotelNames[$style]) && isset($costs[$style])) {
+                    $hotelName = $hotelNames[$style];
                     Place::updateOrCreate(
                         [
                             'destination_id' => $dest->id,
                             'category' => 'stay',
-                            'name' => $hotelNames[$style],
+                            'name' => $hotelName,
                         ],
                         [
                             'price_ugx' => (int) $costs[$style],
                             'unit' => 'night',
                             'type' => $typeName,
                             'description' => "Quality {$style} accommodation near {$dest->name}.",
+                            'image_path' => $this->resolveStayImage($hotelName, $style),
                         ]
                     );
                 }
@@ -283,10 +285,114 @@ class PlaceSeeder extends Seeder
                             'unit' => $item['unit'],
                             'type' => $item['type'],
                             'description' => "Popular {$cat} destination in {$dest->name}.",
+                            'image_path' => $this->resolvePlaceImage($cat, $item['name'], $dest),
                         ]
                     );
                 }
             }
         }
+    }
+
+    protected function resolveStayImage(string $name, string $style): string
+    {
+        $lower = strtolower($name);
+
+        if (str_contains($lower, 'kyaninga')) {
+            return str_contains($lower, 'room')
+                ? 'images/hotels/kyaninga-lodge-room.webp'
+                : 'images/hotels/kyaninga-lodge-aerial.webp';
+        }
+        if (str_contains($lower, 'ishasha')) {
+            return 'images/hotels/ishasha-wilderness-camp.webp';
+        }
+        if (str_contains($lower, 'igongo')) {
+            return 'images/hotels/igongo-country-hotel.webp';
+        }
+
+        if ($style === 'Luxury') {
+            return (abs(crc32($name)) % 2 === 0)
+                ? 'images/hotels/hotel-room-canopy-bed.webp'
+                : 'images/hotels/kyaninga-lodge-aerial.webp';
+        }
+
+        if ($style === 'Moderate') {
+            return (abs(crc32($name)) % 2 === 0)
+                ? 'images/hotels/hotel-cottages-pool.webp'
+                : 'images/hotels/kyaninga-lodge-room.webp';
+        }
+
+        // Budget
+        return (abs(crc32($name)) % 2 === 0)
+            ? 'images/hotels/ishasha-wilderness-camp.webp'
+            : 'images/hotels/hotel-cottages-pool.webp';
+    }
+
+    protected function resolvePlaceImage(string $category, string $name, Destination $dest): string
+    {
+        $lower = strtolower($name);
+
+        if ($category === 'eat') {
+            if (str_contains($lower, 'java') || str_contains($lower, 'cafe') || str_contains($lower, 'bakery') || str_contains($lower, 'coffee')) {
+                return 'images/restaurants/cafe-javas.webp';
+            }
+            if (str_contains($lower, 'cabana') || str_contains($lower, 'grill') || str_contains($lower, 'bar')) {
+                return 'images/restaurants/la-cabana-restaurant.webp';
+            }
+            if (str_contains($lower, 'mediterraneo') || str_contains($lower, 'terrace') || str_contains($lower, 'fine') || str_contains($lower, 'serena')) {
+                return 'images/restaurants/mediterraneo-restaurant-kampala.webp';
+            }
+            if (str_contains($lower, 'lawns') || str_contains($lower, 'garden') || str_contains($lower, 'verandah')) {
+                return 'images/restaurants/the-lawns-restaurant.webp';
+            }
+            if (str_contains($lower, 'piato') || str_contains($lower, 'bistro') || str_contains($lower, 'diner')) {
+                return 'images/restaurants/piato-restaurant.webp';
+            }
+            if (str_contains($lower, 'asian') || str_contains($lower, 'fusion') || str_contains($lower, 'spice') || str_contains($lower, 'curry')) {
+                return 'images/restaurants/asian-fusion-restaurant.webp';
+            }
+            if (str_contains($lower, 'rolex') || str_contains($lower, 'local') || str_contains($lower, 'roots') || str_contains($lower, 'food') || str_contains($lower, 'platter')) {
+                return 'images/restaurants/ugandan-food-platter.webp';
+            }
+
+            $restaurantPool = [
+                'images/restaurants/cafe-javas.webp',
+                'images/restaurants/la-cabana-restaurant.webp',
+                'images/restaurants/mediterraneo-restaurant-kampala.webp',
+                'images/restaurants/the-lawns-restaurant.webp',
+                'images/restaurants/piato-restaurant.webp',
+                'images/restaurants/asian-fusion-restaurant.webp',
+                'images/restaurants/ugandan-food-platter.webp',
+            ];
+            return $restaurantPool[abs(crc32($name)) % count($restaurantPool)];
+        }
+
+        if ($category === 'recreation') {
+            if (str_contains($lower, 'quad') || str_contains($lower, 'bike') || str_contains($lower, 'biking') || str_contains($lower, 'off-road')) {
+                return 'images/recreation centres/jinja-qaud-biking-1024x678-1.webp';
+            }
+            if (str_contains($lower, 'horse') || str_contains($lower, 'equine') || str_contains($lower, 'walking') || str_contains($lower, 'safari')) {
+                return 'images/recreation centres/horseback-riding-spots-kampala.webp';
+            }
+            if (str_contains($lower, 'rafting') || str_contains($lower, 'boat') || str_contains($lower, 'cruise') || str_contains($lower, 'tubing')) {
+                return 'images/destinations/boat-cruise-elephants.webp';
+            }
+            if (str_contains($lower, 'chimp') || str_contains($lower, 'trek') || str_contains($lower, 'hike') || str_contains($lower, 'mountain')) {
+                return 'images/destinations/chimpanzee-trekking.webp';
+            }
+            if (str_contains($lower, 'park') || str_contains($lower, 'resort') || str_contains($lower, 'adventure') || str_contains($lower, 'abseil') || str_contains($lower, 'ropes')) {
+                return 'images/recreation centres/Forest-park-resort-Buloba-1.webp';
+            }
+
+            $recPool = [
+                'images/recreation centres/Forest-park-resort-Buloba-1.webp',
+                'images/recreation centres/Kavumba-Recreation-Center-Kids-Park-Wakiso-Uganda-TortoisePathcom-1.webp',
+                'images/recreation centres/horseback-riding-spots-kampala.webp',
+                'images/recreation centres/jinja-qaud-biking-1024x678-1.webp',
+            ];
+            return $recPool[abs(crc32($name)) % count($recPool)];
+        }
+
+        // Visit places: destination image or waterfall/scenery
+        return $dest->image_path ?: 'images/destinations/boat-cruise-elephants.webp';
     }
 }

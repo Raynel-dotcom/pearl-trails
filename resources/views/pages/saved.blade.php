@@ -30,7 +30,11 @@
             @foreach($savedTrips as $trip)
                 <div class="saved-trip-card">
                     <div class="saved-trip-media">
-                        <x-scene-svg :destination="$trip->destination" height="180px" />
+                        @if(!empty($trip->destination->image_path))
+                            <img src="{{ asset($trip->destination->image_path) }}" alt="{{ $trip->destination->name }}" class="saved-trip-img" loading="lazy">
+                        @else
+                            <x-scene-svg :destination="$trip->destination" height="180px" />
+                        @endif
                         <span class="region-badge">{{ $trip->destination->region }} Uganda</span>
                     </div>
 

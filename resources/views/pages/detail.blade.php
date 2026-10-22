@@ -7,7 +7,11 @@
     <!-- 1. HERO SECTION -->
     <div class="detail-hero-card">
         <div class="detail-hero-media">
-            <x-scene-svg :destination="$destination" height="340px" />
+            @if(!empty($destination->image_path))
+                <img src="{{ asset($destination->image_path) }}" alt="{{ $destination->name }}" class="detail-hero-img">
+            @else
+                <x-scene-svg :destination="$destination" height="340px" />
+            @endif
         </div>
         <div class="detail-hero-content">
             <div class="detail-hero-top">
@@ -376,7 +380,10 @@
                 @foreach($stays as $s)
                     <label class="tick-label">
                         <input type="radio" name="builder_stay" value="{{ $s->price_ugx }}" onchange="calculateLiveBudget()" {{ $loop->first ? 'checked' : '' }}>
-                        <span>{{ $s->name }}</span>
+                        @if(!empty($s->image_path))
+                            <img src="{{ asset($s->image_path) }}" alt="{{ $s->name }}" class="tick-thumb" loading="lazy">
+                        @endif
+                        <span class="tick-name">{{ $s->name }}</span>
                         <strong>@price($s->price_ugx) / night</strong>
                     </label>
                 @endforeach
@@ -388,7 +395,10 @@
                 @foreach($eatPlaces as $e)
                     <label class="tick-label">
                         <input type="radio" name="builder_eat" value="{{ $e->price_ugx }}" onchange="calculateLiveBudget()" {{ $loop->first ? 'checked' : '' }}>
-                        <span>{{ $e->name }}</span>
+                        @if(!empty($e->image_path))
+                            <img src="{{ asset($e->image_path) }}" alt="{{ $e->name }}" class="tick-thumb" loading="lazy">
+                        @endif
+                        <span class="tick-name">{{ $e->name }}</span>
                         <strong>@price($e->price_ugx) / meal</strong>
                     </label>
                 @endforeach

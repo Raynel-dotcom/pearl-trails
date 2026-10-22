@@ -46,7 +46,11 @@
             @endphp
             <div class="rec-card {{ $rank === 1 ? 'featured-card' : '' }}">
                 <div class="rec-card-media">
-                    <x-scene-svg :destination="$dest" height="230px" />
+                    @if(!empty($dest->image_path))
+                        <img src="{{ asset($dest->image_path) }}" alt="{{ $dest->name }}" class="rec-card-img" loading="lazy">
+                    @else
+                        <x-scene-svg :destination="$dest" height="230px" />
+                    @endif
                     <div class="rank-badge rank-{{ $rank }}">
                         #{{ $rank }} Pick
                     </div>
