@@ -18,14 +18,18 @@
     <!-- Moderation Tabs -->
     <div class="moderation-tabs-bar">
         <a href="{{ route('admin.listings') }}" class="tab-link {{ empty($status) ? 'active' : '' }}">All Submissions</a>
-        <a href="{{ route('admin.listings', ['status' => 'pending']) }}" class="tab-link {{ $status === 'pending' ? 'active' : '' }}">⏳ Pending Review</a>
-        <a href="{{ route('admin.listings', ['status' => 'approved']) }}" class="tab-link {{ $status === 'approved' ? 'active' : '' }}">✓ Approved</a>
-        <a href="{{ route('admin.listings', ['status' => 'rejected']) }}" class="tab-link {{ $status === 'rejected' ? 'active' : '' }}">✕ Rejected</a>
+        <a href="{{ route('admin.listings', ['status' => 'pending']) }}" class="tab-link {{ $status === 'pending' ? 'active' : '' }}">Pending Review</a>
+        <a href="{{ route('admin.listings', ['status' => 'approved']) }}" class="tab-link {{ $status === 'approved' ? 'active' : '' }}">Approved</a>
+        <a href="{{ route('admin.listings', ['status' => 'rejected']) }}" class="tab-link {{ $status === 'rejected' ? 'active' : '' }}">Rejected</a>
     </div>
 
     @if($listings->isEmpty())
         <div class="empty-state-card">
-            <span class="empty-icon">📁</span>
+            <div class="empty-icon-wrap">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+            </div>
             <h3>No submissions found in this category</h3>
         </div>
     @else
@@ -52,7 +56,7 @@
                                 @if($listing->website)
                                     <a href="{{ $listing->website }}" target="_blank" class="small-link">Website ↗</a>
                                 @endif
-                                <span class="contact-text">📞 {{ $listing->contact }}</span>
+                                <span class="contact-text">Tel: {{ $listing->contact }}</span>
                             </td>
                             <td><span class="type-pill">{{ $listing->type }}</span></td>
                             <td>{{ $listing->user->name ?? 'User' }} ({{ $listing->user->email ?? 'N/A' }})</td>

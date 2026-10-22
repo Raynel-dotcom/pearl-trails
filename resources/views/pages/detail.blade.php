@@ -17,7 +17,7 @@
             <div class="detail-hero-top">
                 <span class="region-pill">{{ $destination->region }} Uganda</span>
                 <span class="difficulty-pill">Difficulty: {{ $destination->difficulty }}</span>
-                <span class="best-time-pill">🗓️ Best: {{ $destination->best_time }}</span>
+                <span class="best-time-pill">Best Season: {{ $destination->best_time }}</span>
             </div>
 
             <h1 class="detail-title">{{ $destination->name }}</h1>
@@ -41,7 +41,12 @@
                     </div>
                 @else
                     <div class="quiz-prompt-box">
-                        <span class="spark-icon">✨</span>
+                        <span class="spark-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                            </svg>
+                        </span>
                         <div>
                             <strong>Curious about your personalized match score?</strong>
                             <p>Take our 7-step travel quiz to calculate exact compatibility and live budget fit.</p>
@@ -69,7 +74,7 @@
                 </div>
             @else
                 <div class="budget-fit-banner over-budget">
-                    <span class="fit-icon">⚠️</span>
+                    <span class="fit-icon">!</span>
                     <div>
                         <strong>This trip may exceed your budget by approx. @price(abs($diff)).</strong>
                         <span>Consider adjusting duration, choosing budget lodging, or reviewing our cheaper recommendation below.</span>
@@ -96,10 +101,10 @@
     <!-- 3. JUMP BUTTONS (Smooth Scroll) -->
     <div class="jump-nav-bar">
         <span>Jump to:</span>
-        <a href="#stay-and-eat" class="jump-link">🛏️ Stay & Eat</a>
-        <a href="#match-breakdown" class="jump-link">📊 Match & Costs</a>
-        <a href="#itinerary" class="jump-link">🗺️ Itinerary</a>
-        <a href="#budget-builder" class="jump-link">🧮 Budget Builder</a>
+        <a href="#stay-and-eat" class="jump-link">Stay & Eat</a>
+        <a href="#match-breakdown" class="jump-link">Match & Costs</a>
+        <a href="#itinerary" class="jump-link">Itinerary</a>
+        <a href="#budget-builder" class="jump-link">Budget Builder</a>
     </div>
 
     <!-- 4. THREE CARDS NEAR TOP: STAY, EAT, RECREATION NEAR X -->
@@ -108,7 +113,7 @@
             <!-- Where to Stay Near X -->
             <div class="quick-pick-card">
                 <div class="pick-card-header">
-                    <h3>🛏️ Where to stay near {{ $destination->name }}</h3>
+                    <h3>Where to stay near {{ $destination->name }}</h3>
                     <a href="{{ route('stays', ['destination' => $destination->id]) }}" class="see-all-link">See all →</a>
                 </div>
                 <div class="pick-items-list">
@@ -135,7 +140,7 @@
             <!-- Where to Eat Near X -->
             <div class="quick-pick-card">
                 <div class="pick-card-header">
-                    <h3>🍽️ Where to eat near {{ $destination->name }}</h3>
+                    <h3>Where to eat near {{ $destination->name }}</h3>
                     <a href="{{ route('eat', ['destination' => $destination->id]) }}" class="see-all-link">See all →</a>
                 </div>
                 <div class="pick-items-list">
@@ -162,7 +167,7 @@
             <!-- Recreation & Activities Near X -->
             <div class="quick-pick-card">
                 <div class="pick-card-header">
-                    <h3>🛶 Recreation near {{ $destination->name }}</h3>
+                    <h3>Recreation near {{ $destination->name }}</h3>
                     <a href="{{ route('recreation', ['destination' => $destination->id]) }}" class="see-all-link">See all →</a>
                 </div>
                 <div class="pick-items-list">
@@ -255,23 +260,23 @@
                 <table class="cost-table">
                     <tbody>
                         <tr>
-                            <td>🚗 Transport (Road + Local)</td>
+                            <td>Transport (Road + Local)</td>
                             <td class="text-right">@price($costData['transport'])</td>
                         </tr>
                         <tr>
-                            <td>🛏️ Accommodation ({{ $costData['nights'] }} nights)</td>
+                            <td>Accommodation ({{ $costData['nights'] }} nights)</td>
                             <td class="text-right">@price($costData['accommodation'])</td>
                         </tr>
                         <tr>
-                            <td>🍲 Food & Dining ({{ $days }} days)</td>
+                            <td>Food & Dining ({{ $days }} days)</td>
                             <td class="text-right">@price($costData['food'])</td>
                         </tr>
                         <tr>
-                            <td>🎟️ Activities & Park Access</td>
+                            <td>Activities & Park Access</td>
                             <td class="text-right">@price($costData['activities'])</td>
                         </tr>
                         <tr>
-                            <td>🛡️ Emergency & Contingency (10%)</td>
+                            <td>Emergency & Contingency (10%)</td>
                             <td class="text-right">@price($costData['misc'])</td>
                         </tr>
                         <tr class="cost-table-total">
@@ -319,7 +324,7 @@
         <!-- Accommodation by Style -->
         <div class="dest-info-boxes-grid">
             <div class="info-card">
-                <h4>🏨 Lodging Options by Style</h4>
+                <h4>Lodging Options by Style</h4>
                 <ul class="styled-list">
                     <li><strong>Budget:</strong> {{ $destination->hotel_names['Budget'] ?? 'Backpackers / Camp' }} (@price($destination->accommodation_costs['Budget'] ?? 40000) / night)</li>
                     <li><strong>Moderate:</strong> {{ $destination->hotel_names['Moderate'] ?? 'Safari Eco-Lodge' }} (@price($destination->accommodation_costs['Moderate'] ?? 150000) / night)</li>
@@ -328,12 +333,12 @@
             </div>
 
             <div class="info-card">
-                <h4>🚐 Transport Information</h4>
+                <h4>Transport Information</h4>
                 <p>Located approx. <strong>{{ $costData['dist_km'] }} km</strong> from {{ $origin }}. Average driving time is approx. <strong>{{ $costData['hours'] }} hours</strong>. Accessible via public shared taxis, private car hire, and organized tour vans.</p>
             </div>
 
             <div class="info-card">
-                <h4>💡 Tips & Safety</h4>
+                <h4>Tips & Safety</h4>
                 <p><strong>Tips:</strong> {{ $destination->tips }}</p>
                 <p style="margin-top: 0.5rem;"><strong>Safety:</strong> {{ $destination->safety }}</p>
             </div>
@@ -343,7 +348,7 @@
     <!-- 7. BUILD YOUR TRIP BUDGET (Interactive Live Calculator) -->
     <div class="budget-builder-card" id="budget-builder">
         <div class="builder-header">
-            <h2>🧮 Build Your Trip Budget</h2>
+            <h2>Build Your Trip Budget</h2>
             <p>Customize your people count, vehicle option, and pick your favorite places to stay, eat, and visit for a real-time price total.</p>
         </div>
 
@@ -473,17 +478,17 @@
             <input type="hidden" name="style" value="{{ $style }}">
             <input type="hidden" name="total_ugx" id="saveTripTotal" value="{{ $costData['total'] }}">
             <button type="submit" class="btn btn-gold">
-                💾 Save Trip Plan
+                Save Trip Plan
             </button>
         </form>
 
         <!-- Web Share API Button with Copy Link Fallback -->
         <button type="button" class="btn btn-outline" id="shareTripBtn" onclick="shareTripPlan()">
-            🔗 Share Trip
+            Share Trip
         </button>
 
         <a href="{{ route('plan') }}" class="btn btn-outline">
-            🔄 Plan Another Trip
+            Plan Another Trip
         </a>
     </div>
 
@@ -555,7 +560,7 @@
         if (diff >= 0) {
             statusEl.innerHTML = `<span class="badge-within">✓ Within Budget</span><p>approx. UGX ${diff.toLocaleString()} remaining for ${people} travelers.</p>`;
         } else {
-            statusEl.innerHTML = `<span class="badge-over">⚠️ Exceeds Target</span><p>approx. UGX ${Math.abs(diff).toLocaleString()} over group target budget.</p>`;
+            statusEl.innerHTML = `<span class="badge-over">! Exceeds Target</span><p>approx. UGX ${Math.abs(diff).toLocaleString()} over group target budget.</p>`;
         }
     }
 

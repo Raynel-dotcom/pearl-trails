@@ -136,7 +136,7 @@
 
             <div class="form-submit-row">
                 <button type="submit" class="btn btn-gold btn-lg">
-                    🚀 Submit Business for Approval
+                    Submit Business for Approval
                 </button>
             </div>
         </form>

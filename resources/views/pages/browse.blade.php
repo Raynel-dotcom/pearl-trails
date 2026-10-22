@@ -7,18 +7,18 @@
     <!-- "Your Picks" Sticky Top Bar -->
     <div class="your-picks-bar">
         <div class="picks-header">
-            <span class="picks-title">🌟 Your Selected Picks:</span>
+            <span class="picks-title">Your Selected Picks:</span>
             <div class="picks-summary-items">
                 <span class="pick-tag">
-                    🛏️ Stay: <strong>{{ $picks['stay']['name'] ?? 'Not chosen yet' }}</strong>
+                    Stay: <strong>{{ $picks['stay']['name'] ?? 'Not chosen yet' }}</strong>
                     @if(!empty($picks['stay'])) (@price($picks['stay']['price_ugx'])/nt) @endif
                 </span>
                 <span class="pick-tag">
-                    🍽️ Eat: <strong>{{ $picks['eat']['name'] ?? 'Not chosen yet' }}</strong>
+                    Eat: <strong>{{ $picks['eat']['name'] ?? 'Not chosen yet' }}</strong>
                     @if(!empty($picks['eat'])) (@price($picks['eat']['price_ugx'])/meal) @endif
                 </span>
                 <span class="pick-tag">
-                    🛶 Activity: <strong>{{ $picks['recreation']['name'] ?? 'Not chosen yet' }}</strong>
+                    Activity: <strong>{{ $picks['recreation']['name'] ?? 'Not chosen yet' }}</strong>
                     @if(!empty($picks['recreation'])) (@price($picks['recreation']['price_ugx'])) @endif
                 </span>
             </div>
@@ -48,15 +48,16 @@
             <div class="filters-grid">
                 <!-- Keyword Search -->
                 <div class="filter-group filter-group-search">
-                    <label for="browseSearch">🔍 Search</label>
+                    <label for="browseSearch">Search</label>
                     <div class="filter-input-wrapper">
-                        <input type="text" name="q" id="browseSearch" value="{{ request('q') }}" placeholder="Search by name, site, or specialty..." class="filter-input">
+                        <svg class="search-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" name="q" id="browseSearch" value="{{ request('q') }}" placeholder="Search by name, site, or specialty..." class="filter-input filter-input-with-icon">
                     </div>
                 </div>
 
                 <!-- Destination Filter -->
                 <div class="filter-group">
-                    <label for="destSelect">📍 Destination</label>
+                    <label for="destSelect">Destination</label>
                     <select name="destination" id="destSelect" class="filter-select" onchange="document.getElementById('browseFilterForm').submit()">
                         <option value="">All Uganda Destinations</option>
                         @foreach($destinations as $d)
@@ -69,7 +70,7 @@
 
                 <!-- Up to Price Filter -->
                 <div class="filter-group">
-                    <label for="priceSelect">💰 Maximum Spend ({{ $currentCurrency }})</label>
+                    <label for="priceSelect">Maximum Spend ({{ $currentCurrency }})</label>
                     <select name="max_price" id="priceSelect" class="filter-select" onchange="document.getElementById('browseFilterForm').submit()">
                         <option value="">Any Budget</option>
                         @if($currentCurrency === 'UGX')
@@ -127,7 +128,12 @@
 
     @if($items->isEmpty())
         <div class="empty-state-card">
-            <span class="empty-icon">🔎</span>
+            <div class="empty-icon-wrap">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
             <h3>No results found matching your filters</h3>
             <p>Try broadening your price limit or viewing all destinations.</p>
             <a href="{{ url()->current() }}" class="btn btn-outline">Clear Filters</a>
@@ -148,7 +154,7 @@
                                     <span class="fits-plan-badge">Fits plan</span>
                                 @endif
                             </div>
-                            <span class="browse-dest-pill">📍 {{ $item['destination_name'] }}</span>
+                            <span class="browse-dest-pill">{{ $item['destination_name'] }}</span>
                         </div>
                     @else
                         <div class="browse-card-header">
@@ -161,7 +167,7 @@
                                     <span class="fits-plan-badge">Fits your plan</span>
                                 @endif
                             </div>
-                            <span class="browse-dest-pill">📍 {{ $item['destination_name'] }}</span>
+                            <span class="browse-dest-pill">{{ $item['destination_name'] }}</span>
                         </div>
                     @endif
 
@@ -189,7 +195,7 @@
                         @if($item['website'])
                             <div class="browse-website-link">
                                 <a href="{{ $item['website'] }}" target="_blank" rel="noopener noreferrer">
-                                    🌐 Visit Official Website ↗
+                                    Visit Official Website ↗
                                 </a>
                             </div>
                         @endif

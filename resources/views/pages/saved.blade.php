@@ -17,7 +17,13 @@
 
     @if($savedTrips->isEmpty())
         <div class="empty-state-card">
-            <span class="empty-icon">🗺️</span>
+            <div class="empty-icon-wrap">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                    <line x1="8" y1="2" x2="8" y2="18"></line>
+                    <line x1="16" y1="6" x2="16" y2="22"></line>
+                </svg>
+            </div>
             <h3>No saved trips yet</h3>
             <p>Take our 7-step travel wizard or explore any of Uganda's 13 destinations and click "Save Trip" to keep track of your favorites.</p>
             <div class="empty-state-actions">
@@ -62,7 +68,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-outline-danger">
-                                    🗑️ Remove
+                                    Remove
                                 </button>
                             </form>
                         </div>

@@ -32,7 +32,6 @@
                     <label class="choice-tile">
                         <input type="radio" name="origin" value="{{ $orig }}" {{ ($savedQuiz['origin'] ?? 'Kampala') === $orig ? 'checked' : '' }} required>
                         <div class="tile-content">
-                            <span class="tile-icon">📍</span>
                             <span class="tile-name">{{ $orig }}</span>
                             <span class="tile-desc">{{ $orig === 'Other' ? 'Uganda Border / Regional Hub' : 'Uganda Origin' }}</span>
                         </div>
@@ -50,7 +49,6 @@
                     <label class="choice-tile">
                         <input type="radio" name="budget_band" value="{{ $band['id'] }}" {{ ($savedQuiz['budget_band'] ?? '') === $band['id'] ? 'checked' : '' }} required>
                         <div class="tile-content">
-                            <span class="tile-icon">💵</span>
                             <span class="tile-name">{{ $band['label'] }}</span>
                             <span class="tile-desc">Per person estimate</span>
                         </div>
@@ -68,7 +66,6 @@
                     <label class="choice-tile">
                         <input type="radio" name="days" value="{{ $time }}" {{ ($savedQuiz['days'] ?? '3 days') === $time ? 'checked' : '' }} required>
                         <div class="tile-content">
-                            <span class="tile-icon">⏱️</span>
                             <span class="tile-name">{{ $time }}</span>
                             <span class="tile-desc">
                                 @if($time === '1 day') Day Excursion
@@ -93,14 +90,6 @@
                     <label class="choice-tile">
                         <input type="radio" name="group" value="{{ $grp }}" {{ ($savedQuiz['group'] ?? 'Friends') === $grp ? 'checked' : '' }} required>
                         <div class="tile-content">
-                            <span class="tile-icon">
-                                @if($grp === 'Solo') 🎒
-                                @elseif($grp === 'Couple') 💑
-                                @elseif($grp === 'Family') 👨‍👩‍👧‍👦
-                                @elseif($grp === 'Friends') 👥
-                                @else 🚌
-                                @endif
-                            </span>
                             <span class="tile-name">{{ $grp }}</span>
                             <span class="tile-desc">{{ $grp }} friendly experiences</span>
                         </div>
@@ -118,20 +107,6 @@
                     <label class="choice-tile checkbox-tile">
                         <input type="checkbox" name="interests[]" value="{{ $interest }}" {{ in_array($interest, (array) ($savedQuiz['interests'] ?? ['Adventure', 'Nature'])) ? 'checked' : '' }}>
                         <div class="tile-content">
-                            <span class="tile-icon">
-                                @if($interest === 'Wildlife') 🦁
-                                @elseif($interest === 'Adventure') 🛶
-                                @elseif($interest === 'Nature') 🌿
-                                @elseif($interest === 'Beaches/Lakes') 🏖️
-                                @elseif($interest === 'Hiking') 🥾
-                                @elseif($interest === 'Culture') 🥁
-                                @elseif($interest === 'History') 🏛️
-                                @elseif($interest === 'Food') 🍲
-                                @elseif($interest === 'Photography') 📸
-                                @elseif($interest === 'Relaxation') 🧘
-                                @else 🌙
-                                @endif
-                            </span>
                             <span class="tile-name">{{ $interest }}</span>
                         </div>
                     </label>
@@ -148,12 +123,6 @@
                     <label class="choice-tile">
                         <input type="radio" name="style" value="{{ $st }}" {{ ($savedQuiz['style'] ?? 'Moderate') === $st ? 'checked' : '' }} required>
                         <div class="tile-content">
-                            <span class="tile-icon">
-                                @if($st === 'Budget') ⛺
-                                @elseif($st === 'Moderate') 🏡
-                                @else 🏨
-                                @endif
-                            </span>
                             <span class="tile-name">{{ $st }}</span>
                             <span class="tile-desc">
                                 @if($st === 'Budget') Hostels, shared transport & local authentic diners
@@ -176,15 +145,6 @@
                     <label class="choice-tile">
                         <input type="radio" name="preference" value="{{ $pref }}" {{ ($savedQuiz['preference'] ?? 'Adventurous') === $pref ? 'checked' : '' }} required>
                         <div class="tile-content">
-                            <span class="tile-icon">
-                                @if($pref === 'Relaxing') 🌅
-                                @elseif($pref === 'Adventurous') ⚡
-                                @elseif($pref === 'Educational') 📜
-                                @elseif($pref === 'Romantic') 💖
-                                @elseif($pref === 'Family-friendly') 🎈
-                                @else 🥳
-                                @endif
-                            </span>
                             <span class="tile-name">{{ $pref }}</span>
                             <span class="tile-desc">{{ $pref }} focus</span>
                         </div>
@@ -203,7 +163,7 @@
                 Next Step →
             </button>
             <button type="submit" class="btn btn-gold" id="submitBtn" style="display: none;" disabled>
-                ✨ Show My Top Destinations
+                Show My Top Destinations
             </button>
         </div>
     </form>

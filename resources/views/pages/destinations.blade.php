@@ -15,15 +15,16 @@
             <div class="filters-grid">
                 <!-- Search by Keyword -->
                 <div class="filter-group filter-group-search">
-                    <label for="destSearch">🔍 Search Destination</label>
+                    <label for="destSearch">Search Destination</label>
                     <div class="filter-input-wrapper">
-                        <input type="text" name="q" id="destSearch" value="{{ request('q') }}" placeholder="e.g. Bwindi, Gorillas, Jinja..." class="filter-input">
+                        <svg class="search-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" name="q" id="destSearch" value="{{ request('q') }}" placeholder="Search by name, region, or attraction (e.g. Bwindi, Gorillas, Jinja)..." class="filter-input filter-input-with-icon">
                     </div>
                 </div>
 
                 <!-- Region Filter -->
                 <div class="filter-group">
-                    <label for="filterRegion">📍 Region</label>
+                    <label for="filterRegion">Region</label>
                     <select name="region" id="filterRegion" class="filter-select" onchange="document.getElementById('destinationsFilterForm').submit()">
                         <option value="">All Regions</option>
                         @foreach($regions as $reg)
@@ -34,7 +35,7 @@
 
                 <!-- Budget Filter -->
                 <div class="filter-group">
-                    <label for="filterBudget">💰 Budget (From)</label>
+                    <label for="filterBudget">Budget (From)</label>
                     <select name="budget_band" id="filterBudget" class="filter-select" onchange="document.getElementById('destinationsFilterForm').submit()">
                         <option value="">Any Budget</option>
                         @foreach($budgetBands as $band)
@@ -47,7 +48,7 @@
 
                 <!-- Duration Filter -->
                 <div class="filter-group">
-                    <label for="filterDuration">⏱️ Duration</label>
+                    <label for="filterDuration">Duration</label>
                     <select name="duration" id="filterDuration" class="filter-select" onchange="document.getElementById('destinationsFilterForm').submit()">
                         <option value="">Any Duration</option>
                         <option value="1" {{ request('duration') == '1' ? 'selected' : '' }}>1 Day Excursion</option>
@@ -60,7 +61,7 @@
 
                 <!-- Interest Filter -->
                 <div class="filter-group">
-                    <label for="filterInterest">🌿 Interest</label>
+                    <label for="filterInterest">Interest</label>
                     <select name="interest" id="filterInterest" class="filter-select" onchange="document.getElementById('destinationsFilterForm').submit()">
                         <option value="">All Interests</option>
                         @foreach($interests as $interest)
@@ -71,7 +72,7 @@
 
                 <!-- Style Filter -->
                 <div class="filter-group">
-                    <label for="filterStyle">🎒 Travel Style</label>
+                    <label for="filterStyle">Travel Style</label>
                     <select name="style" id="filterStyle" class="filter-select" onchange="document.getElementById('destinationsFilterForm').submit()">
                         <option value="">Any Style</option>
                         @foreach($styles as $st)
@@ -82,7 +83,7 @@
 
                 <!-- Group Filter -->
                 <div class="filter-group">
-                    <label for="filterGroup">👥 Travel Group</label>
+                    <label for="filterGroup">Travel Group</label>
                     <select name="group" id="filterGroup" class="filter-select" onchange="document.getElementById('destinationsFilterForm').submit()">
                         <option value="">Any Group</option>
                         @foreach($groups as $grp)
@@ -138,9 +139,14 @@
 
     @if($destinations->isEmpty())
         <div class="empty-state-card">
-            <span class="empty-icon">🔍</span>
+            <div class="empty-icon-wrap">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
             <h3>No destinations match your active filters</h3>
-            <p>Try clearing some filter criteria to explore more locations.</p>
+            <p>Try clearing some filter criteria to explore more locations across Uganda.</p>
             <a href="{{ route('destinations') }}" class="btn btn-outline">Reset Filters</a>
         </div>
     @else
