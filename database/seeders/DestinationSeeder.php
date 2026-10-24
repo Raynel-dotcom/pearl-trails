@@ -45,7 +45,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Life jackets and helmets are mandatory for river adventures. Stick to certified rafting operators and avoid walking alone after dark along unlit river banks.',
                 'gradient_from' => '#0F4C3A',
                 'gradient_to' => '#1B7B59',
-                'image_path' => 'images/destinations/boat-cruise-elephants.webp',
+                'image_path' => 'images/destinations/jinja-quad-biking.webp',
             ],
             [
                 'slug' => 'sipi-falls',
@@ -82,7 +82,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Always hire an accredited local guide for the 3-falls trek; steep cliffs have few guardrails.',
                 'gradient_from' => '#1B7B59',
                 'gradient_to' => '#D4AF37',
-                'image_path' => 'images/destinations/murchison-falls.webp',
+                'image_path' => 'images/destinations/sipi-falls.webp',
             ],
             [
                 'slug' => 'murchison-falls-np',
@@ -230,7 +230,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'The lake is bilharzia-free and safe to swim in, but it is extremely deep (up to 900m). Always wear a life vest in canoes.',
                 'gradient_from' => '#1B7B59',
                 'gradient_to' => '#0F4C3A',
-                'image_path' => 'images/destinations/boat-cruise-elephants.webp',
+                'image_path' => 'images/destinations/lake-bunyonyi.webp',
             ],
             [
                 'slug' => 'fort-portal',
@@ -304,7 +304,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Never hike without certified park rangers and mountain guides. High-altitude mountain sickness requires immediate descent if symptoms arise.',
                 'gradient_from' => '#14281F',
                 'gradient_to' => '#526B5E',
-                'image_path' => 'images/destinations/bwindi-gorilla-2.webp',
+                'image_path' => 'images/destinations/rwenzori-mountains.webp',
             ],
             [
                 'slug' => 'kidepo',
@@ -378,7 +378,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Entebbe is calm and secure with strong security presence. Be mindful of belongings at busy public lakeside beaches.',
                 'gradient_from' => '#0F4C3A',
                 'gradient_to' => '#1B7B59',
-                'image_path' => 'images/destinations/boat-cruise-elephants.webp',
+                'image_path' => 'images/destinations/entebbe-lake-victoria.webp',
             ],
             [
                 'slug' => 'kampala',
@@ -452,7 +452,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Only swim at designated resort beachfronts where water clarity and safety have been vetted.',
                 'gradient_from' => '#1B7B59',
                 'gradient_to' => '#0F4C3A',
-                'image_path' => 'images/destinations/boat-cruise-elephants.webp',
+                'image_path' => 'images/destinations/ssese-islands.webp',
             ],
             [
                 'slug' => 'lake-mburo-np',
