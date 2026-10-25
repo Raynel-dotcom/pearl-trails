@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Destination;
 use App\Models\Place;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class PlaceSeeder extends Seeder
 {
@@ -295,6 +296,11 @@ class PlaceSeeder extends Seeder
 
     protected function resolveStayImage(string $slug, string $name, string $style): string
     {
+        $dedicated = 'images/hotels/' . Str::slug($name) . '.webp';
+        if (file_exists(public_path($dedicated))) {
+            return $dedicated;
+        }
+
         $destStayMap = [
             'jinja' => [
                 'Budget'   => 'images/hotels/safari-tented-camp.webp',
@@ -410,6 +416,16 @@ class PlaceSeeder extends Seeder
 
     protected function resolvePlaceImage(string $category, string $name, Destination $dest): string
     {
+        $folder = match ($category) {
+            'eat' => 'restaurants',
+            'recreation' => 'recreation centres',
+            default => 'destinations',
+        };
+        $dedicated = "images/{$folder}/" . Str::slug($name) . '.webp';
+        if (file_exists(public_path($dedicated))) {
+            return $dedicated;
+        }
+
         $exactMap = [
             'eat' => [
                 // Jinja
