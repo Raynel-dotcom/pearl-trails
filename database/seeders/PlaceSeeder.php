@@ -301,6 +301,11 @@ class PlaceSeeder extends Seeder
             return $dedicated;
         }
 
+        $noAt = 'images/hotels/' . Str::slug(str_replace('@', '', $name)) . '.webp';
+        if (file_exists(public_path($noAt))) {
+            return $noAt;
+        }
+
         $destStayMap = [
             'jinja' => [
                 'Budget'   => 'images/hotels/safari-tented-camp.webp',
