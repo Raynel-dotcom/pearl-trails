@@ -6,6 +6,9 @@
     <title>@yield('title', config('app.name', 'Pearl Trails')) - Pearl of Africa</title>
     <meta name="description" content="A comprehensive tourism decision assistant for Uganda. Explore destinations, costs, lodges, and custom itineraries across the Pearl of Africa.">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     
