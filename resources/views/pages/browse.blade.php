@@ -144,7 +144,7 @@
                 <div class="browse-card {{ $item['fits_plan'] ? 'fits-plan-card' : '' }}">
                     @if(!empty($item['image_path']))
                         <div class="browse-card-media">
-                            <img src="{{ asset($item['image_path']) }}" alt="{{ $item['name'] }}" class="browse-card-img" loading="lazy">
+                            <img src="{{ asset($item['image_path']) }}?v={{ @filemtime(public_path($item['image_path'])) ?: '1' }}" alt="{{ $item['name'] }}" class="browse-card-img" loading="lazy">
                             <div class="browse-card-badges">
                                 <span class="type-badge">{{ $item['type'] }}</span>
                                 @if($item['is_community'])
