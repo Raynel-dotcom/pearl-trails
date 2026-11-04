@@ -131,7 +131,7 @@
                 <div class="rec-strip-card">
                     @if(!empty($rec->image_path))
                         <div class="rec-strip-media">
-                            <img src="{{ asset($rec->image_path) }}" alt="{{ $rec->name }}" class="rec-strip-img" loading="lazy">
+                            <img src="{{ asset($rec->image_path) }}?v={{ @filemtime(public_path($rec->image_path)) ?: '1' }}" alt="{{ $rec->name }}" class="rec-strip-img" loading="lazy">
                         </div>
                     @endif
                     <div class="rec-strip-top">

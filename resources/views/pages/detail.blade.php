@@ -401,7 +401,7 @@
                     <label class="tick-label">
                         <input type="radio" name="builder_eat" value="{{ $e->price_ugx }}" onchange="calculateLiveBudget()" {{ $loop->first ? 'checked' : '' }}>
                         @if(!empty($e->image_path))
-                            <img src="{{ asset($e->image_path) }}" alt="{{ $e->name }}" class="tick-thumb" loading="lazy">
+                            <img src="{{ asset($e->image_path) }}?v={{ @filemtime(public_path($e->image_path)) ?: '1' }}" alt="{{ $e->name }}" class="tick-thumb" loading="lazy">
                         @endif
                         <span class="tick-name">{{ $e->name }}</span>
                         <strong>@price($e->price_ugx) / meal</strong>
