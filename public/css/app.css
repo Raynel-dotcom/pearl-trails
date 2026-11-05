@@ -1869,6 +1869,7 @@ body.drawer-active {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 1.25rem;
+  overflow: hidden;
 }
 
 .tick-group h4 {
@@ -1889,6 +1890,7 @@ body.drawer-active {
   padding: 0.5rem 0;
   border-bottom: 1px solid rgba(209, 223, 215, 0.4);
   cursor: pointer;
+  min-width: 0;
 }
 
 .tick-thumb {
@@ -1900,11 +1902,17 @@ body.drawer-active {
   border: 1px solid var(--border-color);
 }
 
-.tick-name {
-  flex: 1;
+.tick-name,
+.tick-label > span {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .tick-label strong {
+  flex-shrink: 0;
   margin-left: auto;
   white-space: nowrap;
 }

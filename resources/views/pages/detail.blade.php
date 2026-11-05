@@ -388,7 +388,7 @@
                         @if(!empty($s->image_path))
                             <img src="{{ asset($s->image_path) }}?v={{ @filemtime(public_path($s->image_path)) ?: '1' }}" alt="{{ $s->name }}" class="tick-thumb" loading="lazy">
                         @endif
-                        <span class="tick-name">{{ $s->name }}</span>
+                        <span class="tick-name" title="{{ $s->name }}">{{ $s->name }}</span>
                         <strong>@price($s->price_ugx) / night</strong>
                     </label>
                 @endforeach
@@ -403,7 +403,7 @@
                         @if(!empty($e->image_path))
                             <img src="{{ asset($e->image_path) }}?v={{ @filemtime(public_path($e->image_path)) ?: '1' }}" alt="{{ $e->name }}" class="tick-thumb" loading="lazy">
                         @endif
-                        <span class="tick-name">{{ $e->name }}</span>
+                        <span class="tick-name" title="{{ $e->name }}">{{ $e->name }}</span>
                         <strong>@price($e->price_ugx) / meal</strong>
                     </label>
                 @endforeach
@@ -415,14 +415,14 @@
                 @foreach($visitPlaces as $v)
                     <label class="tick-label">
                         <input type="checkbox" class="visit-check" value="{{ $v->price_ugx }}" onchange="calculateLiveBudget()" checked>
-                        <span>{{ $v->name }}</span>
+                        <span class="tick-name" title="{{ $v->name }}">{{ $v->name }}</span>
                         <strong>@price($v->price_ugx)</strong>
                     </label>
                 @endforeach
                 @foreach($vendorVisits as $vv)
                     <label class="tick-label community-tick">
                         <input type="checkbox" class="visit-check" value="{{ $vv->price_ugx }}" onchange="calculateLiveBudget()">
-                        <span>{{ $vv->name }} (Community)</span>
+                        <span class="tick-name" title="{{ $vv->name }}">{{ $vv->name }} (Community)</span>
                         <strong>@price($vv->price_ugx)</strong>
                     </label>
                 @endforeach
@@ -434,20 +434,20 @@
                 @foreach($recreationPlaces as $r)
                     <label class="tick-label">
                         <input type="checkbox" class="rec-check" value="{{ $r->price_ugx }}" onchange="calculateLiveBudget()" checked>
-                        <span>{{ $r->name }}</span>
+                        <span class="tick-name" title="{{ $r->name }}">{{ $r->name }}</span>
                         <strong>@price($r->price_ugx)</strong>
                     </label>
                 @endforeach
                 @foreach($vendorRecs as $vr)
                     <label class="tick-label community-tick">
                         <input type="checkbox" class="rec-check" value="{{ $vr->price_ugx }}" onchange="calculateLiveBudget()">
-                        <span>{{ $vr->name }} Entry</span>
+                        <span class="tick-name" title="{{ $vr->name }}">{{ $vr->name }} Entry</span>
                         <strong>@price($vr->price_ugx)</strong>
                     </label>
                     @foreach($vr->activities as $vAct)
                         <label class="tick-label sub-activity-tick">
                             <input type="checkbox" class="rec-check" value="{{ $vAct->fee_ugx }}" onchange="calculateLiveBudget()">
-                            <span>↳ {{ $vAct->name }}</span>
+                            <span class="tick-name" title="{{ $vAct->name }}">↳ {{ $vAct->name }}</span>
                             <strong>@price($vAct->fee_ugx)</strong>
                         </label>
                     @endforeach
