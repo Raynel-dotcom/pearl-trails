@@ -94,7 +94,7 @@
 
                 <!-- Action Buttons -->
                 <div class="filter-actions-group">
-                    <button type="submit" class="btn btn-gold btn-filter-submit">Filter</button>
+                    <button type="submit" class="btn btn-primary btn-filter-submit">Filter</button>
                     @if(request()->hasAny(['q', 'region', 'budget_band', 'duration', 'interest', 'style', 'group']))
                         <a href="{{ route('destinations') }}" class="btn btn-outline btn-filter-reset">Reset</a>
                     @endif

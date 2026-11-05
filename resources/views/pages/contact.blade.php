@@ -20,7 +20,7 @@
             <div class="contact-badge-box">
                 <h4>Are you a tour operator or accommodation owner?</h4>
                 <p>Register your property to get featured on our Stays, Eat, and Recreation pages.</p>
-                <a href="{{ route('list-business') }}" class="btn btn-sm btn-gold">List Your Business</a>
+                <a href="{{ route('list-business') }}" class="btn btn-sm btn-primary">List Your Business</a>
             </div>
         </div>
 

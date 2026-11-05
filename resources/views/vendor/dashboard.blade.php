@@ -10,7 +10,7 @@
             <p>Track your submissions, moderation status, and public tourist visibility.</p>
         </div>
         <div>
-            <a href="{{ route('list-business') }}" class="btn btn-gold">
+            <a href="{{ route('list-business') }}" class="btn btn-primary">
                 + Add New Listing
             </a>
         </div>
@@ -32,7 +32,7 @@
             </div>
             <h3>No business listings found</h3>
             <p>You haven't submitted any listings yet. Showcase your hotel, restaurant, or activity center to tourists!</p>
-            <a href="{{ route('list-business') }}" class="btn btn-gold">List Your First Business</a>
+            <a href="{{ route('list-business') }}" class="btn btn-primary">List Your First Business</a>
         </div>
     @else
         <div class="vendor-listings-table-wrapper">

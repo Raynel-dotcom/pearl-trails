@@ -12,7 +12,7 @@
             Discover breathtaking national parks, misty gorilla forests, and tranquil island hideaways tailored precisely to your budget, time, and travel style.
         </p>
         <div class="hero-cta-group">
-            <a href="{{ route('plan') }}" class="btn btn-gold btn-hero">
+            <a href="{{ route('plan') }}" class="btn btn-primary btn-hero">
                 Find My Perfect Trip
             </a>
             <a href="{{ route('destinations') }}" class="btn btn-outline btn-hero">

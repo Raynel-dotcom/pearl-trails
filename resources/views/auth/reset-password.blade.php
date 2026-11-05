@@ -96,7 +96,7 @@
             <x-input-error :messages="$errors->get('password_confirmation')" />
         </div>
 
-        <button type="submit" class="btn btn-gold btn-block auth-submit-btn">
+        <button type="submit" class="btn btn-primary btn-block auth-submit-btn">
             Reset Password
         </button>
     </form>

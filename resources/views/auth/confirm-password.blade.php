@@ -40,7 +40,7 @@
             <x-input-error :messages="$errors->get('password')" />
         </div>
 
-        <button type="submit" class="btn btn-gold btn-block auth-submit-btn">
+        <button type="submit" class="btn btn-primary btn-block auth-submit-btn">
             Confirm Password
         </button>
     </form>

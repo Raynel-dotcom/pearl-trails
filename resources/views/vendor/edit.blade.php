@@ -123,7 +123,7 @@
         </div>
 
         <div class="form-submit-row">
-            <button type="submit" class="btn btn-gold btn-lg">
+            <button type="submit" class="btn btn-primary btn-lg">
                 Save & Resubmit Listing
             </button>
             <a href="{{ route('vendor.listings') }}" class="btn btn-outline">Cancel</a>

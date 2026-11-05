@@ -140,7 +140,7 @@
                         @else
                             <div class="drawer-auth-buttons">
                                 <a href="{{ route('login') }}" class="btn btn-outline btn-sm">Log In</a>
-                                <a href="{{ route('register') }}" class="btn btn-gold btn-sm">Sign Up</a>
+                                <a href="{{ route('register') }}" class="btn btn-primary btn-sm">Sign Up</a>
                             </div>
                         @endauth
                     </div>

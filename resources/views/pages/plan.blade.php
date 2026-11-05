@@ -162,7 +162,7 @@
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>
                 Next Step →
             </button>
-            <button type="submit" class="btn btn-gold" id="submitBtn" style="display: none;" disabled>
+            <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;" disabled>
                 Show My Top Destinations
             </button>
         </div>

@@ -27,7 +27,7 @@
             <h3>No saved trips yet</h3>
             <p>Take our 7-step travel wizard or explore any of Uganda's 13 destinations and click "Save Trip" to keep track of your favorites.</p>
             <div class="empty-state-actions">
-                <a href="{{ route('plan') }}" class="btn btn-gold">Plan My Trip (Quiz)</a>
+                <a href="{{ route('plan') }}" class="btn btn-primary">Plan My Trip (Quiz)</a>
                 <a href="{{ route('destinations') }}" class="btn btn-outline">Browse Destinations</a>
             </div>
         </div>

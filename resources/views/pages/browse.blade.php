@@ -90,7 +90,7 @@
 
                 <!-- Action Buttons -->
                 <div class="filter-actions-group">
-                    <button type="submit" class="btn btn-gold btn-filter-submit">
+                    <button type="submit" class="btn btn-primary btn-filter-submit">
                         Search
                     </button>
                     @if(request()->hasAny(['q', 'destination', 'max_price']))
@@ -217,7 +217,7 @@
                             @php
                                 $isChosen = (!empty($picks[$category]) && $picks[$category]['name'] === $item['name']);
                             @endphp
-                            <button type="submit" class="btn btn-sm {{ $isChosen ? 'btn-chosen' : 'btn-outline' }}">
+                            <button type="submit" class="btn btn-sm {{ $isChosen ? 'btn-chosen' : 'btn-choose' }}">
                                 {{ $isChosen ? '✓ Selected Pick' : 'Choose' }}
                             </button>
                         </form>

@@ -103,7 +103,7 @@
 
                     <!-- Action Button -->
                     <div class="rec-card-footer">
-                        <a href="{{ route('destinations.show', $dest->slug) }}" class="btn {{ $rank === 1 ? 'btn-gold' : 'btn-primary' }} btn-block">
+                        <a href="{{ route('destinations.show', $dest->slug) }}" class="btn btn-primary btn-block">
                             View Full Trip Plan & Itinerary →
                         </a>
                     </div>

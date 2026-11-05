@@ -51,7 +51,7 @@
                             <strong>Curious about your personalized match score?</strong>
                             <p>Take our 7-step travel quiz to calculate exact compatibility and live budget fit.</p>
                         </div>
-                        <a href="{{ route('plan') }}" class="btn btn-sm btn-gold">Take the Quiz</a>
+                        <a href="{{ route('plan') }}" class="btn btn-sm btn-primary">Take the Quiz</a>
                     </div>
                 @endif
             </div>
@@ -477,7 +477,7 @@
             <input type="hidden" name="days" value="{{ $days }}">
             <input type="hidden" name="style" value="{{ $style }}">
             <input type="hidden" name="total_ugx" id="saveTripTotal" value="{{ $costData['total'] }}">
-            <button type="submit" class="btn btn-gold">
+            <button type="submit" class="btn btn-primary">
                 Save Trip Plan
             </button>
         </form>

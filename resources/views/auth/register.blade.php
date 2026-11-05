@@ -122,7 +122,7 @@
         </p>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-gold btn-block auth-submit-btn">
+        <button type="submit" class="btn btn-primary btn-block auth-submit-btn">
             Create Pearl Trails Account
         </button>
 

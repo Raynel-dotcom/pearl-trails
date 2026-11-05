@@ -31,7 +31,7 @@
             <p>To register and manage your business listings, please log in or create a vendor account.</p>
             <div class="auth-notice-btns">
                 <a href="{{ route('login') }}" class="btn btn-outline">Log In</a>
-                <a href="{{ route('register') }}" class="btn btn-gold">Create Vendor Account</a>
+                <a href="{{ route('register') }}" class="btn btn-primary">Create Vendor Account</a>
             </div>
         </div>
     @else
@@ -135,7 +135,7 @@
             </div>
 
             <div class="form-submit-row">
-                <button type="submit" class="btn btn-gold btn-lg">
+                <button type="submit" class="btn btn-primary btn-lg">
                     Submit Business for Approval
                 </button>
             </div>

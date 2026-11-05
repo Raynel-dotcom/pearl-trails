@@ -28,7 +28,7 @@
         </p>
 
         <div class="static-action-box">
-            <a href="{{ route('plan') }}" class="btn btn-gold">Plan Your Custom Trip Now</a>
+            <a href="{{ route('plan') }}" class="btn btn-primary">Plan Your Custom Trip Now</a>
             <a href="{{ route('list-business') }}" class="btn btn-outline">List Your Business</a>
         </div>
     </div>

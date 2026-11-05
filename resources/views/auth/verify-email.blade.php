@@ -18,7 +18,7 @@
     <div class="auth-verify-actions">
         <form method="POST" action="{{ route('verification.send') }}">
             @csrf
-            <button type="submit" class="btn btn-gold btn-block auth-submit-btn">
+            <button type="submit" class="btn btn-primary btn-block auth-submit-btn">
                 Resend Verification Email
             </button>
         </form>
