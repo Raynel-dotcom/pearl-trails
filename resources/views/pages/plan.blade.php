@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Plan My Trip - 7-Step Uganda Travel Wizard')
+@section('meta_description', 'Answer 7 quick questions to get personalised Uganda destination recommendations with transparent budget breakdowns tailored to your travel style.')
 
 @section('content')
 <div class="quiz-container">

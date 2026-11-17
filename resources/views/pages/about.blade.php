@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'About Pearl Trails - Tourism Decision Assistant for Uganda')
+@section('meta_description', 'Learn about Pearl Trails, a tourism planning platform built to make Uganda travel transparent and accessible with honest cost estimates and community listings.')
 
 @section('content')
 <div class="static-page-container">
@@ -18,7 +19,7 @@
         <h3>Our Core Commitments</h3>
         <ul class="styled-list">
             <li><strong>Fair Pricing Transparency:</strong> All displayed estimates reflect real transport costs, community accommodation rates, and official Uganda Wildlife Authority (UWA) park tariffs.</li>
-            <li><strong>Support for Local Vendors:</strong> We empower homegrown Ugandan lodges, restaurants, guides, and cultural centers by connecting them directly with travelers through our verified vendor directory.</li>
+            <li><strong>Support for Local Vendors:</strong> We empower homegrown Ugandan lodges, restaurants, guides, and cultural centers by connecting them directly with travelers through our community vendor directory.</li>
             <li><strong>Preservation & Eco-Tourism:</strong> We champion responsible tourism that safeguards endangered mountain gorillas, chimpanzees, wetlands, and indigenous cultural heritage.</li>
         </ul>
 

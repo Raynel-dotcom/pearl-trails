@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', config('app.name', 'Pearl Trails')) - Pearl of Africa</title>
-    <meta name="description" content="A comprehensive tourism decision assistant for Uganda. Explore destinations, costs, lodges, and custom itineraries across the Pearl of Africa.">
+    <meta name="description" content="@yield('meta_description', 'Pearl Trails is a tourism planning assistant for Uganda. Explore national parks, gorilla forests, crater lakes, and custom itineraries tailored to your budget and travel style.')">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
@@ -185,12 +185,10 @@
                     <h4>Platform & Legal</h4>
                     <ul class="footer-links">
                         <li><a href="{{ route('about') }}">About</a></li>
-                        <li><a href="{{ route('destinations') }}">Destinations</a></li>
-                        <li><a href="{{ route('plan') }}">Plan My Trip</a></li>
                         <li><a href="{{ route('contact') }}">Contact</a></li>
+                        <li><a href="{{ route('list-your-business') }}">List Your Business</a></li>
                         <li><a href="{{ route('privacy') }}">Privacy</a></li>
                         <li><a href="{{ route('terms') }}">Terms</a></li>
-                        <li><a href="{{ route('list-business') }}">List Your Business</a></li>
                     </ul>
                 </div>
             </div>

@@ -95,11 +95,14 @@ class DestinationController extends Controller
 
     /**
      * Explore by Interest page presets the interest filter.
+     * When no interest is given, show all destinations.
      */
-    public function exploreByInterest(string $interest = 'Wildlife')
+    public function exploreByInterest(string $interest = null)
     {
         $request = request();
-        $request->merge(['interest' => ucfirst($interest)]);
+        if ($interest) {
+            $request->merge(['interest' => ucfirst($interest)]);
+        }
         return $this->index($request);
     }
 

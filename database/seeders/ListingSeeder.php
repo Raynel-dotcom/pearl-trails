@@ -28,7 +28,7 @@ class ListingSeeder extends Seeder
                 'custom_location' => null,
                 'price_ugx' => 35000, // base entry
                 'description' => 'A premier community adventure hub overlooking the Nile rapids featuring high ropes, river swings, and local craft sessions.',
-                'image_path' => 'images/recreation centres/Forest-park-resort-Buloba-1.webp',
+                'image_path' => 'images/recreation-centres/Forest-park-resort-Buloba-1.webp',
                 'website' => 'https://nilecanopyadventures.example.com',
                 'contact' => '+256 772 123456',
                 'status' => 'approved',
@@ -94,7 +94,7 @@ class ListingSeeder extends Seeder
                 'custom_location' => 'Kireka, Wakiso',
                 'price_ugx' => 20000,
                 'description' => 'Bouldering and outdoor rock climbing spot for weekend fitness enthusiasts just outside Kampala.',
-                'image_path' => 'images/recreation centres/jinja-qaud-biking-1024x678-1.webp',
+                'image_path' => 'images/recreation-centres/jinja-qaud-biking-1024x678-1.webp',
                 'website' => 'https://kirekaclimbers.example.ug',
                 'contact' => '+256 752 444333',
                 'status' => 'pending',

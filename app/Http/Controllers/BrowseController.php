@@ -244,10 +244,10 @@ class BrowseController extends Controller
         ];
 
         $recreationImages = [
-            'images/recreation centres/Forest-park-resort-Buloba-1.webp',
-            'images/recreation centres/Kavumba-Recreation-Center-Kids-Park-Wakiso-Uganda-TortoisePathcom-1.webp',
-            'images/recreation centres/horseback-riding-spots-kampala.webp',
-            'images/recreation centres/jinja-qaud-biking-1024x678-1.webp',
+            'images/recreation-centres/Forest-park-resort-Buloba-1.webp',
+            'images/recreation-centres/Kavumba-Recreation-Center-Kids-Park-Wakiso-Uganda-TortoisePathcom-1.webp',
+            'images/recreation-centres/horseback-riding-spots-kampala.webp',
+            'images/recreation-centres/jinja-qaud-biking-1024x678-1.webp',
         ];
 
         $hash = abs(crc32($name));

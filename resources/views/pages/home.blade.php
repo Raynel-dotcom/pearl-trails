@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Your Uganda. Your Budget. Your Adventure. - Pearl Trails')
+@section('meta_description', 'Plan your perfect Uganda trip with Pearl Trails. Compare safari costs, find lodges, restaurants, and activities across 13 destinations with transparent budget estimates.')
 
 @section('content')
 <div class="home-container">
@@ -20,9 +21,9 @@
             </a>
         </div>
         <div class="hero-micro-notes">
-            <span>✓ No hidden costs</span>
-            <span>✓ Real road distance metrics</span>
-            <span>✓ Community vendor verified</span>
+            <span>✓ Transparent cost estimates</span>
+            <span>✓ Real road distance data</span>
+            <span>✓ Local community listings</span>
         </div>
     </section>
 
@@ -212,7 +213,7 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 </div>
                 <h3>Community-Backed Listings</h3>
-                <p>Verified local hotels, guides, restaurants, and eco-initiatives connect directly with travelers without unfair intermediary markups.</p>
+                <p>Local hotels, guides, restaurants, and eco-initiatives can list directly on the platform, connecting with travelers without intermediary markups.</p>
             </div>
 
             <div class="why-card">
@@ -220,7 +221,7 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
                 </div>
                 <h3>Multi-Currency Flexibility</h3>
-                <p>Switch seamlessly between UGX, USD, EUR, and GBP with real-time approximate conversions so you know where every shilling or dollar goes.</p>
+                <p>Switch seamlessly between UGX, USD, EUR, and GBP with approximate conversions so you know where every shilling or dollar goes.</p>
             </div>
 
             <div class="why-card">

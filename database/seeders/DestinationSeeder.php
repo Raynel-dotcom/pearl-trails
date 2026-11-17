@@ -415,7 +415,7 @@ class DestinationSeeder extends Seeder
                 'safety' => 'Watch your pockets and bags in crowded markets like Owino and the Old Taxi Park. Use ride-hailing apps like SafeBoda or Uber at night.',
                 'gradient_from' => '#D4AF37',
                 'gradient_to' => '#0F4C3A',
-                'image_path' => 'images/recreation centres/horseback-riding-spots-kampala.webp',
+                'image_path' => 'images/recreation-centres/horseback-riding-spots-kampala.webp',
             ],
             [
                 'slug' => 'ssese-islands',

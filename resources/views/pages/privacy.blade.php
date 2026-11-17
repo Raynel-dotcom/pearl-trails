@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Privacy Policy - Pearl Trails Uganda')
+@section('meta_description', 'Read the Pearl Trails privacy policy. Learn how we handle your data when you use our Uganda tourism planning platform.')
 
 @section('content')
 <div class="static-page-container">

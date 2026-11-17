@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Terms of Service - Pearl Trails Uganda')
+@section('meta_description', 'Review the Pearl Trails terms of service covering usage of our Uganda tourism planning tools, cost estimates, and community vendor listings.')
 
 @section('content')
 <div class="static-page-container">

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'List Your Business - Partner with Pearl Trails Uganda')
+@section('meta_description', 'Register your Ugandan lodge, restaurant, tour company, or recreation centre on Pearl Trails to reach domestic and international travelers.')
 
 @section('content')
 <div class="vendor-form-container">

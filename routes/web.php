@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminListingController;
 use App\Http\Controllers\BrowseController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\PageController;
@@ -40,14 +41,14 @@ Route::get('/currency/{currency}', [CurrencyController::class, 'setCurrency'])->
 // Static / Informational Pages
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
 
 // Vendor Business Listing Form
 Route::get('/list-your-business', [VendorListingController::class, 'create'])->name('list-your-business');
-Route::get('/list-business', fn() => redirect()->route('list-your-business'))->name('list-business');
+Route::get('/list-business', fn() => redirect()->route('list-your-business', request()->query(), 301))->name('list-business');
 Route::post('/list-your-business', [VendorListingController::class, 'store'])->middleware('auth')->name('list-your-business.store');
-Route::post('/list-business', [VendorListingController::class, 'store'])->middleware('auth')->name('list-business.store');
 
 // Vendor Dashboard
 Route::middleware('auth')->prefix('vendor')->name('vendor.')->group(function () {

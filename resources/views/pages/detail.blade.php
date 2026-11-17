@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', "{$destination->name} - Complete Trip Guide & Itinerary Planner")
+@section('meta_description', "Plan your trip to {$destination->name} in {$destination->region} Uganda. See estimated costs, lodges, restaurants, activities, and a suggested {$destination->rec_days}-day itinerary.")
 
 @section('content')
 <div class="trip-detail-container">
@@ -125,7 +126,9 @@
                                 <span class="pick-item-price">@price($stay->price_ugx) / night</span>
                             </div>
                             <div class="pick-item-actions">
-                                <span class="fits-plan-badge">Fits your plan</span>
+                                @if($quiz)
+                                    <span class="fits-plan-badge">Fits your plan</span>
+                                @endif
                                 <button type="button" class="btn-choose" onclick="selectQuickPick('stay', '{{ $stay->name }}', {{ $stay->price_ugx }}, this)">
                                     Choose
                                 </button>
@@ -152,7 +155,9 @@
                                 <span class="pick-item-price">@price($eat->price_ugx) / meal</span>
                             </div>
                             <div class="pick-item-actions">
-                                <span class="fits-plan-badge">Fits your plan</span>
+                                @if($quiz)
+                                    <span class="fits-plan-badge">Fits your plan</span>
+                                @endif
                                 <button type="button" class="btn-choose" onclick="selectQuickPick('eat', '{{ $eat->name }}', {{ $eat->price_ugx }}, this)">
                                     Choose
                                 </button>
@@ -179,7 +184,9 @@
                                 <span class="pick-item-price">@price($rec->price_ugx) / person</span>
                             </div>
                             <div class="pick-item-actions">
-                                <span class="fits-plan-badge">Fits your plan</span>
+                                @if($quiz)
+                                    <span class="fits-plan-badge">Fits your plan</span>
+                                @endif
                                 <button type="button" class="btn-choose" onclick="selectQuickPick('rec', '{{ $rec->name }}', {{ $rec->price_ugx }}, this)">
                                     Choose
                                 </button>
@@ -198,8 +205,13 @@
         <div class="breakdown-grid">
             <!-- 6 Score Bars -->
             <div class="score-bars-card">
-                <h3>Compatibility Breakdown</h3>
-                <p class="section-sub">Detailed assessment of how this trip fits your travel preferences:</p>
+                @if($quiz)
+                    <h3>Compatibility Breakdown</h3>
+                    <p class="section-sub">Detailed assessment of how this trip fits your travel preferences:</p>
+                @else
+                    <h3>Sample Compatibility</h3>
+                    <p class="section-sub">Based on a default trip ({{ $days }} days, {{ $style }} style from {{ $origin }}). <a href="{{ route('plan') }}">Take the quiz</a> for your personalised score.</p>
+                @endif
 
                 <div class="bars-list">
                     <div class="score-bar-item">
@@ -255,7 +267,11 @@
             <!-- Cost Breakdown Table -->
             <div class="cost-table-card">
                 <h3>Estimated Cost Breakdown</h3>
-                <p class="section-sub">Calculated for <strong>{{ $days }} days</strong> ({{ $costData['nights'] }} nights) in <strong>{{ $style }}</strong> style from {{ $origin }}:</p>
+                @if($quiz)
+                    <p class="section-sub">Calculated for <strong>{{ $days }} days</strong> ({{ $costData['nights'] }} nights) in <strong>{{ $style }}</strong> style from {{ $origin }}:</p>
+                @else
+                    <p class="section-sub">Sample estimate for <strong>{{ $days }} days</strong> ({{ $costData['nights'] }} nights) in <strong>{{ $style }}</strong> style from {{ $origin }}. <a href="{{ route('plan') }}">Take the quiz</a> for a personalised breakdown.</p>
+                @endif
                 
                 <table class="cost-table">
                     <tbody>

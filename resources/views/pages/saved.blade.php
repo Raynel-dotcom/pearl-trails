@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Saved Trips - Your Pearl Trails Itineraries')
+@section('meta_description', 'View and manage your saved Uganda trip itineraries. Compare costs and revisit your favourite destinations on Pearl Trails.')
 
 @section('content')
 <div class="saved-trips-container">

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Destinations - Explore All 13 Iconic Uganda Safaris & Sites')
+@section('meta_description', 'Browse all 13 Uganda destinations — national parks, crater lakes, mountain trails, and island retreats. Filter by region, budget, interest, and travel style.')
 
 @section('content')
 <div class="destinations-page-container">
@@ -40,7 +41,7 @@
                         <option value="">Any Budget</option>
                         @foreach($budgetBands as $band)
                             <option value="{{ $band['id'] }}" {{ request('budget_band') === $band['id'] ? 'selected' : '' }}>
-                                Up to {{ $band['label'] }}
+                                {{ $band['label'] }}
                             </option>
                         @endforeach
                     </select>
