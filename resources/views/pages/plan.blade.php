@@ -157,14 +157,14 @@
         <!-- Form Navigation Footer -->
         <div class="quiz-nav-footer">
             <button type="button" class="btn btn-outline" id="prevBtn" style="display: none;">
-                ← Back
+                &larr; Back
             </button>
             <div class="quiz-nav-spacer"></div>
             <button type="button" class="btn btn-primary" id="nextBtn" disabled>
-                Next Step →
+                Next Step &rarr;
             </button>
-            <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;" disabled>
-                Show My Top Destinations
+            <button type="submit" class="btn btn-gold" id="submitBtn" style="display: none;" disabled>
+                Show My Top Destinations &rarr;
             </button>
         </div>
     </form>
@@ -256,8 +256,33 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Form inputs change listener to validate and enable buttons
-    document.getElementById('tripQuizForm').addEventListener('change', function () {
+    const form = document.getElementById('tripQuizForm');
+    form.addEventListener('change', function () {
         updateNavState();
+    });
+
+    // Auto-advance to next step when a radio option is chosen
+    steps.forEach(step => {
+        const stepNum = parseInt(step.getAttribute('data-step'));
+        const radios = step.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                updateNavState();
+                if (stepNum < totalSteps) {
+                    setTimeout(() => {
+                        if (currentStep === stepNum) {
+                            showStep(stepNum + 1);
+                        }
+                    }, 280);
+                } else if (stepNum === totalSteps) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Calculating Matches...';
+                    setTimeout(() => {
+                        form.submit();
+                    }, 350);
+                }
+            });
+        });
     });
 
     // Initial check

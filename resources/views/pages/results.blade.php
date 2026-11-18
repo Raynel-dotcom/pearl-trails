@@ -22,9 +22,6 @@
     <!-- Cheaper Alternative Callout if top choice exceeds budget -->
     @if($cheaperAlternative && !$topRecommendations[0]['is_within_budget'])
         <div class="budget-alert-banner alert-notice">
-            <div class="banner-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-            </div>
             <div class="banner-body">
                 <h3>Looking for a budget-friendly alternative?</h3>
                 <p>
@@ -74,12 +71,10 @@
                     <!-- Budget Fit Banner -->
                     @if($rec['is_within_budget'])
                         <div class="budget-fit-banner within-budget">
-                            <span class="fit-icon">✓</span>
                             <span>Within your budget (approx. @price($rec['budget_diff']) remaining)</span>
                         </div>
                     @else
                         <div class="budget-fit-banner over-budget">
-                            <span class="fit-icon">!</span>
                             <span>May exceed target budget by @price(abs($rec['budget_diff']))</span>
                         </div>
                     @endif

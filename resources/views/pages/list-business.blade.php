@@ -12,7 +12,7 @@
 
     @if(session('success'))
         <div class="alert-success-banner">
-            <span>✓ {{ session('success') }}</span>
+            <span>{{ session('success') }}</span>
         </div>
     @endif
 
@@ -20,7 +20,7 @@
         <div class="alert-error-banner">
             <ul>
                 @foreach($errors->all() as $error)
-                    <li>⚠️ {{ $error }}</li>
+                    <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
@@ -136,7 +136,7 @@
             </div>
 
             <div class="form-submit-row">
-                <button type="submit" class="btn btn-primary btn-lg">
+                <button type="submit" class="btn btn-gold btn-lg">
                     Submit Business for Approval
                 </button>
             </div>
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="activity-input-flex">
                     <input type="text" name="activities[${activityIndex}][name]" placeholder="Activity Name">
                     <input type="number" name="activities[${activityIndex}][fee_ugx]" placeholder="Fee in UGX" min="0">
-                    <button type="button" class="btn-remove-row" onclick="this.closest('.activity-row').remove()">✕</button>
+                    <button type="button" class="btn-remove-row" onclick="this.closest('.activity-row').remove()">&times;</button>
                 </div>
             `;
             container.appendChild(row);

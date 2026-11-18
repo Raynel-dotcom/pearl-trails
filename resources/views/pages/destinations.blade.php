@@ -3,11 +3,11 @@
 @section('meta_description', 'Browse all 13 Uganda destinations — national parks, crater lakes, mountain trails, and island retreats. Filter by region, budget, interest, and travel style.')
 
 @section('content')
-<div class="destinations-page-container">
-    <div class="page-hero">
-        <span class="quiz-badge">Uganda Destination Guide</span>
-        <h1>Explore Uganda's 13 Iconic Destinations</h1>
-        <p>From the mountain gorillas of Bwindi to the thundering waters of Murchison Falls and the source of the Nile in Jinja—filter and discover your ideal itinerary.</p>
+<div class="destinations-page-container" style="max-width: 1280px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem;">
+    <div class="page-hero" style="text-align: center; max-width: 840px; margin: 0 auto 3rem;">
+        <span class="section-kicker-gold">Destination Directory</span>
+        <h1 class="section-title-serif" style="margin: 0.6rem 0 1rem; font-size: clamp(2.2rem, 3.8vw, 3rem); line-height: 1.15;">Explore Uganda's 13 Iconic Destinations</h1>
+        <p style="font-size: 1.05rem; line-height: 1.6; color: var(--text-muted); margin: 0 auto;">From the mountain gorillas of Bwindi to the thundering waters of Murchison Falls and the source of the Nile in Jinja—filter and discover your ideal itinerary.</p>
     </div>
 
     <!-- Server-Side Filter Bar -->
@@ -106,25 +106,25 @@
                 <div class="active-filters-row">
                     <span class="active-filters-label">Active Filters:</span>
                     @if(request('q'))
-                        <span class="filter-tag">"{{ request('q') }}" <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}">✕</a></span>
+                        <span class="filter-tag">"{{ request('q') }}" <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}">&times;</a></span>
                     @endif
                     @if(request('region'))
-                        <span class="filter-tag">{{ request('region') }} <a href="{{ request()->fullUrlWithQuery(['region' => null]) }}">✕</a></span>
+                        <span class="filter-tag">{{ request('region') }} <a href="{{ request()->fullUrlWithQuery(['region' => null]) }}">&times;</a></span>
                     @endif
                     @if(request('interest'))
-                        <span class="filter-tag">{{ request('interest') }} <a href="{{ request()->fullUrlWithQuery(['interest' => null]) }}">✕</a></span>
+                        <span class="filter-tag">{{ request('interest') }} <a href="{{ request()->fullUrlWithQuery(['interest' => null]) }}">&times;</a></span>
                     @endif
                     @if(request('style'))
-                        <span class="filter-tag">{{ request('style') }} <a href="{{ request()->fullUrlWithQuery(['style' => null]) }}">✕</a></span>
+                        <span class="filter-tag">{{ request('style') }} <a href="{{ request()->fullUrlWithQuery(['style' => null]) }}">&times;</a></span>
                     @endif
                     @if(request('group'))
-                        <span class="filter-tag">{{ request('group') }} <a href="{{ request()->fullUrlWithQuery(['group' => null]) }}">✕</a></span>
+                        <span class="filter-tag">{{ request('group') }} <a href="{{ request()->fullUrlWithQuery(['group' => null]) }}">&times;</a></span>
                     @endif
                     @if(request('duration'))
-                        <span class="filter-tag">{{ request('duration') }} Days <a href="{{ request()->fullUrlWithQuery(['duration' => null]) }}">✕</a></span>
+                        <span class="filter-tag">{{ request('duration') }} Days <a href="{{ request()->fullUrlWithQuery(['duration' => null]) }}">&times;</a></span>
                     @endif
                     @if(request('budget_band'))
-                        <span class="filter-tag">Budget: {{ request('budget_band') }} <a href="{{ request()->fullUrlWithQuery(['budget_band' => null]) }}">✕</a></span>
+                        <span class="filter-tag">Budget: {{ request('budget_band') }} <a href="{{ request()->fullUrlWithQuery(['budget_band' => null]) }}">&times;</a></span>
                     @endif
                     <a href="{{ route('destinations') }}" class="clear-filters-link">Clear All</a>
                 </div>
@@ -140,12 +140,12 @@
 
     @if($destinations->isEmpty())
         <div class="empty-state-card">
-            <div class="empty-icon-wrap">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <span class="empty-icon" aria-hidden="true">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
-            </div>
+            </span>
             <h3>No destinations match your active filters</h3>
             <p>Try clearing some filter criteria to explore more locations across Uganda.</p>
             <a href="{{ route('destinations') }}" class="btn btn-outline">Reset Filters</a>
@@ -153,12 +153,12 @@
     @else
         <div class="destinations-grid">
             @foreach($destinations as $dest)
-                <div class="dest-card">
+                <div class="dest-card" onclick="window.location='{{ route('destinations.show', $dest->slug) }}'" tabindex="0" role="link" aria-label="Explore {{ $dest->name }} Details">
                     <div class="dest-card-media">
                         @if(!empty($dest->image_path))
                             <img src="{{ asset($dest->image_path) }}" alt="{{ $dest->name }}" class="dest-card-img" loading="lazy">
                         @else
-                            <x-scene-svg :destination="$dest" height="210px" />
+                            <x-scene-svg :destination="$dest" height="220px" />
                         @endif
                         <span class="region-badge">{{ $dest->region }} Uganda</span>
                         <span class="duration-badge">{{ $dest->min_days }}-{{ $dest->max_days }} Days</span>
@@ -181,7 +181,7 @@
                                 <span class="price-amount">@price($dest->estimated_cost_from_kampala)</span>
                             </div>
                             <a href="{{ route('destinations.show', $dest->slug) }}" class="btn btn-sm btn-primary">
-                                View Details →
+                                View Details &rarr;
                             </a>
                         </div>
                     </div>

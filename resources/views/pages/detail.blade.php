@@ -18,7 +18,7 @@
             <div class="detail-hero-top">
                 <span class="region-pill">{{ $destination->region }} Uganda</span>
                 <span class="difficulty-pill">Difficulty: {{ $destination->difficulty }}</span>
-                <span class="best-time-pill">Best Season: {{ $destination->best_time }}</span>
+                <span class="best-time-pill">Best: {{ $destination->best_time }}</span>
             </div>
 
             <h1 class="detail-title">{{ $destination->name }}</h1>
@@ -42,12 +42,6 @@
                     </div>
                 @else
                     <div class="quiz-prompt-box">
-                        <span class="spark-icon" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-                            </svg>
-                        </span>
                         <div>
                             <strong>Curious about your personalized match score?</strong>
                             <p>Take our 7-step travel quiz to calculate exact compatibility and live budget fit.</p>
@@ -67,7 +61,6 @@
             @php $diff = $budgetUgx - $costData['total']; @endphp
             @if($diff >= 0)
                 <div class="budget-fit-banner within-budget">
-                    <span class="fit-icon">✓</span>
                     <div>
                         <strong>You are within your budget!</strong>
                         <span>Estimated trip cost (@price($costData['total'])) leaves approx. <strong>@price($diff)</strong> remaining for discretionary spending.</span>
@@ -75,7 +68,6 @@
                 </div>
             @else
                 <div class="budget-fit-banner over-budget">
-                    <span class="fit-icon">!</span>
                     <div>
                         <strong>This trip may exceed your budget by approx. @price(abs($diff)).</strong>
                         <span>Consider adjusting duration, choosing budget lodging, or reviewing our cheaper recommendation below.</span>
@@ -126,7 +118,7 @@
                                 <span class="pick-item-type">{{ $stay->type ?? 'Lodge' }}</span>
                                 <span class="pick-item-price">@price($stay->price_ugx) / night</span>
                                 <div class="pick-item-links">
-                                    @if($stay->website)
+                                    @if(!empty($stay->website))
                                         <a href="{{ $stay->website }}" target="_blank" rel="noopener noreferrer" class="pick-website-link">Official Website ↗</a>
                                     @endif
                                     <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($stay->name . ', ' . $destination->name . ', Uganda') }}" target="_blank" rel="noopener noreferrer" class="pick-maps-link" title="View on Google Maps">
@@ -166,7 +158,7 @@
                                 <span class="pick-item-type">{{ $eat->type ?? 'Restaurant' }}</span>
                                 <span class="pick-item-price">@price($eat->price_ugx) / meal</span>
                                 <div class="pick-item-links">
-                                    @if($eat->website)
+                                    @if(!empty($eat->website))
                                         <a href="{{ $eat->website }}" target="_blank" rel="noopener noreferrer" class="pick-website-link">Official Website ↗</a>
                                     @endif
                                     <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($eat->name . ', ' . $destination->name . ', Uganda') }}" target="_blank" rel="noopener noreferrer" class="pick-maps-link" title="View on Google Maps">
@@ -206,7 +198,7 @@
                                 <span class="pick-item-type">{{ $rec->type ?? 'Activity' }}</span>
                                 <span class="pick-item-price">@price($rec->price_ugx) / person</span>
                                 <div class="pick-item-links">
-                                    @if($rec->website)
+                                    @if(!empty($rec->website))
                                         <a href="{{ $rec->website }}" target="_blank" rel="noopener noreferrer" class="pick-website-link">Official Website ↗</a>
                                     @endif
                                     <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($rec->name . ', ' . $destination->name . ', Uganda') }}" target="_blank" rel="noopener noreferrer" class="pick-maps-link" title="View on Google Maps">
@@ -362,28 +354,50 @@
 
         <div class="route-metrics-grid">
             <div class="route-metric-card">
-                <span class="metric-icon">🚗</span>
+                <span class="metric-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="3" width="15" height="13"></rect>
+                        <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
+                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
+                </span>
                 <div class="metric-info">
                     <span class="metric-label">Estimated Distance</span>
                     <strong class="metric-value">{{ $costData['dist_km'] }} km</strong>
                 </div>
             </div>
             <div class="route-metric-card">
-                <span class="metric-icon">⏱️</span>
+                <span class="metric-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                </span>
                 <div class="metric-info">
                     <span class="metric-label">Estimated Travel Time</span>
                     <strong class="metric-value">~{{ $costData['hours'] }} hours</strong>
                 </div>
             </div>
             <div class="route-metric-card">
-                <span class="metric-icon">📍</span>
+                <span class="metric-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                </span>
                 <div class="metric-info">
                     <span class="metric-label">Starting Point</span>
                     <strong class="metric-value">{{ $origin }}</strong>
                 </div>
             </div>
             <div class="route-metric-card">
-                <span class="metric-icon">🏁</span>
+                <span class="metric-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                        <line x1="4" y1="22" x2="4" y2="15"></line>
+                    </svg>
+                </span>
                 <div class="metric-info">
                     <span class="metric-label">Destination</span>
                     <strong class="metric-value">{{ $destination->name }}</strong>
@@ -590,7 +604,7 @@
             <input type="hidden" name="days" value="{{ $days }}">
             <input type="hidden" name="style" value="{{ $style }}">
             <input type="hidden" name="total_ugx" id="saveTripTotal" value="{{ $costData['total'] }}">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-gold">
                 Save Trip Plan
             </button>
         </form>
@@ -671,9 +685,9 @@
         // Render budget status
         const statusEl = document.getElementById('liveBudgetStatus');
         if (diff >= 0) {
-            statusEl.innerHTML = `<span class="badge-within">✓ Within Budget</span><p>approx. UGX ${diff.toLocaleString()} remaining for ${people} travelers.</p>`;
+            statusEl.innerHTML = `<span class="badge-within">Within Budget</span><p>approx. UGX ${diff.toLocaleString()} remaining for ${people} travelers.</p>`;
         } else {
-            statusEl.innerHTML = `<span class="badge-over">! Exceeds Target</span><p>approx. UGX ${Math.abs(diff).toLocaleString()} over group target budget.</p>`;
+            statusEl.innerHTML = `<span class="badge-over">Exceeds Target</span><p>approx. UGX ${Math.abs(diff).toLocaleString()} over group target budget.</p>`;
         }
     }
 
@@ -698,7 +712,7 @@
             b.textContent = 'Choose';
             b.classList.remove('btn-chosen');
         });
-        btn.textContent = '✓ Chosen';
+        btn.textContent = 'Chosen';
         btn.classList.add('btn-chosen');
     }
 
@@ -713,7 +727,7 @@
             navigator.clipboard.writeText(window.location.href);
             const btn = document.getElementById('shareTripBtn');
             const originalText = btn.textContent;
-            btn.textContent = '✓ Link Copied!';
+            btn.textContent = 'Link Copied!';
             setTimeout(() => { btn.textContent = originalText; }, 2500);
         }
     }

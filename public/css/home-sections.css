@@ -1,0 +1,658 @@
+/* ==========================================================================
+   PEARL TRAILS: HOME SECTIONS (Popular Destinations, Trust, Plan, Interest, Closing)
+   ========================================================================== */
+
+/* Shared Section Utilities */
+.section-kicker-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.section-kicker-gold::before,
+.section-kicker-gold::after {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--gold);
+  opacity: 0.7;
+}
+
+.section-title-serif {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.4vw, 2.75rem);
+  font-weight: 700;
+  color: var(--text-heading);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   4. POPULAR DESTINATIONS CAROUSEL (Cream Background with Topo Pattern)
+   ========================================================================== */
+.section-popular-destinations {
+  padding: 5.5rem 0 4.5rem;
+  background-color: var(--bg-page);
+  background-image: var(--topo-pattern);
+  position: relative;
+}
+
+.destinations-carousel-header {
+  max-width: 1360px;
+  margin: 0 auto 2.5rem;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.carousel-viewport-wrapper {
+  position: relative;
+  max-width: 1420px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.destinations-cards-track {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 1rem 0.5rem 2rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.destinations-cards-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Individual Destination Card */
+.popular-dest-card {
+  flex: 0 0 calc((100% - 5rem) / 5);
+  min-width: 230px;
+  height: 420px;
+  scroll-snap-align: start;
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  background: var(--forest);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+}
+
+@media (max-width: 1200px) {
+  .popular-dest-card {
+    flex: 0 0 calc((100% - 3rem) / 3.2);
+  }
+}
+
+@media (max-width: 768px) {
+  .popular-dest-card {
+    flex: 0 0 78%;
+    height: 380px;
+  }
+}
+
+.popular-dest-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.popular-dest-card .dest-card-media,
+.popular-dest-card .popular-dest-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.popular-dest-card .dest-card-img,
+.popular-dest-card .popular-dest-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.popular-dest-card:hover .dest-card-img,
+.popular-dest-card:hover .popular-dest-img {
+  transform: scale(1.08);
+}
+
+.popular-dest-card .dest-card-gradient,
+.popular-dest-card .popular-dest-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 48, 31, 0.45) 0%,
+    transparent 45%,
+    rgba(18, 48, 31, 0.95) 90%
+  );
+  z-index: 2;
+}
+
+/* Card Content Overlay */
+.popular-dest-card .dest-card-content,
+.popular-dest-card .popular-dest-content {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.popular-dest-card .dest-top-pill {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(18, 48, 31, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(247, 241, 227, 0.18);
+  border-radius: var(--radius-full);
+  padding: 0.3rem 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.popular-dest-card .dest-bottom-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.popular-dest-card .dest-card-name {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+}
+
+.popular-dest-card .dest-meta-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  color: #d2e3d9;
+}
+
+.popular-dest-card .dest-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.popular-dest-card .dest-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gold-soft);
+  margin-top: 0.45rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.popular-dest-card:hover .dest-card-cta {
+  color: var(--gold);
+  transform: translateX(3px);
+}
+
+/* Side Carousel Arrow Buttons */
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.carousel-nav-btn:hover {
+  background: var(--forest);
+  color: var(--gold);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-nav-prev { left: 0; }
+.carousel-nav-next { right: 0; }
+
+/* ==========================================================================
+   5. TRUST STRIP (Dark Green Bar, Rounded Corners)
+   ========================================================================== */
+.section-trust-strip-wrapper {
+  max-width: 1240px;
+  margin: 1.5rem auto 5rem;
+  padding: 0 1.5rem;
+}
+
+.trust-strip-card {
+  background: var(--forest);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-xl);
+  padding: 2rem 2.5rem;
+  box-shadow: var(--shadow-md);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  border-right: 1px solid rgba(247, 241, 227, 0.12);
+}
+
+.trust-item:last-child {
+  border-right: none;
+}
+
+.trust-icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(232, 163, 23, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.trust-item-title {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.35;
+}
+
+@media (max-width: 900px) {
+  .trust-strip-card {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1.75rem;
+  }
+  .trust-item:nth-child(2) {
+    border-right: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .trust-strip-card {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .trust-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(247, 241, 227, 0.08);
+    padding-bottom: 1rem;
+  }
+  .trust-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+/* ==========================================================================
+   6. PLAN YOUR TRIP SPLIT SECTION
+   ========================================================================== */
+.section-plan-split {
+  padding: 3rem 0 6rem;
+  background: var(--bg-page);
+}
+
+.plan-split-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+/* Left Half: Diagonal Image with Script Overlay */
+.plan-split-media-col {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  min-height: 460px;
+  display: flex;
+  align-items: flex-end;
+  background: var(--forest);
+}
+
+.plan-split-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+}
+
+.plan-split-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 35%, rgba(18, 48, 31, 0.88) 100%);
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+  z-index: 2;
+}
+
+.plan-script-badge {
+  position: relative;
+  z-index: 3;
+  padding: 2.25rem;
+  width: 100%;
+}
+
+.script-text {
+  font-family: var(--font-script);
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.btn-plan-video {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(18, 48, 31, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-full);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-plan-video:hover {
+  background: var(--forest);
+  color: var(--gold);
+}
+
+/* Right Half: Pitch & Dynamic Stats */
+.plan-split-content-col {
+  padding-left: 0.5rem;
+}
+
+.plan-lead-copy {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 1.25rem 0 2rem;
+  max-width: 520px;
+}
+
+.plan-stats-strip {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.plan-stat-item {
+  display: flex;
+  flex-direction: column;
+  padding-right: 1.75rem;
+  border-right: 1px solid var(--border-light);
+}
+
+.plan-stat-item:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.plan-stat-number {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-heading);
+  line-height: 1.05;
+}
+
+.plan-stat-label {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+@media (max-width: 960px) {
+  .plan-split-container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .plan-split-bg-img,
+  .plan-split-overlay {
+    clip-path: none;
+  }
+}
+
+/* ==========================================================================
+   7. EXPLORE BY INTEREST SECTION (Dark Green)
+   ========================================================================== */
+.section-explore-interest {
+  background: var(--forest);
+  color: var(--white);
+  padding: 6rem 0;
+  position: relative;
+}
+
+.interest-header-row {
+  max-width: 1280px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-explore-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: transparent;
+  border: 1px solid var(--border-gold);
+  color: var(--gold-soft);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.6rem 1.35rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-explore-more:hover {
+  background: rgba(232, 163, 23, 0.15);
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.interest-tiles-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.25rem;
+}
+
+.interest-tile-card {
+  position: relative;
+  height: 240px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  background: var(--forest-2);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.interest-tile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.interest-tile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.interest-tile-card:hover .interest-tile-img {
+  transform: scale(1.1);
+}
+
+.interest-tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(18, 48, 31, 0.25) 0%, rgba(18, 48, 31, 0.88) 100%);
+}
+
+.interest-tile-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1.25rem 0.75rem;
+  text-align: center;
+}
+
+.interest-tile-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--gold-soft);
+  margin-bottom: 0.5rem;
+}
+
+.interest-tile-label {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 1100px) {
+  .interest-tiles-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .interest-tiles-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+  .interest-tile-card {
+    height: 180px;
+  }
+}
+
+/* ==========================================================================
+   8. CLOSING BANNER (Savanna Sunset Photo with Overlay)
+   ========================================================================== */
+.section-closing-banner {
+  position: relative;
+  padding: 6.5rem 1.5rem;
+  overflow: hidden;
+  text-align: center;
+  color: var(--white);
+  background: var(--forest);
+}
+
+.closing-banner-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.closing-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 48, 31, 0.65) 0%,
+    rgba(18, 48, 31, 0.85) 100%
+  );
+}
+
+.closing-banner-content {
+  position: relative;
+  z-index: 3;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.closing-banner-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 0.85rem;
+}
+
+.closing-banner-sub {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  color: var(--cream);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}

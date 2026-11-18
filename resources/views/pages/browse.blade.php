@@ -38,7 +38,7 @@
 
     @if(session('success'))
         <div class="alert-success-banner">
-            <span>✓ {{ session('success') }}</span>
+            <span>{{ session('success') }}</span>
         </div>
     @endif
 
@@ -105,14 +105,14 @@
                 <div class="active-filters-row">
                     <span class="active-filters-label">Active Filters:</span>
                     @if(request('q'))
-                        <span class="filter-tag">"{{ request('q') }}" <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}">✕</a></span>
+                        <span class="filter-tag">"{{ request('q') }}" <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}">&times;</a></span>
                     @endif
                     @if($selectedDestinationId)
                         @php $activeDest = $destinations->firstWhere('id', $selectedDestinationId); @endphp
-                        <span class="filter-tag">{{ $activeDest->name ?? 'Destination' }} <a href="{{ request()->fullUrlWithQuery(['destination' => null]) }}">✕</a></span>
+                        <span class="filter-tag">{{ $activeDest->name ?? 'Destination' }} <a href="{{ request()->fullUrlWithQuery(['destination' => null]) }}">&times;</a></span>
                     @endif
                     @if($maxPriceUgx)
-                        <span class="filter-tag">Max @price($maxPriceUgx) <a href="{{ request()->fullUrlWithQuery(['max_price' => null]) }}">✕</a></span>
+                        <span class="filter-tag">Max @price($maxPriceUgx) <a href="{{ request()->fullUrlWithQuery(['max_price' => null]) }}">&times;</a></span>
                     @endif
                     <a href="{{ url()->current() }}" class="clear-filters-link">Reset All</a>
                 </div>
@@ -128,12 +128,12 @@
 
     @if($items->isEmpty())
         <div class="empty-state-card">
-            <div class="empty-icon-wrap">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <span class="empty-icon" aria-hidden="true">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
-            </div>
+            </span>
             <h3>No results found matching your filters</h3>
             <p>Try broadening your price limit or viewing all destinations.</p>
             <a href="{{ url()->current() }}" class="btn btn-outline">Clear Filters</a>
@@ -144,14 +144,14 @@
                 <div class="browse-card {{ $item['fits_plan'] ? 'fits-plan-card' : '' }}">
                     @if(!empty($item['image_path']))
                         <div class="browse-card-media">
-                            <img src="{{ asset($item['image_path']) }}?v={{ @filemtime(public_path($item['image_path'])) ?: '1' }}" alt="{{ $item['name'] }}" class="browse-card-img" loading="lazy">
+                            <img src="{{ asset($item['image_path']) }}" alt="{{ $item['name'] }}" class="browse-card-img" loading="lazy">
                             <div class="browse-card-badges">
                                 <span class="type-badge">{{ $item['type'] }}</span>
                                 @if($item['is_community'])
-                                    <span class="community-badge">Community</span>
+                                    <span class="community-badge">Community Listing</span>
                                 @endif
                                 @if($item['fits_plan'])
-                                    <span class="fits-plan-badge">Fits plan</span>
+                                    <span class="fits-plan-badge">Fits your plan</span>
                                 @endif
                             </div>
                             <span class="browse-dest-pill">{{ $item['destination_name'] }}</span>
@@ -195,7 +195,7 @@
                         <div class="browse-card-links">
                             @if($item['website'])
                                 <a href="{{ $item['website'] }}" target="_blank" rel="noopener noreferrer" class="browse-action-link">
-                                    Official Website ↗
+                                    Official Website &rarr;
                                 </a>
                             @endif
                             <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($item['name'] . ', ' . $item['destination_name'] . ', Uganda') }}" target="_blank" rel="noopener noreferrer" class="browse-action-link maps-pin-link">
@@ -203,7 +203,7 @@
                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                     <circle cx="12" cy="10" r="3"></circle>
                                 </svg>
-                                View on Maps ↗
+                                View on Maps &rarr;
                             </a>
                         </div>
                     </div>
@@ -224,8 +224,8 @@
                             @php
                                 $isChosen = (!empty($picks[$category]) && $picks[$category]['name'] === $item['name']);
                             @endphp
-                            <button type="submit" class="btn btn-sm {{ $isChosen ? 'btn-chosen' : 'btn-choose' }}">
-                                {{ $isChosen ? '✓ Selected Pick' : 'Choose' }}
+                            <button type="submit" class="btn btn-sm {{ $isChosen ? 'btn-chosen' : 'btn-outline' }}">
+                                {{ $isChosen ? 'Selected Pick' : 'Choose' }}
                             </button>
                         </form>
                     </div>

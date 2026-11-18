@@ -10,16 +10,42 @@
     $name = $destination->name ?? 'Uganda';
     $from = $destination->gradient_from ?? '#0F4C3A';
     $to = $destination->gradient_to ?? '#D4AF37';
-    $realImage = $destination->image_path;
-    $localImagePath = "images/destinations/{$slug}.jpg";
-    $hasLocalImage = file_exists(public_path($localImagePath));
+
+    $slugMap = [
+        'jinja' => 'images/destinations/source-of-the-nile.webp',
+        'sipi-falls' => 'images/destinations/sipi-falls.webp',
+        'murchison-falls-np' => 'images/destinations/murchison-falls.webp',
+        'queen-elizabeth-np' => 'images/destinations/boat-cruise-elephants.webp',
+        'bwindi' => 'images/destinations/bwindi-gorilla-1.webp',
+        'lake-bunyonyi' => 'images/destinations/lake-bunyonyi.webp',
+        'rwenzori' => 'images/destinations/rwenzori-mountains.webp',
+        'fort-portal' => 'images/destinations/fort-portal-crater-lakes.webp',
+        'kidepo' => 'images/destinations/buffalo-herd-savanna.webp',
+        'entebbe' => 'images/destinations/entebbe-lake-victoria.webp',
+        'kampala' => 'images/destinations/gaddafi-national-mosque.webp',
+        'ssese-islands' => 'images/destinations/ssese-islands.webp',
+        'lake-mburo-np' => 'images/destinations/lake-mburo-zebras.webp',
+    ];
+
+    $resolvedImage = null;
+    if (!empty($destination->image_path) && file_exists(public_path($destination->image_path))) {
+        $resolvedImage = $destination->image_path;
+    } elseif (isset($slugMap[$slug]) && file_exists(public_path($slugMap[$slug]))) {
+        $resolvedImage = $slugMap[$slug];
+    } elseif (file_exists(public_path("images/destinations/{$slug}.webp"))) {
+        $resolvedImage = "images/destinations/{$slug}.webp";
+    } elseif (file_exists(public_path("images/destinations/{$slug}.jpg"))) {
+        $resolvedImage = "images/destinations/{$slug}.jpg";
+    }
 @endphp
 
 <div class="{{ $class }}" style="width: {{ $width }}; height: {{ $height }}; position: relative; overflow: hidden; background: linear-gradient(135deg, {{ $from }}, {{ $to }}); border-top-left-radius: inherit; border-top-right-radius: inherit;">
-    @if($realImage)
-        <img src="{{ asset($realImage) }}" alt="{{ $name }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-    @elseif($hasLocalImage)
-        <img src="{{ asset($localImagePath) }}" alt="{{ $name }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+    @if($resolvedImage)
+        <img src="{{ asset($resolvedImage) }}" 
+             alt="{{ $name }}" 
+             class="scene-card-img" 
+             loading="lazy" 
+             style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);">
     @else
         <!-- Procedural SVG Scene Art -->
         <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width: 100%; height: 100%; display: block;" xmlns="http://www.w3.org/2000/svg">

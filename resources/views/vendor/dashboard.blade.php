@@ -18,18 +18,18 @@
 
     @if(session('success'))
         <div class="alert-success-banner">
-            <span>✓ {{ session('success') }}</span>
+            <span>{{ session('success') }}</span>
         </div>
     @endif
 
     @if($listings->isEmpty())
         <div class="empty-state-card">
-            <div class="empty-icon-wrap">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            <span class="empty-icon" aria-hidden="true">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                 </svg>
-            </div>
+            </span>
             <h3>No business listings found</h3>
             <p>You haven't submitted any listings yet. Showcase your hotel, restaurant, or activity center to tourists!</p>
             <a href="{{ route('list-business') }}" class="btn btn-primary">List Your First Business</a>
@@ -63,11 +63,11 @@
                             <td>{{ $listing->activities->count() }} activities</td>
                             <td>
                                 @if($listing->status === 'approved')
-                                    <span class="badge-status-approved">✓ Approved</span>
+                                    <span class="badge-status-approved">Approved</span>
                                 @elseif($listing->status === 'pending')
-                                    <span class="badge-status-pending">⏳ Pending Review</span>
+                                    <span class="badge-status-pending">Pending Review</span>
                                 @else
-                                    <span class="badge-status-rejected">✕ Rejected</span>
+                                    <span class="badge-status-rejected">Rejected</span>
                                 @endif
                             </td>
                             <td>
