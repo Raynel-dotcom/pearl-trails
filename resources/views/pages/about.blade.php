@@ -18,18 +18,14 @@
             <span class="detail-label" style="display: block; margin-bottom: 0.5rem;">The Pearl of Africa Decision Assistant</span>
             <h2>Guiding Your Journey Through Uganda with Clarity</h2>
             <p>
-                Pearl Trails was created to eliminate the uncertainty from exploring Uganda. Whether you have 24 hours for a whitewater excursion in Jinja, a weekend retreat on the islands of Lake Bunyonyi, or two weeks traversing the Rwenzori snow peaks and Kidepo savannahs, we provide the clarity you need.
+                Pearl Trails was created to eliminate the uncertainty from exploring Uganda. Whether you have 24 hours for a whitewater excursion in Jinja, a weekend retreat amidst volcanic crater lakes, or two weeks traversing the Rwenzori snow peaks and Kidepo savannahs, we provide the clarity you need.
             </p>
             <p>
                 We unite transparent budget estimates, realistic driving times, official Uganda Wildlife Authority (UWA) tariffs, and authentic local recommendations into an effortless, personalized travel experience.
             </p>
-        </div>
-        <div class="about-story-media">
-            <img src="{{ asset('images/sections/plan-lake-bunyonyi.webp') }}" 
-                 alt="Scenic emerald islands of Lake Bunyonyi in southwestern Uganda" 
-                 class="about-story-img" 
-                 loading="lazy">
-            <span class="about-media-badge">Lake Bunyonyi, Uganda</span>
+            <p>
+                Our platform gives independent travellers, families, and safari explorers total confidence to discover the true Pearl of Africa on their own terms.
+            </p>
         </div>
     </div>
 
