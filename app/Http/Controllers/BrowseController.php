@@ -110,7 +110,7 @@ class BrowseController extends Controller
                 'unit' => $place->unit,
                 'is_community' => false,
                 'image_path' => $place->image_path ?: $this->resolveFallbackImage($place->category, $place->name),
-                'website' => null,
+                'website' => $place->website,
                 'activities' => [],
                 'description' => $place->description,
             ]);

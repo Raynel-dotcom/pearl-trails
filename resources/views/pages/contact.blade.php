@@ -1,3 +1,5 @@
+@extends('layouts.app')
+
 @section('title', 'Contact Us - Pearl Trails Uganda')
 @section('meta_description', 'Get in touch with Pearl Trails for trip planning help, business listing enquiries, or partnership opportunities in Uganda tourism.')
 

@@ -18,6 +18,7 @@ class Place extends Model
         'type',
         'description',
         'image_path',
+        'website',
     ];
 
     protected $casts = [

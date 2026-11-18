@@ -104,6 +104,7 @@
         <span>Jump to:</span>
         <a href="#stay-and-eat" class="jump-link">Stay & Eat</a>
         <a href="#match-breakdown" class="jump-link">Match & Costs</a>
+        <a href="#route-map" class="jump-link">Route & Map</a>
         <a href="#itinerary" class="jump-link">Itinerary</a>
         <a href="#budget-builder" class="jump-link">Budget Builder</a>
     </div>
@@ -124,6 +125,9 @@
                                 <span class="pick-item-name">{{ $stay->name }}</span>
                                 <span class="pick-item-type">{{ $stay->type ?? 'Lodge' }}</span>
                                 <span class="pick-item-price">@price($stay->price_ugx) / night</span>
+                                @if($stay->website)
+                                    <a href="{{ $stay->website }}" target="_blank" rel="noopener noreferrer" class="pick-website-link">Official Website ↗</a>
+                                @endif
                             </div>
                             <div class="pick-item-actions">
                                 @if($quiz)
@@ -153,6 +157,9 @@
                                 <span class="pick-item-name">{{ $eat->name }}</span>
                                 <span class="pick-item-type">{{ $eat->type ?? 'Restaurant' }}</span>
                                 <span class="pick-item-price">@price($eat->price_ugx) / meal</span>
+                                @if($eat->website)
+                                    <a href="{{ $eat->website }}" target="_blank" rel="noopener noreferrer" class="pick-website-link">Official Website ↗</a>
+                                @endif
                             </div>
                             <div class="pick-item-actions">
                                 @if($quiz)
@@ -182,6 +189,9 @@
                                 <span class="pick-item-name">{{ $rec->name }}</span>
                                 <span class="pick-item-type">{{ $rec->type ?? 'Activity' }}</span>
                                 <span class="pick-item-price">@price($rec->price_ugx) / person</span>
+                                @if($rec->website)
+                                    <a href="{{ $rec->website }}" target="_blank" rel="noopener noreferrer" class="pick-website-link">Official Website ↗</a>
+                                @endif
                             </div>
                             <div class="pick-item-actions">
                                 @if($quiz)
@@ -308,7 +318,70 @@
         </div>
     </div>
 
-    <!-- 6. SUGGESTED ITINERARY & DESTINATION INSIGHTS -->
+    <!-- 6. TRAVEL ROUTE & GOOGLE MAPS NAVIGATION -->
+    <div class="detail-section" id="route-map">
+        <div class="section-header-row">
+            <div>
+                <h2 class="section-heading">Travel Route & Live Navigation</h2>
+                <p class="section-sub">Direct driving route and road navigation from <strong>{{ $origin }}, Uganda</strong> to <strong>{{ $destination->name }}, Uganda</strong></p>
+            </div>
+            <a href="https://www.google.com/maps/dir/?api=1&origin={{ urlencode($origin . ', Uganda') }}&destination={{ $destination->lat }},{{ $destination->lon }}" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn btn-primary route-nav-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;">
+                    <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+                </svg>
+                Open in Google Maps (Live Navigation) ↗
+            </a>
+        </div>
+
+        <div class="route-metrics-grid">
+            <div class="route-metric-card">
+                <span class="metric-icon">🚗</span>
+                <div class="metric-info">
+                    <span class="metric-label">Estimated Distance</span>
+                    <strong class="metric-value">{{ $costData['dist_km'] }} km</strong>
+                </div>
+            </div>
+            <div class="route-metric-card">
+                <span class="metric-icon">⏱️</span>
+                <div class="metric-info">
+                    <span class="metric-label">Estimated Travel Time</span>
+                    <strong class="metric-value">~{{ $costData['hours'] }} hours</strong>
+                </div>
+            </div>
+            <div class="route-metric-card">
+                <span class="metric-icon">📍</span>
+                <div class="metric-info">
+                    <span class="metric-label">Starting Point</span>
+                    <strong class="metric-value">{{ $origin }}</strong>
+                </div>
+            </div>
+            <div class="route-metric-card">
+                <span class="metric-icon">🏁</span>
+                <div class="metric-info">
+                    <span class="metric-label">Destination</span>
+                    <strong class="metric-value">{{ $destination->name }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="route-map-wrapper">
+            <iframe
+                title="Google Maps Route from {{ $origin }} to {{ $destination->name }}"
+                src="https://maps.google.com/maps?saddr={{ urlencode($origin . ', Uganda') }}&daddr={{ $destination->lat }},{{ $destination->lon }}&hl=en&z=8&output=embed"
+                width="100%"
+                height="440"
+                style="border:0; width:100%; border-radius: 12px; display: block;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- 7. SUGGESTED ITINERARY & DESTINATION INSIGHTS -->
     <div class="detail-section" id="itinerary">
         <h2 class="section-heading">Suggested {{ $days }}-Day Itinerary</h2>
         <div class="itinerary-timeline">

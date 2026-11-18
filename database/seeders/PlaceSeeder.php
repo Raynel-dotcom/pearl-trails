@@ -13,6 +13,206 @@ class PlaceSeeder extends Seeder
     {
         $destinations = Destination::all();
 
+
+        $hotelMeta = [
+            'Nile River Camp & Backpackers' => [
+                'price_ugx' => 55000,
+                'website' => 'https://camponthenile.com',
+                'desc' => 'Riverside backpackers camp on the Nile with dorms, safari tents, swimming pool, and sunset bar.',
+            ],
+            'Haven Eco River Lodge' => [
+                'price_ugx' => 550000,
+                'website' => 'https://www.thehaven-uganda.com',
+                'desc' => 'Tranquil eco-lodge on the Nile banks with private bungalows, river view swimming pool, and bird sanctuary trails.',
+            ],
+            'Lemala Wildwaters Lodge' => [
+                'price_ugx' => 1450000,
+                'website' => 'https://www.lemalacamps.com',
+                'desc' => 'Ultra-luxury lodge secluded on its own private rainforest island amidst roaring rapids of the River Nile.',
+            ],
+            'Crow\'s Nest Rest Camp' => [
+                'price_ugx' => 65000,
+                'website' => 'https://crowsnestsipi.com',
+                'desc' => 'Rustic mountain camp on the slopes of Mount Elgon with direct front-row views of Sipi Falls cascade.',
+            ],
+            'Rafiki Lodge Sipi' => [
+                'price_ugx' => 370000,
+                'website' => 'https://rafikilodgesipi.com',
+                'desc' => 'Cliffside lodge overlooking the Sipi valley with stone cottages, swimming pool, and guided coffee walks.',
+            ],
+            'Sipi River Lodge' => [
+                'price_ugx' => 550000,
+                'website' => 'https://sipiheritage.com',
+                'desc' => 'Heritage lodge set amidst lush coffee farms and waterfalls with cozy fireplaces and gourmet dining.',
+            ],
+            'Red Chilli Rest Camp' => [
+                'price_ugx' => 150000,
+                'website' => 'https://redchillihideaway.com',
+                'desc' => 'Iconic safari camp inside the park at Paraa offering safari tents, en-suite bandas, and open-air bar.',
+            ],
+            'Pakuba Safari Lodge' => [
+                'price_ugx' => 750000,
+                'website' => 'https://pakubasafarilodge.com',
+                'desc' => 'Elevated safari lodge on the Eastern bank of the Albert Nile with panoramic views and swimming pool.',
+            ],
+            'Chobe Safari Lodge' => [
+                'price_ugx' => 1500000,
+                'website' => 'https://chobelodgeuganda.com',
+                'desc' => 'Five-star Marasa Africa luxury resort with multi-tiered infinity pools overlooking the Victoria Nile.',
+            ],
+            'Engiri Game Lodge & Campsite' => [
+                'price_ugx' => 185000,
+                'website' => 'https://engirigamelodge.com',
+                'desc' => 'Eco-campsite and safari lodge nestled near Kazinga Channel with permanent tents, bandas, and campfire nights.',
+            ],
+            'Marafiki Safari Lodge' => [
+                'price_ugx' => 850000,
+                'website' => 'https://marafikisafaris.com',
+                'desc' => 'Eco-luxury safari tents and thatched cottages perched on a volcanic ridge overlooking Lake George.',
+            ],
+            'Mweya Safari Lodge' => [
+                'price_ugx' => 1450000,
+                'website' => 'https://mweyalodge.com',
+                'desc' => 'Legendary peninsula lodge surrounded by the Kazinga Channel with infinity pool and sunset safari deck.',
+            ],
+            'Bwindi Backpackers Lodge' => [
+                'price_ugx' => 75000,
+                'website' => 'https://www.bwindibackpackerslodge.net',
+                'desc' => 'Community-oriented backpackers lodge at the edge of the gorilla forest with dorms and private cottages.',
+            ],
+            'Bakiga Lodge Ruhija' => [
+                'price_ugx' => 650000,
+                'website' => 'https://bakigalodge.org',
+                'desc' => 'Non-profit eco-lodge in the misty Ruhija gorilla sector with valley-facing private balconies.',
+            ],
+            'Bwindi Lodge by Volcanoes Safaris' => [
+                'price_ugx' => 3200000,
+                'website' => 'https://volcanoessafaris.com',
+                'desc' => 'Ultra-luxury forest lodge featuring handcrafted stone bandas, personalized butler service, and forest spa.',
+            ],
+            'Bunyonyi Overland Resort' => [
+                'price_ugx' => 150000,
+                'website' => 'https://mbzgroup.africa',
+                'desc' => 'Lakeside retreat with tiered gardens, furnished safari tents, swimming pier, and motorized canoe tours.',
+            ],
+            'Arcadia Cottages Bunyonyi' => [
+                'price_ugx' => 550000,
+                'website' => 'https://arcadialodges.com',
+                'desc' => 'Panoramic highland lodge set atop a ridge with 360-degree views across all 29 islands of Lake Bunyonyi.',
+            ],
+            'BirdNest Resort @ Lake Bunyonyi' => [
+                'price_ugx' => 480000,
+                'website' => 'https://birdnestresort.com',
+                'desc' => 'Belgian-Ugandan luxury resort on the water edge with ecological pool and renowned fine dining.',
+            ],
+            'Rwenzori View Guesthouse' => [
+                'price_ugx' => 175000,
+                'website' => 'https://ruwenzori-view.com',
+                'desc' => 'Quiet family-run guesthouse renowned for communal evening dinners and lush tropical gardens.',
+            ],
+            'Mountains of the Moon Hotel' => [
+                'price_ugx' => 420000,
+                'website' => 'https://www.motmh.com',
+                'desc' => 'Colonial-style hotel surrounded by 15 acres of landscaped gardens with an Olympic pool and wellness spa.',
+            ],
+            'Kyaninga Lodge' => [
+                'price_ugx' => 1600000,
+                'website' => 'https://www.kyaningalodge.com',
+                'desc' => 'Architectural log lodge raised above Lake Kyaninga crater with backdrop views of the Rwenzori peaks.',
+            ],
+            'Rwenzori Trekkers Hostel & Cottages' => [
+                'price_ugx' => 80000,
+                'website' => 'https://www.rwenzoritrekking.com',
+                'desc' => 'The beloved mountain base of Rwenzori Trekking Services along the river in Kyanjuki with dorms and private rooms.',
+            ],
+            'Rwenzori Basecamp Guesthouse' => [
+                'price_ugx' => 220000,
+                'website' => 'https://rwenzorimountainsnationalpark.com',
+                'desc' => 'Alpine guesthouse at the foothills of Mount Stanley supporting Central Circuit hikers and cultural walks.',
+            ],
+            'Equator Snow Lodge' => [
+                'price_ugx' => 1100000,
+                'website' => 'https://geolodgesafrica.com',
+                'desc' => 'Luxury mountain lodge built from river pebbles of the Mubuku River with roaring open fireplaces.',
+            ],
+            'UWA Bandas & Student Hostel' => [
+                'price_ugx' => 80000,
+                'website' => 'https://ugandawildlife.org',
+                'desc' => 'Official UWA rest camp in Narus Valley where zebras and warthogs graze between self-contained bandas.',
+            ],
+            'Kidepo Savannah Lodge' => [
+                'price_ugx' => 300000,
+                'website' => 'https://naturelodgesuganda.com',
+                'desc' => 'Nature Lodges camp perched on a rocky kopje overlooking the Narus Valley grasslands with open-air dining.',
+            ],
+            'Apoka Safari Lodge' => [
+                'price_ugx' => 3500000,
+                'website' => 'https://wildplacesafrica.com',
+                'desc' => 'Top-tier luxury safari lodge carved into granite kopje with private natural stone outdoor plunge tubs.',
+            ],
+            'Entebbe Backpackers Hostel' => [
+                'price_ugx' => 60000,
+                'website' => 'https://entebbebackpackers.com',
+                'desc' => 'Friendly backpackers hostel with camping grounds, leafy shade trees, and quick access to Entebbe Airport.',
+            ],
+            '2 Friends Beach Hotel' => [
+                'price_ugx' => 500000,
+                'website' => 'https://www.2friendshotel.com',
+                'desc' => 'Boutique hotel situated right along the shores of Lake Victoria with outdoor pool and beach club dining.',
+            ],
+            'Protea Hotel Entebbe Resort' => [
+                'price_ugx' => 850000,
+                'website' => 'https://www.marriott.com',
+                'desc' => 'Four-star Marriott resort located 1km from the international airport with sweeping lakeside terrace and spa.',
+            ],
+            'Bushpig Backpackers Hostel Kololo' => [
+                'price_ugx' => 75000,
+                'website' => 'https://bushpigkampala.com',
+                'desc' => 'Top-rated urban hostel in upscale Kololo featuring artisan sourdough pizza, craft beer, and travel hub.',
+            ],
+            'Fairway Hotel & Spa' => [
+                'price_ugx' => 450000,
+                'website' => 'https://fairwayhotel.co.ug',
+                'desc' => 'Historic boutique hotel with lush tropical courtyards in Nakasero, Asian Fusion restaurant, spa, and pool.',
+            ],
+            'Kampala Serena Hotel' => [
+                'price_ugx' => 1150000,
+                'website' => 'https://www.serenahotels.com/kampala',
+                'desc' => 'Five-star luxury oasis featuring 17 acres of water gardens, cascading waterfalls, and world-class dining.',
+            ],
+            'Hornbill Campsite & Cottages' => [
+                'price_ugx' => 70000,
+                'website' => 'https://thisisuganda.org',
+                'desc' => 'Peaceful white-sand beach campsite tucked inside a bay of Bugala Island, surrounded by tropical forest.',
+            ],
+            'Brovad Sands Lodge' => [
+                'price_ugx' => 450000,
+                'website' => 'https://www.brovadsandslodge.com',
+                'desc' => 'Tropical beach resort with private white sands on Bugala Island, beach hammocks, and swimming pool.',
+            ],
+            'Victoria Forest Resort Kalangala' => [
+                'price_ugx' => 650000,
+                'website' => 'https://victoriaforestresort.com',
+                'desc' => 'Premier island resort set against natural rain forest with private beach frontage and forest trails.',
+            ],
+            'Rwakobo Rock Eco Camp' => [
+                'price_ugx' => 550000,
+                'website' => 'https://www.rwakoborock.com',
+                'desc' => 'Spectacular eco-camp perched on a massive granite outcrop overlooking Lake Mburo with solar showers and pool.',
+            ],
+            'Arcadia Cottages Mburo' => [
+                'price_ugx' => 450000,
+                'website' => 'https://arcadialodges.com',
+                'desc' => 'Intimate lodge located inside the park with peaceful views across Lake Mburo and resident warthogs on lawn.',
+            ],
+            'Mihingo Safari Lodge' => [
+                'price_ugx' => 1650000,
+                'website' => 'https://mihingolodge.com',
+                'desc' => 'Magical luxury wilderness retreat built into rock kopjes featuring an iconic infinity pool and horseback safaris.',
+            ],
+        ];
+
+
         // 1. Seed Stays from hotel_names and accommodation_costs for each destination
         foreach ($destinations as $dest) {
             $hotelNames = $dest->hotel_names ?? [];
@@ -27,6 +227,7 @@ class PlaceSeeder extends Seeder
             foreach ($styleTypes as $style => $typeName) {
                 if (!empty($hotelNames[$style]) && isset($costs[$style])) {
                     $hotelName = $hotelNames[$style];
+                    $meta = $hotelMeta[$hotelName] ?? [];
                     Place::updateOrCreate(
                         [
                             'destination_id' => $dest->id,
@@ -34,10 +235,11 @@ class PlaceSeeder extends Seeder
                             'name' => $hotelName,
                         ],
                         [
-                            'price_ugx' => (int) $costs[$style],
+                            'price_ugx' => $meta['price_ugx'] ?? (int) $costs[$style],
                             'unit' => 'night',
                             'type' => $typeName,
-                            'description' => "Quality {$style} accommodation near {$dest->name}.",
+                            'description' => $meta['desc'] ?? "Quality {$style} accommodation near {$dest->name}.",
+                            'website' => $meta['website'] ?? null,
                             'image_path' => $this->resolveStayImage($dest->slug, $hotelName, $style),
                         ]
                     );
@@ -45,229 +247,231 @@ class PlaceSeeder extends Seeder
             }
         }
 
+
         // 2. Specific Eat, Recreation, and Visit places
         $placesData = [
             'jinja' => [
                 'eat' => [
-                    ['name' => 'All Friends Food Bar & Grill', 'price_ugx' => 25000, 'unit' => 'meal', 'type' => 'Restaurant'],
-                    ['name' => 'The Source Cafe Jinja', 'price_ugx' => 18000, 'unit' => 'meal', 'type' => 'Cafe'],
-                    ['name' => 'Java House Jinja', 'price_ugx' => 35000, 'unit' => 'meal', 'type' => 'Casual Dining'],
-                    ['name' => 'Igar Cafe & Bakery', 'price_ugx' => 15000, 'unit' => 'meal', 'type' => 'Bakery & Snacks'],
+                    ['name' => 'All Friends Food Bar & Grill', 'price_ugx' => 28000, 'unit' => 'meal', 'type' => 'Restaurant', 'website' => 'https://allfriendsgrill.com', 'description' => 'Popular open-air bar and grill on Jackson Crescent serving tender steaks, local tilapia, and chilled beverages.'],
+                    ['name' => 'The Source Cafe Jinja', 'price_ugx' => 22000, 'unit' => 'meal', 'type' => 'Cafe', 'website' => 'https://facebook.com/SourceCafeJinja', 'description' => 'Historic Jinja cafe serving fresh Uganda espresso, fresh sandwiches, smoothies, and baked goods.'],
+                    ['name' => 'Java House Jinja', 'price_ugx' => 35000, 'unit' => 'meal', 'type' => 'Casual Dining', 'website' => 'https://javahouseafrica.com', 'description' => 'Modern East African casual dining chain serving burgers, breakfast platters, and gourmet coffees.'],
+                    ['name' => 'Igar Cafe & Bakery', 'price_ugx' => 18000, 'unit' => 'meal', 'type' => 'Bakery & Snacks', 'website' => 'https://facebook.com/IgarPlaza', 'description' => 'Central bakery and snack cafe serving authentic Ugandan rolex, pastries, samosas, and iced drinks.'],
                 ],
                 'recreation' => [
-                    ['name' => 'Adrift River Adventures Rafting', 'price_ugx' => 280000, 'unit' => 'entry', 'type' => 'Activity Centre'],
-                    ['name' => 'Nile River Tubing Crew', 'price_ugx' => 60000, 'unit' => 'entry', 'type' => 'River Recreation'],
-                    ['name' => 'All Terrain Quad Adventures', 'price_ugx' => 150000, 'unit' => 'entry', 'type' => 'Off-road Park'],
-                    ['name' => 'Nile Horseback Safaris', 'price_ugx' => 120000, 'unit' => 'entry', 'type' => 'Equine Trails'],
+                    ['name' => 'Adrift River Adventures Rafting', 'price_ugx' => 520000, 'unit' => 'entry', 'type' => 'Activity Centre', 'website' => 'https://adrift.ug', 'description' => 'Uganda premier white-water rafting outfitter tackling the world-famous grade 5 rapids of the River Nile.'],
+                    ['name' => 'Nile River Tubing Crew', 'price_ugx' => 75000, 'unit' => 'entry', 'type' => 'River Recreation', 'website' => 'https://tubingthenile.com', 'description' => 'Relaxing and adventure river tubing expeditions drifting along scenic sections of the Upper Nile.'],
+                    ['name' => 'All Terrain Quad Adventures', 'price_ugx' => 185000, 'unit' => 'entry', 'type' => 'Off-road Park', 'website' => 'https://atvadventuresuganda.com', 'description' => 'Guided all-terrain quad biking along rural dirt trails, farmland, and riverbanks of the Nile.'],
+                    ['name' => 'Nile Horseback Safaris', 'price_ugx' => 150000, 'unit' => 'entry', 'type' => 'Equine Trails', 'website' => 'https://nilehorsebacksafaris.com', 'description' => 'Scenic horseback safaris along riverbanks and local village trails suitable for beginner and experienced riders.'],
                 ],
                 'visit' => [
-                    ['name' => 'Source of the River Nile Monument', 'price_ugx' => 10000, 'unit' => 'entry', 'type' => 'Historical Monument'],
-                    ['name' => 'Busowoko Falls Eco Park', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Natural Waterfall'],
-                    ['name' => 'Itanda Rapids Viewpoint', 'price_ugx' => 10000, 'unit' => 'entry', 'type' => 'Scenic River Rapids'],
+                    ['name' => 'Source of the River Nile Monument', 'price_ugx' => 10000, 'unit' => 'entry', 'type' => 'Historical Monument', 'website' => 'https://ugandawildlife.org', 'description' => 'The historic geographical spot where the Nile emerges from Lake Victoria on its journey to the Mediterranean.'],
+                    ['name' => 'Busowoko Falls Eco Park', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Natural Waterfall', 'website' => 'https://busowokofalls.com', 'description' => 'Dramatic foaming cascades along the Nile with boardwalks, scenic picnic grounds, and swimming pools.'],
+                    ['name' => 'Itanda Rapids Viewpoint', 'price_ugx' => 10000, 'unit' => 'entry', 'type' => 'Scenic River Rapids', 'website' => 'https://jinja.go.ug', 'description' => 'Spectacular thunderous river rapids famous for extreme kayaking and powerful white-water hydraulics.'],
                 ],
             ],
             'sipi-falls' => [
                 'eat' => [
-                    ['name' => 'Sipi Coffee View Cafe', 'price_ugx' => 15000, 'unit' => 'meal', 'type' => 'Cafe'],
-                    ['name' => 'Lacam Verandah Diner', 'price_ugx' => 28000, 'unit' => 'meal', 'type' => 'Restaurant'],
-                    ['name' => 'Rafiki Terrace Dining', 'price_ugx' => 35000, 'unit' => 'meal', 'type' => 'Bistro'],
+                    ['name' => 'Sipi Coffee View Cafe', 'price_ugx' => 18000, 'unit' => 'meal', 'type' => 'Cafe', 'website' => 'https://crowsnestsipi.com', 'description' => 'Perched cafe offering steaming freshly brewed Mount Elgon Arabica coffee and scenic valley terrace views.'],
+                    ['name' => 'Lacam Verandah Diner', 'price_ugx' => 32000, 'unit' => 'meal', 'type' => 'Restaurant', 'website' => 'https://lacamlodge.com', 'description' => 'Cliffside verandah restaurant serving hearty homemade soups, grilled meats, and local Ugandan dishes.'],
+                    ['name' => 'Rafiki Terrace Dining', 'price_ugx' => 40000, 'unit' => 'meal', 'type' => 'Bistro', 'website' => 'https://rafikilodgesipi.com', 'description' => 'Open-air bistro with panoramic sunset views over Sipi valley, serving fresh wood-fired meals and cocktails.'],
                 ],
                 'recreation' => [
-                    ['name' => 'Sipi Falls Abseiling Experience', 'price_ugx' => 140000, 'unit' => 'entry', 'type' => 'Extreme Sports'],
-                    ['name' => 'Chebonet River Rock Scramble', 'price_ugx' => 40000, 'unit' => 'entry', 'type' => 'Guided Trek'],
-                    ['name' => 'Elgon Ridge Mountain Biking', 'price_ugx' => 70000, 'unit' => 'entry', 'type' => 'Bike Trail'],
+                    ['name' => 'Sipi Falls Abseiling Experience', 'price_ugx' => 180000, 'unit' => 'entry', 'type' => 'Extreme Sports', 'website' => 'https://crowsnestsipi.com', 'description' => 'Exhilarating 100-meter abseil descent alongside the thunderous main waterfall of Sipi Falls.'],
+                    ['name' => 'Chebonet River Rock Scramble', 'price_ugx' => 45000, 'unit' => 'entry', 'type' => 'Guided Trek', 'website' => 'https://sipiheritage.com', 'description' => 'Guided boulder hike along Chebonet mountain stream with natural stone pools and hidden river caves.'],
+                    ['name' => 'Elgon Ridge Mountain Biking', 'price_ugx' => 80000, 'unit' => 'entry', 'type' => 'Bike Trail', 'website' => 'https://discoverugandasafaris.com', 'description' => 'Thrilling downhill mountain biking through coffee farms, cliff ridges, and high Mount Elgon trails.'],
                 ],
                 'visit' => [
-                    ['name' => 'Sipi Three-Falls Trail Access', 'price_ugx' => 30000, 'unit' => 'entry', 'type' => 'Waterfall Trail'],
-                    ['name' => 'Bugisu Arabica Coffee Farm Walk', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Agro-Tourism'],
-                    ['name' => 'Tewei Forest Sanctuary', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Forest Reserve'],
+                    ['name' => 'Sipi Three-Falls Trail Access', 'price_ugx' => 35000, 'unit' => 'entry', 'type' => 'Waterfall Trail', 'website' => 'https://ugandawildlife.org', 'description' => 'Guided trek exploring all three magnificent waterfalls of Sipi cascading 100m, 85m, and 75m down the mountain.'],
+                    ['name' => 'Bugisu Arabica Coffee Farm Walk', 'price_ugx' => 30000, 'unit' => 'entry', 'type' => 'Agro-Tourism', 'website' => 'https://sipiheritage.com', 'description' => 'Immersive hands-on coffee tour from picking beans to roasting, grinding, and brewing fresh Arabica.'],
+                    ['name' => 'Tewei Forest Sanctuary', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Forest Reserve', 'website' => 'https://ugandawildlife.org', 'description' => 'Peaceful evergreen forest pocket home to chameleons, black-and-white colobus monkeys, and exotic birds.'],
                 ],
             ],
             'murchison-falls-np' => [
                 'eat' => [
-                    ['name' => 'Red Chilli River Camp Restaurant', 'price_ugx' => 30000, 'unit' => 'meal', 'type' => 'Safari Camp Diner'],
-                    ['name' => 'Pakuba Safari Restaurant', 'price_ugx' => 50000, 'unit' => 'meal', 'type' => 'Lodge Dining'],
-                    ['name' => 'Paraa Safari Riverside Terrace', 'price_ugx' => 70000, 'unit' => 'meal', 'type' => 'Fine Dining'],
+                    ['name' => 'Red Chilli River Camp Restaurant', 'price_ugx' => 35000, 'unit' => 'meal', 'type' => 'Safari Camp Diner', 'website' => 'https://redchillihideaway.com', 'description' => 'Casual safari diner serving pizzas, full English breakfasts, and cold Nile Special beers under open skies.'],
+                    ['name' => 'Pakuba Safari Restaurant', 'price_ugx' => 60000, 'unit' => 'meal', 'type' => 'Lodge Dining', 'website' => 'https://pakubasafarilodge.com', 'description' => 'Full-board lodge restaurant with panoramic views of Albert Nile, serving international and local buffet courses.'],
+                    ['name' => 'Paraa Safari Riverside Terrace', 'price_ugx' => 75000, 'unit' => 'meal', 'type' => 'Fine Dining', 'website' => 'https://marasa.net', 'description' => 'Elevated terrace restaurant overlooking the flowing Nile with colonial charm and international wine selection.'],
                 ],
                 'recreation' => [
-                    ['name' => 'Nile Launch Boat to Base of Falls', 'price_ugx' => 110000, 'unit' => 'entry', 'type' => 'River Cruise'],
-                    ['name' => 'Budongo Forest Chimpanzee Trek', 'price_ugx' => 220000, 'unit' => 'entry', 'type' => 'Primate Sanctuary'],
-                    ['name' => 'Albert Nile Delta Wildlife Boat', 'price_ugx' => 150000, 'unit' => 'entry', 'type' => 'Birding Safari'],
+                    ['name' => 'Nile Launch Boat to Base of Falls', 'price_ugx' => 110000, 'unit' => 'entry', 'type' => 'River Cruise', 'website' => 'https://ugandawildlife.org', 'description' => 'Official UWA boat safari sailing past pods of hippos and giant crocodiles to the bottom of the roaring falls.'],
+                    ['name' => 'Budongo Forest Chimpanzee Trek', 'price_ugx' => 350000, 'unit' => 'entry', 'type' => 'Primate Sanctuary', 'website' => 'https://ugandawildlife.org', 'description' => 'Guided tracking through mahogany rainforest to encounter habituated wild chimpanzee communities.'],
+                    ['name' => 'Albert Nile Delta Wildlife Boat', 'price_ugx' => 180000, 'unit' => 'entry', 'type' => 'Birding Safari', 'website' => 'https://ugandawildlife.org', 'description' => 'Specialized river cruise heading into the Lake Albert delta in search of rare shoebill storks and elephant herds.'],
                 ],
                 'visit' => [
-                    ['name' => 'Top of Murchison Falls Gorge Trail', 'price_ugx' => 35000, 'unit' => 'entry', 'type' => 'National Park Site'],
-                    ['name' => 'Paraa Ferry Nile Crossing', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Scenic Crossing'],
-                    ['name' => 'Kaniyo Pabidi Mahogany Forest', 'price_ugx' => 40000, 'unit' => 'entry', 'type' => 'Nature Reserve'],
+                    ['name' => 'Top of Murchison Falls Gorge Trail', 'price_ugx' => 35000, 'unit' => 'entry', 'type' => 'National Park Site', 'website' => 'https://ugandawildlife.org', 'description' => 'Dramatic viewpoint where the full volume of the Victoria Nile surges violently through a 7-meter rock crevice.'],
+                    ['name' => 'Paraa Ferry Nile Crossing', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Scenic Crossing', 'website' => 'https://ugandawildlife.org', 'description' => 'Scenic vehicle and passenger ferry connecting northern game tracks with southern forest sectors across the Nile.'],
+                    ['name' => 'Kaniyo Pabidi Mahogany Forest', 'price_ugx' => 45000, 'unit' => 'entry', 'type' => 'Nature Reserve', 'website' => 'https://ugandawildlife.org', 'description' => 'Ancient ironwood forest trail with towering mahogany trees, baboon troops, and diverse forest bird species.'],
                 ],
             ],
             'queen-elizabeth-np' => [
                 'eat' => [
-                    ['name' => 'Tembo Canteen & Grill', 'price_ugx' => 25000, 'unit' => 'meal', 'type' => 'Local Grill'],
-                    ['name' => 'Kazinga Channel Lookout Bistro', 'price_ugx' => 45000, 'unit' => 'meal', 'type' => 'Lodge Dining'],
-                    ['name' => 'Bush Lodge River View Diner', 'price_ugx' => 50000, 'unit' => 'meal', 'type' => 'Eco-Diner'],
+                    ['name' => 'Tembo Canteen & Grill', 'price_ugx' => 28000, 'unit' => 'meal', 'type' => 'Local Grill', 'website' => 'https://ugandawildlife.org', 'description' => 'Ranger canteen serving freshly cooked matooke, beef stew, tilapia, and chapati near park headquarters.'],
+                    ['name' => 'Kazinga Channel Lookout Bistro', 'price_ugx' => 50000, 'unit' => 'meal', 'type' => 'Lodge Dining', 'website' => 'https://mweyalodge.com', 'description' => 'Lodge bistro overlooking the waterway with wildlife views and continental dining.'],
+                    ['name' => 'Bush Lodge River View Diner', 'price_ugx' => 55000, 'unit' => 'meal', 'type' => 'Eco-Diner', 'website' => 'https://naturelodgesuganda.com', 'description' => 'Romantic open-air dining terrace illuminated by hurricane lanterns, serving multi-course evening meals.'],
                 ],
                 'recreation' => [
-                    ['name' => 'UWA Kazinga Channel 2hr Boat Safari', 'price_ugx' => 110000, 'unit' => 'entry', 'type' => 'Channel Cruise'],
-                    ['name' => 'Kyambura Gorge Chimp Tracking', 'price_ugx' => 200000, 'unit' => 'entry', 'type' => 'Primate Trek'],
-                    ['name' => 'Ishasha Tree-Climbing Lion Guided Drive', 'price_ugx' => 90000, 'unit' => 'entry', 'type' => 'Ranger Guided Safari'],
+                    ['name' => 'UWA Kazinga Channel 2hr Boat Safari', 'price_ugx' => 110000, 'unit' => 'entry', 'type' => 'Channel Cruise', 'website' => 'https://ugandawildlife.org', 'description' => 'The world-famous boat safari delivering close-up sightings of hippos, bathing buffalos, and water birds.'],
+                    ['name' => 'Kyambura Gorge Chimp Tracking', 'price_ugx' => 370000, 'unit' => 'entry', 'type' => 'Primate Trek', 'website' => 'https://ugandawildlife.org', 'description' => 'Descend into the sunken Valley of Apes rainforest to track isolated communities of chimpanzees.'],
+                    ['name' => 'Ishasha Tree-Climbing Lion Guided Drive', 'price_ugx' => 110000, 'unit' => 'entry', 'type' => 'Ranger Guided Safari', 'website' => 'https://ugandawildlife.org', 'description' => 'Ranger-guided safari through Ishasha savannah to spot legendary lions lounging in large fig trees.'],
                 ],
                 'visit' => [
-                    ['name' => 'Lake Katwe Traditional Salt Mines', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Heritage Site'],
-                    ['name' => 'Bunyaruguru Twin Crater Lookout', 'price_ugx' => 10000, 'unit' => 'entry', 'type' => 'Crater Viewpoint'],
-                    ['name' => 'Kikorongo Equator Monument', 'price_ugx' => 5000, 'unit' => 'entry', 'type' => 'Geographical Landmark'],
+                    ['name' => 'Lake Katwe Traditional Salt Mines', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Heritage Site', 'website' => 'https://visitqueenelizabeth.com', 'description' => 'Centuries-old volcanic salt lake where local miners harvest pure rock salt using traditional methods.'],
+                    ['name' => 'Bunyaruguru Twin Crater Lookout', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Crater Viewpoint', 'website' => 'https://visitqueenelizabeth.com', 'description' => 'Scenic volcanic rim offering breathtaking panoramic views of twin crater lakes and the Rift Valley floor.'],
+                    ['name' => 'Kikorongo Equator Monument', 'price_ugx' => 10000, 'unit' => 'entry', 'type' => 'Geographical Landmark', 'website' => 'https://ugandawildlife.org', 'description' => 'Iconic geographic landmark marking 0 degrees latitude with unobstructed views of the Rwenzori foothills.'],
                 ],
             ],
             'bwindi' => [
                 'eat' => [
-                    ['name' => 'Buhoma Community Rest Haven Meals', 'price_ugx' => 30000, 'unit' => 'meal', 'type' => 'Community Restaurant'],
-                    ['name' => 'Bakiga Lodge Organic Kitchen', 'price_ugx' => 45000, 'unit' => 'meal', 'type' => 'Lodge Dining'],
-                    ['name' => 'Silverback Gorilla Bistro', 'price_ugx' => 55000, 'unit' => 'meal', 'type' => 'Fine Dining'],
+                    ['name' => 'Buhoma Community Rest Haven Meals', 'price_ugx' => 35000, 'unit' => 'meal', 'type' => 'Community Restaurant', 'website' => 'https://buhomarelodge.com', 'description' => 'Locally run community restaurant serving organic garden salads, chicken stews, and hot post-trek lunches.'],
+                    ['name' => 'Bakiga Lodge Organic Kitchen', 'price_ugx' => 50000, 'unit' => 'meal', 'type' => 'Lodge Dining', 'website' => 'https://bakigalodge.org', 'description' => 'Farm-to-table organic kitchen serving wholesome hearty meals with panoramic views of Ruhija forest.'],
+                    ['name' => 'Silverback Gorilla Bistro', 'price_ugx' => 65000, 'unit' => 'meal', 'type' => 'Fine Dining', 'website' => 'https://marasa.net', 'description' => 'Highland lodge restaurant offering warm fireplaces, 3-course dinners, and fine wine after mountain gorilla treks.'],
                 ],
                 'recreation' => [
-                    ['name' => 'Batwa Cultural Forest Experience', 'price_ugx' => 120000, 'unit' => 'entry', 'type' => 'Cultural Trail'],
-                    ['name' => 'Munyaga Waterfall Rainforest Walk', 'price_ugx' => 70000, 'unit' => 'entry', 'type' => 'Forest Nature Trail'],
-                    ['name' => 'Bwindi Community Bike Tour', 'price_ugx' => 60000, 'unit' => 'entry', 'type' => 'Cycling Tour'],
+                    ['name' => 'Batwa Cultural Forest Experience', 'price_ugx' => 150000, 'unit' => 'entry', 'type' => 'Cultural Trail', 'website' => 'https://ugandawildlife.org', 'description' => 'Authentic trail led by indigenous Batwa elders showcasing ancient forest survival, traditional medicine, and music.'],
+                    ['name' => 'Munyaga Waterfall Rainforest Walk', 'price_ugx' => 80000, 'unit' => 'entry', 'type' => 'Forest Nature Trail', 'website' => 'https://ugandawildlife.org', 'description' => 'Ranger-guided rainforest trek past ancient ferns and orchid trees to three cascading mountain waterfalls.'],
+                    ['name' => 'Bwindi Community Bike Tour', 'price_ugx' => 70000, 'unit' => 'entry', 'type' => 'Cycling Tour', 'website' => 'https://ride4awoman.org', 'description' => 'Guided cycling tour through tea plantations, local schools, and artisan villages along the park border.'],
                 ],
                 'visit' => [
-                    ['name' => 'Ride 4 a Woman Craft Center', 'price_ugx' => 10000, 'unit' => 'entry', 'type' => 'Artisan Cooperative'],
-                    ['name' => 'Buhoma Gorilla Hospital Visitor Wing', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Conservation Education'],
+                    ['name' => 'Ride 4 a Woman Craft Center', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Artisan Cooperative', 'website' => 'https://ride4awoman.org', 'description' => 'Inspiring women cooperative teaching traditional basket weaving, textile sewing, and cultural storytelling.'],
+                    ['name' => 'Buhoma Gorilla Hospital Visitor Wing', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Conservation Education', 'website' => 'https://gorilladoctors.org', 'description' => 'Conservation veterinary center dedicated to saving wild mountain gorillas through veterinary medicine and education.'],
                 ],
             ],
             'lake-bunyonyi' => [
                 'eat' => [
-                    ['name' => 'Bunyonyi Overland Lake Bar & Grill', 'price_ugx' => 22000, 'unit' => 'meal', 'type' => 'Lakeside Grill'],
-                    ['name' => 'Arcadia Highlands Panoramic Restaurant', 'price_ugx' => 38000, 'unit' => 'meal', 'type' => 'Scenic Dining'],
-                    ['name' => 'BirdNest Belgo-Ugandan Kitchen', 'price_ugx' => 55000, 'unit' => 'meal', 'type' => 'Fine Dining'],
+                    ['name' => 'Bunyonyi Overland Lake Bar & Grill', 'price_ugx' => 28000, 'unit' => 'meal', 'type' => 'Lakeside Grill', 'website' => 'https://mbzgroup.africa', 'description' => 'Lakeside terrace grill serving Lake Bunyonyi crayfish curries, grilled tilapia, and fresh pizzas.'],
+                    ['name' => 'Arcadia Highlands Panoramic Restaurant', 'price_ugx' => 45000, 'unit' => 'meal', 'type' => 'Scenic Dining', 'website' => 'https://arcadialodges.com', 'description' => 'Highland panoramic restaurant serving buffet meals while overlooking all 29 islands of Lake Bunyonyi.'],
+                    ['name' => 'BirdNest Belgo-Ugandan Kitchen', 'price_ugx' => 55000, 'unit' => 'meal', 'type' => 'Fine Dining', 'website' => 'https://birdnestresort.com', 'description' => 'Critically acclaimed culinary kitchen blending authentic Belgian culinary recipes with fresh Ugandan ingredients.'],
                 ],
                 'recreation' => [
-                    ['name' => 'Supreme Adventure Park Zipline over Lake', 'price_ugx' => 80000, 'unit' => 'entry', 'type' => 'Adventure Park'],
-                    ['name' => 'Bunyonyi Motorized Canoe Safari', 'price_ugx' => 60000, 'unit' => 'entry', 'type' => 'Boat Cruise'],
-                    ['name' => 'Traditional Dugout Canoe Rental & Lesson', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Water Sports'],
+                    ['name' => 'Supreme Adventure Park Zipline over Lake', 'price_ugx' => 80000, 'unit' => 'entry', 'type' => 'Adventure Park', 'website' => 'https://supremeadventurepark.com', 'description' => 'High-adrenaline zipline flying directly over the tranquil waters of Lake Bunyonyi and high ropes courses.'],
+                    ['name' => 'Bunyonyi Motorized Canoe Safari', 'price_ugx' => 60000, 'unit' => 'entry', 'type' => 'Boat Cruise', 'website' => 'https://mbzgroup.africa', 'description' => 'Guided island-hopping motorboat cruise visiting historical Punishment Island, Bushara, and Kyahugye.'],
+                    ['name' => 'Traditional Dugout Canoe Rental & Lesson', 'price_ugx' => 30000, 'unit' => 'entry', 'type' => 'Water Sports', 'website' => 'https://mbzgroup.africa', 'description' => 'Learn the ancient art of paddling a traditional handcrafted wooden dugout canoe across calm waters.'],
                 ],
                 'visit' => [
-                    ['name' => 'Akampene (Punishment Island) Historical Tour', 'price_ugx' => 30000, 'unit' => 'entry', 'type' => 'Historic Island'],
-                    ['name' => 'Kyahugye Island Zebra & Impala Sanctuary', 'price_ugx' => 45000, 'unit' => 'entry', 'type' => 'Island Wildlife Reserve'],
-                    ['name' => 'Arcadia 360-degree Hills Viewpoint', 'price_ugx' => 10000, 'unit' => 'entry', 'type' => 'Scenic Viewpoint'],
+                    ['name' => 'Akampene (Punishment Island) Historical Tour', 'price_ugx' => 35000, 'unit' => 'entry', 'type' => 'Historic Island', 'website' => 'https://lakebunyonyiuganda.com', 'description' => 'Somber and historic island where pregnant unmarried Bakiga girls were once abandoned, now an educational site.'],
+                    ['name' => 'Kyahugye Island Zebra & Impala Sanctuary', 'price_ugx' => 50000, 'unit' => 'entry', 'type' => 'Island Wildlife Reserve', 'website' => 'https://lakebunyonyiuganda.com', 'description' => 'Privately protected island sanctuary where zebras, impalas, and waterbucks roam amidst highland lake scenery.'],
+                    ['name' => 'Arcadia 360-degree Hills Viewpoint', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Scenic Viewpoint', 'website' => 'https://arcadialodges.com', 'description' => 'The most photographed panoramic viewpoint in southwestern Uganda, looking across 29 serene islands.'],
                 ],
             ],
             'fort-portal' => [
                 'eat' => [
-                    ['name' => 'Gardens Restaurant Fort Portal', 'price_ugx' => 20000, 'unit' => 'meal', 'type' => 'Local & Continental'],
-                    ['name' => 'The Dutchess European Diner', 'price_ugx' => 35000, 'unit' => 'meal', 'type' => 'Bistro & Pizzeria'],
-                    ['name' => 'Mountains of the Moon Verandah', 'price_ugx' => 45000, 'unit' => 'meal', 'type' => 'Hotel Dining'],
+                    ['name' => 'Gardens Restaurant Fort Portal', 'price_ugx' => 25000, 'unit' => 'meal', 'type' => 'Local & Continental', 'website' => 'https://gardensrestaurant.ug', 'description' => 'Popular Fort Portal dining garden serving tasty local matooke, smoked beef, and continental specials.'],
+                    ['name' => 'The Dutchess European Diner', 'price_ugx' => 38000, 'unit' => 'meal', 'type' => 'Bistro & Pizzeria', 'website' => 'https://thedutchessuganda.com', 'description' => 'Renowned boutique restaurant famous for stone-baked pizzas, goat milk cheeses, and gourmet burgers.'],
+                    ['name' => 'Mountains of the Moon Verandah', 'price_ugx' => 50000, 'unit' => 'meal', 'type' => 'Hotel Dining', 'website' => 'https://www.motmh.com', 'description' => 'Grand colonial hotel verandah restaurant overlooking manicured lawns, serving multi-course meals.'],
                 ],
                 'recreation' => [
-                    ['name' => 'Ndali-Kasenda Guided Crater Bike Tour', 'price_ugx' => 65000, 'unit' => 'entry', 'type' => 'Cycling Excursion'],
-                    ['name' => 'Mpanga Tea Estate Tour & Tasting', 'price_ugx' => 30000, 'unit' => 'entry', 'type' => 'Agro-Tourism'],
-                    ['name' => 'Top of the World Viewpoint Hike', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Scenic Trek'],
+                    ['name' => 'Ndali-Kasenda Guided Crater Bike Tour', 'price_ugx' => 75000, 'unit' => 'entry', 'type' => 'Cycling Excursion', 'website' => 'https://ndali.com', 'description' => 'Guided mountain biking across volcanic ridges connecting over a dozen emerald-green crater lakes.'],
+                    ['name' => 'Mpanga Tea Estate Tour & Tasting', 'price_ugx' => 35000, 'unit' => 'entry', 'type' => 'Agro-Tourism', 'website' => 'https://mpangatea.com', 'description' => 'Walk through rolling emerald tea fields, learn plucking techniques, and taste fresh processed tea.'],
+                    ['name' => 'Top of the World Viewpoint Hike', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Scenic Trek', 'website' => 'https://toorokingdom.org', 'description' => 'Rewarding hilltop trek offering panoramic views of three volcanic craters and Mount Stanley peaks.'],
                 ],
                 'visit' => [
-                    ['name' => 'Amabere Ga Nyina Mwiru Caves & Waterfalls', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Stalactite Caves'],
-                    ['name' => 'Karuzika Palace of Tooro Kingdom', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Royal Heritage'],
-                    ['name' => 'Kyaninga Crater Rim Trail', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Crater Lake'],
+                    ['name' => 'Amabere Ga Nyina Mwiru Caves & Waterfalls', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Stalactite Caves', 'website' => 'https://toorokingdom.org', 'description' => 'Limestone stalactites and plunging waterfalls steeped in rich Tooro Kingdom folklore and royal legends.'],
+                    ['name' => 'Karuzika Palace of Tooro Kingdom', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Royal Heritage', 'website' => 'https://toorokingdom.org', 'description' => 'The circular hilltop royal palace of King Oyo, commanding 360-degree vistas across Fort Portal city.'],
+                    ['name' => 'Kyaninga Crater Rim Trail', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Crater Lake', 'website' => 'https://www.kyaningalodge.com', 'description' => 'Scenic nature trail circumscribing the rim of Lake Kyaninga, an ancient and pristine explosion crater.'],
                 ],
             ],
             'rwenzori' => [
                 'eat' => [
-                    ['name' => 'Trekkers Rest Canteen Kilembe', 'price_ugx' => 25000, 'unit' => 'meal', 'type' => 'Mountain Canteen'],
-                    ['name' => 'Equator Snow Alpine Diner', 'price_ugx' => 45000, 'unit' => 'meal', 'type' => 'Lodge Dining'],
-                    ['name' => 'Kasese Spring International Cafe', 'price_ugx' => 18000, 'unit' => 'meal', 'type' => 'Town Cafe'],
+                    ['name' => 'Trekkers Rest Canteen Kilembe', 'price_ugx' => 28000, 'unit' => 'meal', 'type' => 'Mountain Canteen', 'website' => 'https://www.rwenzoritrekking.com', 'description' => 'Cozy riverside mountaineering canteen serving hearty pasta, hot stews, and breakfasts for hikers.'],
+                    ['name' => 'Equator Snow Alpine Diner', 'price_ugx' => 50000, 'unit' => 'meal', 'type' => 'Lodge Dining', 'website' => 'https://geolodgesafrica.com', 'description' => 'Stone fireplace dining room serving warming four-course dinners beside the rushing Mubuku mountain river.'],
+                    ['name' => 'Kasese Spring International Cafe', 'price_ugx' => 22000, 'unit' => 'meal', 'type' => 'Town Cafe', 'website' => 'https://kasesehotel.com', 'description' => 'Convenient town cafe serving espresso, Ugandan buffet dishes, and packed lunches for expeditions.'],
                 ],
                 'recreation' => [
-                    ['name' => '1-Day Mahoma Nature Trail Hike', 'price_ugx' => 120000, 'unit' => 'entry', 'type' => 'Guided Trek'],
-                    ['name' => 'Ruboni Community Village Cultural Walk', 'price_ugx' => 40000, 'unit' => 'entry', 'type' => 'Cultural Trail'],
-                    ['name' => 'River Mubuku Whitewater Scramble', 'price_ugx' => 60000, 'unit' => 'entry', 'type' => 'Mountain Activity'],
+                    ['name' => '1-Day Mahoma Nature Trail Hike', 'price_ugx' => 150000, 'unit' => 'entry', 'type' => 'Guided Trek', 'website' => 'https://rwenzoritrekking.com', 'description' => 'Superb 1-day guided alpine trek traversing bamboo zones, moorland plants, and glacial river valleys.'],
+                    ['name' => 'Ruboni Community Village Cultural Walk', 'price_ugx' => 45000, 'unit' => 'entry', 'type' => 'Cultural Trail', 'website' => 'https://rubonicamp.com', 'description' => 'Authentic Bakonzo village tour visiting traditional blacksmiths, herbalists, and folk basket weavers.'],
+                    ['name' => 'River Mubuku Whitewater Scramble', 'price_ugx' => 70000, 'unit' => 'entry', 'type' => 'Mountain Activity', 'website' => 'https://rwenzorimountainsnationalpark.com', 'description' => 'Adrenaline river scramble over ancient glacier-sculpted granite boulders and mountain torrents.'],
                 ],
                 'visit' => [
-                    ['name' => 'Nyakalengija Trailhead Interpretive Center', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Mountaineering Center'],
-                    ['name' => 'Ruboni Hilltop Viewpoint of Mount Stanley', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Mountain Lookout'],
+                    ['name' => 'Nyakalengija Trailhead Interpretive Center', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Mountaineering Center', 'website' => 'https://ugandawildlife.org', 'description' => 'The official starting point of the Central Circuit with exhibits on mountaineering history and botany.'],
+                    ['name' => 'Ruboni Hilltop Viewpoint of Mount Stanley', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Mountain Lookout', 'website' => 'https://rubonicamp.com', 'description' => 'Hilltop viewpoint offering breathtaking clear-day vistas of the glistening Margherita glaciers.'],
                 ],
             ],
             'kidepo' => [
                 'eat' => [
-                    ['name' => 'Apoka Rest Camp Canteen', 'price_ugx' => 25000, 'unit' => 'meal', 'type' => 'Camp Canteen'],
-                    ['name' => 'Kidepo Savannah Lodge Open-Air Dining', 'price_ugx' => 45000, 'unit' => 'meal', 'type' => 'Lodge Dining'],
-                    ['name' => 'Apoka Safari Lodge Gourmet Table', 'price_ugx' => 80000, 'unit' => 'meal', 'type' => 'Luxury Dining'],
+                    ['name' => 'Apoka Rest Camp Canteen', 'price_ugx' => 30000, 'unit' => 'meal', 'type' => 'Camp Canteen', 'website' => 'https://ugandawildlife.org', 'description' => 'UWA camp canteen serving cold sodas, beers, and simple freshly cooked Ugandan dishes.'],
+                    ['name' => 'Kidepo Savannah Lodge Open-Air Dining', 'price_ugx' => 55000, 'unit' => 'meal', 'type' => 'Lodge Dining', 'website' => 'https://naturelodgesuganda.com', 'description' => 'Thatched wooden deck dining with uninterrupted views of wild game moving across Narus Valley.'],
+                    ['name' => 'Apoka Safari Lodge Gourmet Table', 'price_ugx' => 95000, 'unit' => 'meal', 'type' => 'Luxury Dining', 'website' => 'https://wildplacesafrica.com', 'description' => 'Fine multi-course safari dining crafted from fresh regional ingredients, served under Karamoja stars.'],
                 ],
                 'recreation' => [
-                    ['name' => 'Lorukul Cultural Karamojong Manyattas Walk', 'price_ugx' => 50000, 'unit' => 'entry', 'type' => 'Cultural Immersion'],
-                    ['name' => 'Guided Bush Nature Walk in Narus', 'price_ugx' => 80000, 'unit' => 'entry', 'type' => 'Walking Safari'],
-                    ['name' => 'Night Spotlight Game Drive', 'price_ugx' => 120000, 'unit' => 'entry', 'type' => 'Night Safari'],
+                    ['name' => 'Lorukul Cultural Karamojong Manyattas Walk', 'price_ugx' => 60000, 'unit' => 'entry', 'type' => 'Cultural Immersion', 'website' => 'https://ugandawildlife.org', 'description' => 'Respectful cultural visit into traditional Karamojong homesteads to witness music, cattle herding, and lifestyle.'],
+                    ['name' => 'Guided Bush Nature Walk in Narus', 'price_ugx' => 90000, 'unit' => 'entry', 'type' => 'Walking Safari', 'website' => 'https://ugandawildlife.org', 'description' => 'Unforgettable on-foot savannah walk with armed rangers tracking wildlife along Narus River pools.'],
+                    ['name' => 'Night Spotlight Game Drive', 'price_ugx' => 140000, 'unit' => 'entry', 'type' => 'Night Safari', 'website' => 'https://ugandawildlife.org', 'description' => 'Thrilling night drive using powerful spotlights to detect nocturnal predators like leopards and hyenas.'],
                 ],
                 'visit' => [
-                    ['name' => 'Kanangorok Hot Springs on South Sudan Border', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Geothermal Springs'],
-                    ['name' => 'Narus Valley Wildlife Waterhole Hide', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Wildlife Hide'],
+                    ['name' => 'Kanangorok Hot Springs on South Sudan Border', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Geothermal Springs', 'website' => 'https://ugandawildlife.org', 'description' => 'Natural geothermal springs bubbling at 50 degrees Celsius nestled between the rugged Lotukei Mountains.'],
+                    ['name' => 'Narus Valley Wildlife Waterhole Hide', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Wildlife Hide', 'website' => 'https://ugandawildlife.org', 'description' => 'Concealed wildlife observation hide overlooking the primary waterholes where animals gather in dry months.'],
                 ],
             ],
             'entebbe' => [
                 'eat' => [
-                    ['name' => 'Goretti\'s Pizzeria on the Beach', 'price_ugx' => 30000, 'unit' => 'meal', 'type' => 'Beach Restaurant'],
-                    ['name' => 'Cafe Javas Entebbe Mall', 'price_ugx' => 35000, 'unit' => 'meal', 'type' => 'Modern Casual'],
-                    ['name' => '2 Friends Waterfront Seafood Bar', 'price_ugx' => 50000, 'unit' => 'meal', 'type' => 'Lakeside Dining'],
+                    ['name' => 'Goretti\'s Pizzeria on the Beach', 'price_ugx' => 35000, 'unit' => 'meal', 'type' => 'Beach Restaurant', 'website' => 'https://facebook.com/GorettisPizzeria', 'description' => 'Laid-back beachfront pizzeria where diners enjoy stone-baked pizzas with their feet in the sand of Lake Victoria.'],
+                    ['name' => 'Cafe Javas Entebbe Mall', 'price_ugx' => 38000, 'unit' => 'meal', 'type' => 'Modern Casual', 'website' => 'https://cafejavas.co.ug', 'description' => 'Famous Ugandan casual dining restaurant renowned for generous portions, rich coffee, and waffles.'],
+                    ['name' => '2 Friends Waterfront Seafood Bar', 'price_ugx' => 55000, 'unit' => 'meal', 'type' => 'Lakeside Dining', 'website' => 'https://www.2friendshotel.com', 'description' => 'Charming open-air lakeside terrace serving fresh Lake Victoria Nile perch, calamari, and cocktails.'],
                 ],
                 'recreation' => [
-                    ['name' => 'Ngamba Island Day Excursion & Speedboat', 'price_ugx' => 240000, 'unit' => 'entry', 'type' => 'Sanctuary Cruise'],
-                    ['name' => 'Mabamba Swamp Shoebill Wooden Canoe', 'price_ugx' => 90000, 'unit' => 'entry', 'type' => 'Birding Safari'],
-                    ['name' => 'Sunset Yacht Cruise on Lake Victoria', 'price_ugx' => 120000, 'unit' => 'entry', 'type' => 'Lake Cruise'],
+                    ['name' => 'Ngamba Island Day Excursion & Speedboat', 'price_ugx' => 380000, 'unit' => 'entry', 'type' => 'Sanctuary Cruise', 'website' => 'https://ngambaisland.org', 'description' => 'Speedboat cruise across Lake Victoria to the 100-acre forested sanctuary protecting orphaned chimpanzees.'],
+                    ['name' => 'Mabamba Swamp Shoebill Wooden Canoe', 'price_ugx' => 120000, 'unit' => 'entry', 'type' => 'Birding Safari', 'website' => 'https://mabambaswamp.com', 'description' => 'Traditional wooden boat safari through Papyrus channels to observe the prehistoric Shoebill stork.'],
+                    ['name' => 'Sunset Yacht Cruise on Lake Victoria', 'price_ugx' => 140000, 'unit' => 'entry', 'type' => 'Lake Cruise', 'website' => 'https://entebbecruises.com', 'description' => 'Relaxing late-afternoon boat cruise sailing past islands with complimentary drinks as the sun sets.'],
                 ],
                 'visit' => [
-                    ['name' => 'Entebbe National Botanical Gardens', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Botanical Park'],
-                    ['name' => 'UWEC (Uganda Wildlife Conservation Zoo)', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Wildlife Zoo'],
-                    ['name' => 'Uganda Reptile Village', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Reptile Sanctuary'],
+                    ['name' => 'Entebbe National Botanical Gardens', 'price_ugx' => 10000, 'unit' => 'entry', 'type' => 'Botanical Park', 'website' => 'https://ugandawildlife.org', 'description' => 'Established in 1898, this 40-hectare park features giant rainforest trees, Colobus monkeys, and exotic birds.'],
+                    ['name' => 'UWEC (Uganda Wildlife Conservation Zoo)', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Wildlife Zoo', 'website' => 'https://uwec.ug', 'description' => 'Renowned wildlife rescue center where visitors see rescued lions, rhinos, chimps, and shoebills up close.'],
+                    ['name' => 'Uganda Reptile Village', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Reptile Sanctuary', 'website' => 'https://reptilesuganda.com', 'description' => 'Educational community sanctuary caring for mambas, cobras, pythons, tortoises, and chameleons.'],
                 ],
             ],
             'kampala' => [
                 'eat' => [
-                    ['name' => '2K Restaurant Nakasero (Local Cuisine)', 'price_ugx' => 22000, 'unit' => 'meal', 'type' => 'Authentic Local'],
-                    ['name' => 'Cafe Javas Oasis Mall', 'price_ugx' => 35000, 'unit' => 'meal', 'type' => 'Modern Casual'],
-                    ['name' => 'Fang Fang Chinese Restaurant', 'price_ugx' => 45000, 'unit' => 'meal', 'type' => 'Asian Dining'],
-                    ['name' => 'The Lawns Wild Game & Grill Kololo', 'price_ugx' => 65000, 'unit' => 'meal', 'type' => 'Steakhouse'],
+                    ['name' => '2K Restaurant Nakasero (Local Cuisine)', 'price_ugx' => 25000, 'unit' => 'meal', 'type' => 'Authentic Local', 'website' => 'https://2krestaurant.ug', 'description' => 'Kampala legendary home of steamed matooke, peanut paste with smoked fish, beef, and local greens.'],
+                    ['name' => 'Cafe Javas Oasis Mall', 'price_ugx' => 38000, 'unit' => 'meal', 'type' => 'Modern Casual', 'website' => 'https://cafejavas.co.ug', 'description' => 'Top-tier casual dining hub in central Kampala famous for loaded burgers, milkshakes, and breakfasts.'],
+                    ['name' => 'Fang Fang Chinese Restaurant', 'price_ugx' => 48000, 'unit' => 'meal', 'type' => 'Asian Dining', 'website' => 'https://fangfangrestaurant.com', 'description' => 'Long-standing upscale Chinese culinary institution serving authentic sizzling platters and dim sum in Nakasero.'],
+                    ['name' => 'The Lawns Wild Game & Grill Kololo', 'price_ugx' => 65000, 'unit' => 'meal', 'type' => 'Steakhouse', 'website' => 'https://thelawns.co.ug', 'description' => 'Fine dining garden restaurant on Kololo hill serving cuts of steak, wild game meats, and fine wines.'],
                 ],
                 'recreation' => [
-                    ['name' => 'Ndere Cultural Centre Troupe Night Show', 'price_ugx' => 60000, 'unit' => 'entry', 'type' => 'Cultural Theater'],
-                    ['name' => 'Kampala Rolex & Street Food Walking Safari', 'price_ugx' => 45000, 'unit' => 'entry', 'type' => 'Culinary Tour'],
-                    ['name' => 'Uganda National Theatre Performing Arts', 'price_ugx' => 30000, 'unit' => 'entry', 'type' => 'Live Theater'],
+                    ['name' => 'Ndere Cultural Centre Troupe Night Show', 'price_ugx' => 60000, 'unit' => 'entry', 'type' => 'Cultural Theater', 'website' => 'https://ndere.com', 'description' => 'World-renowned high-energy folklore dance performance showcasing music and dance from all 50+ Ugandan tribes.'],
+                    ['name' => 'Kampala Rolex & Street Food Walking Safari', 'price_ugx' => 50000, 'unit' => 'entry', 'type' => 'Culinary Tour', 'website' => 'https://pearltrails.ug', 'description' => 'Guided street food walk through lively student and market districts tasting hot Rolex, samosas, and sugar cane juice.'],
+                    ['name' => 'Uganda National Theatre Performing Arts', 'price_ugx' => 35000, 'unit' => 'entry', 'type' => 'Live Theater', 'website' => 'https://uncc.co.ug', 'description' => 'The hub of Ugandan performing arts, hosting live drama, musical concerts, comedy nights, and craft markets.'],
                 ],
                 'visit' => [
-                    ['name' => 'Kasubi Royal Tombs UNESCO World Heritage', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Historical Heritage'],
-                    ['name' => 'Uganda National Museum Kira Road', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'National Museum'],
-                    ['name' => 'Gaddafi National Mosque Minaret Tower', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Architectural Landmark'],
-                    ['name' => 'Bahai Temple of Africa Gardens', 'price_ugx' => 5000, 'unit' => 'entry', 'type' => 'Spiritual Sanctuary'],
+                    ['name' => 'Kasubi Royal Tombs UNESCO World Heritage', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Historical Heritage', 'website' => 'https://bugandakingdom.org', 'description' => 'The spiritual heart of the Buganda Kingdom, housing the grand thatched royal mausoleum of four historic Kabakas.'],
+                    ['name' => 'Uganda National Museum Kira Road', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'National Museum', 'website' => 'https://ugandamuseums.ug', 'description' => 'Uganda oldest museum, showcasing ethnographical collections, hunting artifacts, and playable traditional instruments.'],
+                    ['name' => 'Gaddafi National Mosque Minaret Tower', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Architectural Landmark', 'website' => 'https://ugandamuslimsupreme.org', 'description' => 'The largest mosque in East Africa perched on Old Kampala Hill; climb the 304 steps of the minaret for 360-degree city views.'],
+                    ['name' => 'Bahai Temple of Africa Gardens', 'price_ugx' => 0, 'unit' => 'entry', 'type' => 'Spiritual Sanctuary', 'website' => 'https://bahai.ug', 'description' => 'The only Bahai Mother Temple on the African continent, set amid 52 acres of tranquil, beautifully landscaped hilltop gardens.'],
                 ],
             ],
             'ssese-islands' => [
                 'eat' => [
-                    ['name' => 'Kalangala Beach Camp Fish Fry', 'price_ugx' => 20000, 'unit' => 'meal', 'type' => 'Beach BBQ'],
-                    ['name' => 'Brovad Sands Lakeside Buffet', 'price_ugx' => 45000, 'unit' => 'meal', 'type' => 'Resort Dining'],
-                    ['name' => 'Victoria Forest Verandah Grill', 'price_ugx' => 50000, 'unit' => 'meal', 'type' => 'Island Bistro'],
+                    ['name' => 'Kalangala Beach Camp Fish Fry', 'price_ugx' => 25000, 'unit' => 'meal', 'type' => 'Beach BBQ', 'website' => 'https://ssesebeach.com', 'description' => 'Rustic beach cookout serving fresh whole grilled Nile tilapia and chips beside Lake Victoria bonfires.'],
+                    ['name' => 'Brovad Sands Lakeside Buffet', 'price_ugx' => 50000, 'unit' => 'meal', 'type' => 'Resort Dining', 'website' => 'https://www.brovadsandslodge.com', 'description' => 'Sumptuous resort buffet featuring fresh lake catches, continental curries, salads, and island desserts.'],
+                    ['name' => 'Victoria Forest Verandah Grill', 'price_ugx' => 55000, 'unit' => 'meal', 'type' => 'Island Bistro', 'website' => 'https://victoriaforestresort.com', 'description' => 'Shaded verandah restaurant looking through palm trees to the beach, serving gourmet grilled specialties.'],
                 ],
                 'recreation' => [
-                    ['name' => 'Ssese Island Quad Bike Trail Safari', 'price_ugx' => 100000, 'unit' => 'entry', 'type' => 'Off-road Trail'],
-                    ['name' => 'Lake Victoria Nile Perch Sport Fishing', 'price_ugx' => 150000, 'unit' => 'entry', 'type' => 'Sport Fishing'],
-                    ['name' => 'Bugala Island Forest Monkey Walk', 'price_ugx' => 30000, 'unit' => 'entry', 'type' => 'Nature Trail'],
+                    ['name' => 'Ssese Island Quad Bike Trail Safari', 'price_ugx' => 120000, 'unit' => 'entry', 'type' => 'Off-road Trail', 'website' => 'https://brovadsandslodge.com', 'description' => 'Exciting quad bike ride through red-dirt island tracks, palm oil estates, and scenic coastal lookouts.'],
+                    ['name' => 'Lake Victoria Nile Perch Sport Fishing', 'price_ugx' => 180000, 'unit' => 'entry', 'type' => 'Sport Fishing', 'website' => 'https://sseseislands.com', 'description' => 'Trophy sport fishing expedition targeting monster Nile perch in the deep waters of the archipelago.'],
+                    ['name' => 'Bugala Island Forest Monkey Walk', 'price_ugx' => 35000, 'unit' => 'entry', 'type' => 'Nature Trail', 'website' => 'https://victoriaforestresort.com', 'description' => 'Guided nature stroll through primary island rainforest to spot vervet monkeys and colourful hornbills.'],
                 ],
                 'visit' => [
-                    ['name' => 'Lutoboka Bay Pier & White Sands', 'price_ugx' => 10000, 'unit' => 'entry', 'type' => 'Sandy Beach'],
-                    ['name' => 'Nanziri Sacred Falls & Cave Shrine', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Cultural Shrine'],
+                    ['name' => 'Lutoboka Bay Pier & White Sands', 'price_ugx' => 10000, 'unit' => 'entry', 'type' => 'Sandy Beach', 'website' => 'https://kalangala.go.ug', 'description' => 'The main passenger ferry gateway on Bugala Island with broad white sand beaches and beachfront bars.'],
+                    ['name' => 'Nanziri Sacred Falls & Cave Shrine', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Cultural Shrine', 'website' => 'https://bugandakingdom.org', 'description' => 'Sacred waterfall and ancient cave shrine venerated by locals as the dwelling place of traditional island spirits.'],
                 ],
             ],
             'lake-mburo-np' => [
                 'eat' => [
-                    ['name' => 'Rwakobo Rock Sunset Diner', 'price_ugx' => 30000, 'unit' => 'meal', 'type' => 'Eco-Camp Dining'],
-                    ['name' => 'Arcadia Cottages Lakeside Grill', 'price_ugx' => 45000, 'unit' => 'meal', 'type' => 'Lodge Dining'],
-                    ['name' => 'Mihingo Lodge Cliff Restaurant', 'price_ugx' => 75000, 'unit' => 'meal', 'type' => 'Fine Dining'],
+                    ['name' => 'Rwakobo Rock Sunset Diner', 'price_ugx' => 35000, 'unit' => 'meal', 'type' => 'Eco-Camp Dining', 'website' => 'https://www.rwakoborock.com', 'description' => 'Granite kopje dining terrace offering panoramic savannah views, home-cooked roasts, and cold beers.'],
+                    ['name' => 'Arcadia Cottages Lakeside Grill', 'price_ugx' => 48000, 'unit' => 'meal', 'type' => 'Lodge Dining', 'website' => 'https://arcadialodges.com', 'description' => 'Peaceful lakefront restaurant serving grilled meat skewers, fresh salads, and soups inside the national park.'],
+                    ['name' => 'Mihingo Lodge Cliff Restaurant', 'price_ugx' => 80000, 'unit' => 'meal', 'type' => 'Fine Dining', 'website' => 'https://mihingolodge.com', 'description' => 'Gourmet 3-course dining experience atop a high cliff overlooking a floodlit waterhole visited by wildlife.'],
                 ],
                 'recreation' => [
-                    ['name' => 'Guided Savannah Walking Safari on Foot', 'price_ugx' => 75000, 'unit' => 'entry', 'type' => 'Walking Safari'],
-                    ['name' => 'Mihingo Horseback Wildlife Safari (2hr)', 'price_ugx' => 220000, 'unit' => 'entry', 'type' => 'Horse Riding'],
-                    ['name' => 'Lake Mburo 2hr Motorboat Cruise', 'price_ugx' => 90000, 'unit' => 'entry', 'type' => 'Boat Cruise'],
+                    ['name' => 'Guided Savannah Walking Safari on Foot', 'price_ugx' => 90000, 'unit' => 'entry', 'type' => 'Walking Safari', 'website' => 'https://ugandawildlife.org', 'description' => 'Unrivaled on-foot walking safari with an armed ranger moving safely alongside herds of zebras, elands, and impalas.'],
+                    ['name' => 'Mihingo Horseback Wildlife Safari (2hr)', 'price_ugx' => 350000, 'unit' => 'entry', 'type' => 'Horse Riding', 'website' => 'https://mihingolodge.com', 'description' => 'Peaceful horseback ride through the savannah; wild zebras and giraffes curiously approach horses without fear.'],
+                    ['name' => 'Lake Mburo 2hr Motorboat Cruise', 'price_ugx' => 110000, 'unit' => 'entry', 'type' => 'Boat Cruise', 'website' => 'https://ugandawildlife.org', 'description' => 'UWA boat cruise around the shores of Lake Mburo observing basking hippos, giant crocodiles, and African fish eagles.'],
                 ],
                 'visit' => [
-                    ['name' => 'Kazuma Hill Lookout Panoramic Deck', 'price_ugx' => 15000, 'unit' => 'entry', 'type' => 'Lookout Deck'],
-                    ['name' => 'Ankole Cultural Cattle Sanctuary', 'price_ugx' => 25000, 'unit' => 'entry', 'type' => 'Living Heritage'],
+                    ['name' => 'Kazuma Hill Lookout Panoramic Deck', 'price_ugx' => 20000, 'unit' => 'entry', 'type' => 'Lookout Deck', 'website' => 'https://ugandawildlife.org', 'description' => 'The park highest viewpoint with wooden observation platforms showing 8 of Lake Mburo surrounding lakes.'],
+                    ['name' => 'Ankole Cultural Cattle Sanctuary', 'price_ugx' => 30000, 'unit' => 'entry', 'type' => 'Living Heritage', 'website' => 'https://igongo.ug', 'description' => 'Traditional Bahima pastoralist cultural centre celebrating the regal, long-horned Ankole cattle and milk processing traditions.'],
                 ],
             ],
         ];
+
 
         foreach ($placesData as $slug => $categories) {
             $dest = $destinations->firstWhere('slug', $slug);
@@ -285,7 +489,8 @@ class PlaceSeeder extends Seeder
                             'price_ugx' => $item['price_ugx'],
                             'unit' => $item['unit'],
                             'type' => $item['type'],
-                            'description' => "Popular {$cat} destination in {$dest->name}.",
+                            'description' => $item['description'] ?? "Popular {$cat} destination in {$dest->name}.",
+                            'website' => $item['website'] ?? null,
                             'image_path' => $this->resolvePlaceImage($cat, $item['name'], $dest),
                         ]
                     );

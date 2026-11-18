@@ -29,6 +29,9 @@ class DetailAndSavedTripsTest extends TestCase
         $response->assertSee('Recreation near Jinja');
         $response->assertSee('Build Your Trip Budget');
         $response->assertSee('Estimated Cost Breakdown');
+        $response->assertSee('Travel Route & Live Navigation', false);
+        $response->assertSee('Open in Google Maps (Live Navigation)');
+        $response->assertSee('maps.google.com/maps', false);
         $response->assertSee('Suggested');
     }
 
