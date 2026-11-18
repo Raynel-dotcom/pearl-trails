@@ -42,6 +42,11 @@ Route::get('/currency/{currency}', [CurrencyController::class, 'setCurrency'])->
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+Route::get('/travel-guide', [PageController::class, 'guide'])->name('guide');
+Route::get('/guide', fn() => redirect()->route('guide', [], 301));
+Route::get('/experiences', fn() => redirect()->route('interest', [], 301))->name('experiences');
+Route::get('/recreational-centers', fn() => redirect()->route('recreation', [], 301))->name('recreation-centers');
+Route::get('/accommodation', fn() => redirect()->route('stays', [], 301))->name('accommodation');
 Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
 

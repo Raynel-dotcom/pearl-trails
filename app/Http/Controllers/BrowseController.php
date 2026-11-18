@@ -21,7 +21,7 @@ class BrowseController extends Controller
      */
     public function stays(Request $request)
     {
-        return $this->renderBrowsePage('stay', 'Where to Stay in Uganda', 'Find eco-lodges, safari camps, and backpacker hostels across Uganda.', $request);
+        return $this->renderBrowsePage('stay', 'Find Your Perfect Stay in Uganda', 'From intimate eco-lodges and safari camps to beautiful lakeside retreats and luxury escapes.', $request);
     }
 
     /**
@@ -29,7 +29,7 @@ class BrowseController extends Controller
      */
     public function eat(Request $request)
     {
-        return $this->renderBrowsePage('eat', 'Where to Eat in Uganda', 'Discover authentic local dining spots, cafes, and restaurants with typical spends.', $request);
+        return $this->renderBrowsePage('eat', 'Discover Where to Eat in Uganda', 'From authentic local flavours to beautiful cafés and unforgettable dining experiences.', $request);
     }
 
     /**
@@ -37,7 +37,7 @@ class BrowseController extends Controller
      */
     public function recreation(Request $request)
     {
-        return $this->renderBrowsePage('recreation', 'Recreation & Fun Activities', 'Explore activity centres, boat tours, cultural experiences, and community adventures.', $request);
+        return $this->renderBrowsePage('recreation', 'Find Your Next Adventure', 'Discover unforgettable activities, recreational centres, cultural experiences, and adventures across Uganda.', $request);
     }
 
     /**

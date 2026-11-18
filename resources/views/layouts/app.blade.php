@@ -3,14 +3,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', config('app.name', 'Pearl Trails')) - Pearl of Africa</title>
-    <meta name="description" content="@yield('meta_description', 'Pearl Trails is a tourism planning assistant for Uganda. Explore national parks, gorilla forests, crater lakes, and custom itineraries tailored to your budget and travel style.')">
+    <title>@yield('title', config('app.name', 'Pearl Trails')) — The Pearl of Africa</title>
+    <meta name="description" content="@yield('meta_description', 'Pearl Trails is Uganda\'s premier travel and tourism discovery platform. Explore national parks, misty gorilla forests, crater lakes, white-water Nile rapids, and tailor-made safari itineraries.')">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 
+    <!-- Google Fonts: Playfair Display (Serif) & DM Sans (Sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ @filemtime(public_path('css/app.css')) ?: '2.0' }}">
     
     <script>
         // Check for saved dark mode preference
@@ -21,27 +26,34 @@
         }
     </script>
 </head>
-<body>
-    <!-- 4. SITE HEADER (Sticky with hamburger <900px, normal row >=900px) -->
-    <header class="site-header">
-        <div class="container nav-wrapper">
+<body class="{{ request()->routeIs('home') ? 'is-home-page' : 'is-inner-page' }}">
+    <!-- 1. GLOBAL NAVIGATION BAR -->
+    <header class="site-header {{ request()->routeIs('home') ? 'header-home-overlay' : 'header-solid' }}" id="siteHeader">
+        <div class="nav-container nav-wrapper">
             <!-- Brand Logo -->
-            <a href="{{ route('home') }}" class="brand-logo">
+            <a href="{{ route('home') }}" class="brand-logo" aria-label="Pearl Trails Home">
                 <span class="logo-emblem-svg" aria-hidden="true">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"></circle>
                         <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
                     </svg>
                 </span>
-                <span class="logo-title">Pearl Trails</span>
+                <span class="brand-text-group">
+                    <span class="brand-name">PEARL TRAILS</span>
+                    <span class="brand-tagline">THE PEARL OF AFRICA</span>
+                </span>
             </a>
 
-            <!-- Primary Navigation Links (Clean, compact desktop row) -->
+            <!-- Primary Navigation Links (Editorial Desktop Menu) -->
             <nav class="nav-primary-desktop" aria-label="Main Navigation">
+                <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
                 <a href="{{ route('destinations') }}" class="nav-link {{ request()->routeIs('destinations*') ? 'active' : '' }}">Destinations</a>
-                <a href="{{ route('stays') }}" class="nav-link {{ request()->routeIs('stays*') ? 'active' : '' }}">Stays</a>
-                <a href="{{ route('eat') }}" class="nav-link {{ request()->routeIs('eat*') ? 'active' : '' }}">Eat</a>
+                <a href="{{ route('interest') }}" class="nav-link {{ request()->routeIs('interest*') || request()->routeIs('experiences*') ? 'active' : '' }}">Experiences</a>
                 <a href="{{ route('recreation') }}" class="nav-link {{ request()->routeIs('recreation*') ? 'active' : '' }}">Recreation</a>
+                <a href="{{ route('stays') }}" class="nav-link {{ request()->routeIs('stays*') ? 'active' : '' }}">Accommodation</a>
+                <a href="{{ route('guide') }}" class="nav-link {{ request()->routeIs('guide*') ? 'active' : '' }}">Travel Guide</a>
+                <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about*') ? 'active' : '' }}">About Us</a>
+                <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact*') ? 'active' : '' }}">Contact</a>
             </nav>
 
             <!-- Header Right Controls -->
@@ -58,67 +70,71 @@
                     </select>
                 </div>
 
-                <!-- Prominent "Plan My Trip" Button -->
-                <a href="{{ route('plan') }}" class="btn-plan-trip-header">
-                    Plan My Trip
-                </a>
-
                 <!-- Theme Toggle Button -->
                 <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Light / Dark Theme" aria-label="Toggle Theme">
                     <svg class="theme-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </button>
 
+                <!-- Plan Your Trip CTA -->
+                <a href="{{ route('plan') }}" class="btn-plan-trip-header">
+                    Plan Your Trip
+                </a>
+
                 <!-- Hamburger Menu Button -->
                 <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
                     <span id="hamburgerIcon" aria-hidden="true">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                     </span>
                     <span class="hamburger-label">Menu</span>
                 </button>
             </div>
 
-            <!-- Hamburger Drawer Menu (Secondary links on desktop, all links on mobile) -->
+            <!-- Hamburger Drawer Menu -->
             <div class="nav-drawer" id="navDrawer" role="dialog" aria-label="Site Navigation">
                 <div class="drawer-header">
                     <div class="drawer-brand">
                         <span class="logo-emblem-svg" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
                             </svg>
                         </span>
-                        <span>Pearl Trails Menu</span>
+                        <div>
+                            <div style="font-weight: 800; font-family: var(--font-serif); font-size: 1.1rem; letter-spacing: 0.5px;">PEARL TRAILS</div>
+                            <div style="font-size: 0.68rem; color: var(--color-gold); letter-spacing: 1px;">THE PEARL OF AFRICA</div>
+                        </div>
                     </div>
                     <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Navigation Menu">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     </button>
                 </div>
 
                 <div class="drawer-content">
-                    <!-- Mobile-only Explore links -->
-                    <div class="drawer-section mobile-only-section">
-                        <span class="drawer-section-title">Explore</span>
+                    <!-- Explore Links -->
+                    <div class="drawer-section">
+                        <span class="drawer-section-title">Discover Uganda</span>
                         <a href="{{ route('home') }}" class="drawer-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
                         <a href="{{ route('destinations') }}" class="drawer-link {{ request()->routeIs('destinations*') ? 'active' : '' }}">Destinations</a>
-                        <a href="{{ route('stays') }}" class="drawer-link {{ request()->routeIs('stays*') ? 'active' : '' }}">Where to Stay</a>
-                        <a href="{{ route('eat') }}" class="drawer-link {{ request()->routeIs('eat*') ? 'active' : '' }}">Where to Eat</a>
-                        <a href="{{ route('recreation') }}" class="drawer-link {{ request()->routeIs('recreation*') ? 'active' : '' }}">Recreation & Fun</a>
+                        <a href="{{ route('interest') }}" class="drawer-link {{ request()->routeIs('interest*') || request()->routeIs('experiences*') ? 'active' : '' }}">Experiences & Activities</a>
+                        <a href="{{ route('recreation') }}" class="drawer-link {{ request()->routeIs('recreation*') ? 'active' : '' }}">Recreational Centers</a>
+                        <a href="{{ route('stays') }}" class="drawer-link {{ request()->routeIs('stays*') ? 'active' : '' }}">Accommodation & Lodges</a>
+                        <a href="{{ route('eat') }}" class="drawer-link {{ request()->routeIs('eat*') ? 'active' : '' }}">Dining & Cuisine</a>
                     </div>
 
-                    <!-- Planning & Tools -->
+                    <!-- Planning & Guide -->
                     <div class="drawer-section">
-                        <span class="drawer-section-title">Planning Tools</span>
-                        <a href="{{ route('plan') }}" class="drawer-link {{ request()->routeIs('plan*') ? 'active' : '' }}">Plan My Trip Wizard</a>
-                        <a href="{{ route('interest') }}" class="drawer-link {{ request()->routeIs('interest*') ? 'active' : '' }}">Explore by Interest</a>
-                        <a href="{{ route('saved') }}" class="drawer-link {{ request()->routeIs('saved*') ? 'active' : '' }}">Saved Trips</a>
+                        <span class="drawer-section-title">Trip Planning</span>
+                        <a href="{{ route('plan') }}" class="drawer-link {{ request()->routeIs('plan*') ? 'active' : '' }}">Plan Your Adventure (Interactive)</a>
+                        <a href="{{ route('guide') }}" class="drawer-link {{ request()->routeIs('guide*') ? 'active' : '' }}">Uganda Travel Guide</a>
+                        <a href="{{ route('saved') }}" class="drawer-link {{ request()->routeIs('saved*') ? 'active' : '' }}">Saved Itineraries</a>
                     </div>
 
-                    <!-- Business & Information -->
+                    <!-- Company & Partner Links -->
                     <div class="drawer-section">
-                        <span class="drawer-section-title">Partners & Info</span>
-                        <a href="{{ route('list-your-business') }}" class="drawer-link {{ request()->routeIs('list-your-business*') || request()->routeIs('list-business*') ? 'active' : '' }}">List Your Business</a>
-                        <a href="{{ route('about') }}" class="drawer-link {{ request()->routeIs('about*') ? 'active' : '' }}">About Pearl Trails</a>
+                        <span class="drawer-section-title">Pearl Trails</span>
+                        <a href="{{ route('about') }}" class="drawer-link {{ request()->routeIs('about*') ? 'active' : '' }}">About Us</a>
                         <a href="{{ route('contact') }}" class="drawer-link {{ request()->routeIs('contact*') ? 'active' : '' }}">Contact Us</a>
+                        <a href="{{ route('list-your-business') }}" class="drawer-link {{ request()->routeIs('list-your-business*') || request()->routeIs('list-business*') ? 'active' : '' }}">List Your Tourism Enterprise</a>
                         <a href="{{ route('privacy') }}" class="drawer-link {{ request()->routeIs('privacy*') ? 'active' : '' }}">Privacy Policy</a>
                         <a href="{{ route('terms') }}" class="drawer-link {{ request()->routeIs('terms*') ? 'active' : '' }}">Terms of Service</a>
                     </div>
@@ -152,49 +168,86 @@
         </div>
     </header>
 
-    <!-- Main Content Area -->
-    <main class="main-content">
-        <div class="container">
-            @yield('content')
-        </div>
+    <!-- Main Content Area (Full bleed capable) -->
+    <main class="main-content" id="mainContent">
+        @yield('content')
     </main>
 
-    <!-- Site Footer -->
+    <!-- 10. PREMIUM LUXURY FOOTER -->
     <footer class="site-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>Pearl Trails</h3>
-                    <p>The intelligent tourism decision assistant for Uganda. Discover national parks, gorillas, crater lakes, and custom itineraries tailored to your budget and travel style.</p>
-                    <p class="footer-disclaimer">Prices are always labelled as estimates at approximate rates.</p>
+        <div class="container footer-inner">
+            <div class="footer-grid">
+                <!-- Brand Statement Column -->
+                <div class="footer-col-brand">
+                    <div class="footer-logo">
+                        <span class="logo-emblem-svg" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                            </svg>
+                        </span>
+                        <span class="footer-brand-title">PEARL TRAILS</span>
+                    </div>
+                    <p class="footer-tagline-sub">THE PEARL OF AFRICA</p>
+                    <p class="footer-mission">
+                        A curated Ugandan travel and tourism platform inspiring visitors to discover mist-covered gorilla forests, roaring Nile waterfalls, serene island lakes, authentic cultural heritage, and unforgettable safari adventures.
+                    </p>
+                    <div class="footer-badges">
+                        <span class="footer-badge">Authentic Uganda</span>
+                        <span class="footer-badge">Verified Pricing</span>
+                        <span class="footer-badge">Live Maps</span>
+                    </div>
                 </div>
 
-                <div class="footer-section">
-                    <h4>Explore Uganda</h4>
+                <!-- Navigation Column 1: Discover -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Discover Uganda</h4>
                     <ul class="footer-links">
-                        <li><a href="{{ route('destinations') }}">Destinations</a></li>
-                        <li><a href="{{ route('plan') }}">Plan My Trip</a></li>
-                        <li><a href="{{ route('interest') }}">Explore by Interest</a></li>
-                        <li><a href="{{ route('stays') }}">Stays & Lodges</a></li>
-                        <li><a href="{{ route('eat') }}">Where to Eat</a></li>
-                        <li><a href="{{ route('recreation') }}">Recreation & Fun</a></li>
+                        <li><a href="{{ route('destinations') }}">All 13 Destinations</a></li>
+                        <li><a href="{{ route('interest') }}">Experiences & Safaris</a></li>
+                        <li><a href="{{ route('recreation') }}">Recreational Centers</a></li>
+                        <li><a href="{{ route('stays') }}">Safari Lodges & Stays</a></li>
+                        <li><a href="{{ route('eat') }}">Local Dining & Cafes</a></li>
+                        <li><a href="{{ route('guide') }}">Uganda Travel Guide</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-section">
-                    <h4>Platform & Legal</h4>
+                <!-- Navigation Column 2: Planning & Tools -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Trip Planning</h4>
                     <ul class="footer-links">
-                        <li><a href="{{ route('about') }}">About</a></li>
-                        <li><a href="{{ route('contact') }}">Contact</a></li>
+                        <li><a href="{{ route('plan') }}">Plan Your Adventure</a></li>
+                        <li><a href="{{ route('saved') }}">Saved Itineraries</a></li>
                         <li><a href="{{ route('list-your-business') }}">List Your Business</a></li>
-                        <li><a href="{{ route('privacy') }}">Privacy</a></li>
-                        <li><a href="{{ route('terms') }}">Terms</a></li>
+                        <li><a href="{{ route('about') }}">About Pearl Trails</a></li>
+                        <li><a href="{{ route('contact') }}">Contact & Inquiries</a></li>
+                        <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
+                        <li><a href="{{ route('terms') }}">Terms of Service</a></li>
                     </ul>
+                </div>
+
+                <!-- Column 3: Newsletter & Contact -->
+                <div class="footer-col footer-col-newsletter">
+                    <h4 class="footer-heading">Newsletter</h4>
+                    <p class="footer-newsletter-text">Receive curated seasonal itineraries, primate tracking updates, and safari stories straight from the Pearl of Africa.</p>
+                    <form action="{{ route('contact') }}" method="GET" class="footer-newsletter-form">
+                        <input type="email" placeholder="Your email address" aria-label="Email address" required class="newsletter-input">
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                    <div class="footer-contact-snippet">
+                        <span>Kampala, Uganda</span> &bull; 
+                        <a href="mailto:pearltrailsug@gmail.com">pearltrailsug@gmail.com</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="footer-bottom">
-                <p>&copy; {{ date('Y') }} {{ config('app.name', 'Pearl Trails') }}. All rights reserved.</p>
+            <div class="footer-bottom-bar">
+                <p>&copy; {{ date('Y') }} PEARL TRAILS. Handcrafted in Uganda. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="{{ route('privacy') }}">Privacy</a>
+                    <a href="{{ route('terms') }}">Terms</a>
+                    <a href="{{ route('contact') }}">Support</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -220,6 +273,18 @@
             updateThemeIcon();
         }
 
+        // Homepage Transparent Navbar scroll effect
+        const siteHeader = document.getElementById('siteHeader');
+        if (document.body.classList.contains('is-home-page')) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 40) {
+                    siteHeader.classList.add('header-scrolled');
+                } else {
+                    siteHeader.classList.remove('header-scrolled');
+                }
+            }, { passive: true });
+        }
+
         // Drawer & Hamburger Navigation
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const hamburgerIcon = document.getElementById('hamburgerIcon');
@@ -227,8 +292,8 @@
         const drawerBackdrop = document.getElementById('drawerBackdrop');
         const drawerCloseBtn = document.getElementById('drawerCloseBtn');
 
-        const hamburgerSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`;
-        const closeSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+        const hamburgerSvg = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`;
+        const closeSvg = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
 
         function openDrawer() {
             navDrawer.classList.add('open');

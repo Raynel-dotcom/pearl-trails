@@ -5,10 +5,10 @@
 @section('content')
 <div class="page-hero">
     @if(!empty($interest))
-        <h1>Explore by Interest: {{ ucfirst($interest) }}</h1>
+        <h1>Explore Uganda by Interest: {{ ucfirst($interest) }}</h1>
         <p>Showing destinations that match <strong>{{ ucfirst($interest) }}</strong>. <a href="{{ route('interest') }}">Clear filter ✕</a></p>
     @else
-        <h1>Explore by Interest</h1>
+        <h1>Explore Uganda by Interest</h1>
         <p>Choose an interest below to filter Uganda destinations by what excites you most.</p>
     @endif
 </div>
