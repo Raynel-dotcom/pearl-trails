@@ -69,10 +69,14 @@
             <span>Scroll to explore</span>
         </div>
 
-        <!-- 1/3 slide counter and arrows on bottom-right -->
+        <!-- Slide Navigation on bottom-right -->
         <div class="hero-slide-controls" aria-label="Slide Navigation">
             <button type="button" class="slide-arrow-btn" id="heroPrevBtn" aria-label="Previous Slide">&larr;</button>
-            <span class="slide-counter-display" id="heroSlideCounter">1 / {{ count($slides) ?: 3 }}</span>
+            <div class="hero-slide-dots" id="heroSlideDots">
+                @foreach($slides as $index => $slide)
+                    <button type="button" class="slide-dot {{ $index === 0 ? 'active' : '' }}" data-dot-index="{{ $index }}" aria-label="Slide {{ $index + 1 }}"></button>
+                @endforeach
+            </div>
             <button type="button" class="slide-arrow-btn" id="heroNextBtn" aria-label="Next Slide">&rarr;</button>
         </div>
     </div>
@@ -90,7 +94,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const section = document.getElementById('heroSection');
     const slides = document.querySelectorAll('.hero-slide-item');
-    const counter = document.getElementById('heroSlideCounter');
+    const dots = document.querySelectorAll('.slide-dot');
     const prevBtn = document.getElementById('heroPrevBtn');
     const nextBtn = document.getElementById('heroNextBtn');
     if (!slides.length) return;
@@ -98,14 +102,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let current = 0;
     const total = slides.length;
     let timer = null;
-    const intervalTime = 6000;
+    const intervalTime = 3000;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function showSlide(index) {
         slides[current].classList.remove('active');
+        if (dots[current]) dots[current].classList.remove('active');
         current = (index + total) % total;
         slides[current].classList.add('active');
-        if (counter) counter.textContent = `${current + 1} / ${total}`;
+        if (dots[current]) dots[current].classList.add('active');
     }
 
     function startAutoSlide() {
@@ -133,6 +138,13 @@ document.addEventListener('DOMContentLoaded', () => {
             startAutoSlide();
         });
     }
+
+    dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+            showSlide(idx);
+            startAutoSlide();
+        });
+    });
 
     if (section) {
         section.addEventListener('mouseenter', stopAutoSlide);

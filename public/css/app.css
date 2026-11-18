@@ -3118,3 +3118,345 @@ body.drawer-active {
   text-decoration: underline;
   opacity: 0.85;
 }
+
+/* ==========================================================================
+   CONTACT US PAGE REDESIGN
+   ========================================================================== */
+.contact-page-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 20px 5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-hero {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+}
+
+.contact-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .contact-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}
+
+.contact-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-details-card,
+.contact-vendor-card,
+.contact-form-card {
+  background: var(--forest, #12301f);
+  color: var(--white, #ffffff);
+  border: 1px solid rgba(232, 163, 23, 0.22);
+  border-radius: var(--radius-lg, 24px);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.4);
+  padding: 2.25rem 2rem;
+  position: relative;
+}
+
+@media (max-width: 480px) {
+  .contact-details-card,
+  .contact-vendor-card,
+  .contact-form-card {
+    padding: 1.75rem 1.25rem;
+    border-radius: 20px;
+  }
+}
+
+.contact-card-title {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--white, #ffffff);
+  margin: 0 0 0.6rem;
+  line-height: 1.25;
+}
+
+.contact-card-intro {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(247, 241, 227, 0.78);
+  margin-bottom: 1.75rem;
+}
+
+.contact-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.detail-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(232, 163, 23, 0.12);
+  border: 1px solid rgba(232, 163, 23, 0.3);
+  color: var(--gold, #e8a317);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.detail-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold, #e8a317);
+}
+
+.detail-value {
+  font-size: 0.95rem;
+  color: var(--cream, #f7f1e3);
+  line-height: 1.5;
+}
+
+.detail-link {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gold, #e8a317);
+  text-decoration: none;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.detail-link:hover,
+.detail-link:focus {
+  color: var(--gold-soft, #f3c75b);
+  text-decoration: underline;
+}
+
+.response-pledge-note {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(247, 241, 227, 0.12);
+  font-size: 0.85rem;
+  color: rgba(247, 241, 227, 0.75);
+  font-style: italic;
+}
+
+.response-pledge-note p {
+  margin: 0;
+}
+
+/* List Your Business separate card */
+.contact-vendor-card {
+  background: var(--forest-2, #1d4a32);
+  border: 1px solid rgba(232, 163, 23, 0.28);
+  padding: 1.85rem 2rem;
+}
+
+.vendor-card-badge {
+  display: inline-block;
+  background: rgba(232, 163, 23, 0.15);
+  color: var(--gold, #e8a317);
+  border: 1px solid rgba(232, 163, 23, 0.35);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+}
+
+.vendor-card-title {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: 1.25rem;
+  color: var(--white, #ffffff);
+  margin: 0 0 0.5rem;
+}
+
+.vendor-card-desc {
+  font-size: 0.88rem;
+  color: rgba(247, 241, 227, 0.8);
+  line-height: 1.55;
+  margin-bottom: 1.35rem;
+}
+
+.btn-vendor-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.45rem;
+  border: 1.5px solid var(--gold, #e8a317);
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--gold, #e8a317);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-vendor-outline:hover,
+.btn-vendor-outline:focus {
+  background: var(--gold, #e8a317);
+  color: var(--forest, #12301f);
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(232, 163, 23, 0.25);
+}
+
+/* Contact Message Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.contact-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--cream, #f7f1e3);
+}
+
+.contact-label .req {
+  color: var(--gold, #e8a317);
+}
+
+.contact-input,
+.contact-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(10, 30, 20, 0.65);
+  border: 1.5px solid rgba(247, 241, 227, 0.2);
+  border-radius: 12px;
+  padding: 0.85rem 1.1rem;
+  color: var(--white, #ffffff);
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.contact-input::placeholder,
+.contact-textarea::placeholder {
+  color: rgba(247, 241, 227, 0.4);
+}
+
+.contact-input:focus,
+.contact-textarea:focus {
+  border-color: var(--gold, #e8a317);
+  box-shadow: 0 0 0 3px rgba(232, 163, 23, 0.25);
+  background: rgba(10, 30, 20, 0.85);
+}
+
+.contact-input.is-invalid,
+.contact-textarea.is-invalid {
+  border-color: #ef4444;
+}
+
+.contact-input.is-invalid:focus,
+.contact-textarea.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25);
+}
+
+.field-error-msg {
+  font-size: 0.8rem;
+  color: #fca5a5;
+  margin-top: 0.15rem;
+}
+
+.btn-contact-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.95rem 1.75rem;
+  background: var(--gold, #e8a317);
+  color: var(--forest, #12301f);
+  border: none;
+  border-radius: 9999px;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(232, 163, 23, 0.35);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-contact-submit:hover {
+  background: var(--gold-soft, #f3c75b);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(232, 163, 23, 0.45);
+}
+
+.btn-contact-submit:active {
+  transform: translateY(0);
+}
+
+.contact-success-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(18, 48, 31, 0.95);
+  border: 1.5px solid var(--color-emerald, #10b981);
+  border-radius: 16px;
+  padding: 1.15rem 1.5rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
+}
+
+.contact-success-banner .success-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-emerald, #10b981);
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.contact-success-banner strong {
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.contact-success-banner p {
+  font-size: 0.88rem;
+  color: rgba(247, 241, 227, 0.85);
+  margin: 0;
+}

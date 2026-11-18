@@ -66,6 +66,18 @@ class PageController extends Controller
                     'subtitle' => 'Glide across 29 emerald islands enveloped by the terraced hills of southwestern Uganda.',
                     'link' => '/destinations/lake-bunyonyi',
                 ],
+                (object)[
+                    'image_path' => 'images/hero/hero-savanna.webp',
+                    'title' => 'Golden Savannah. / Endless Horizons.',
+                    'subtitle' => 'Experience untamed wildlife under breathtaking African sunsets across vast wilderness expanses.',
+                    'link' => '/destinations/kidepo-valley',
+                ],
+                (object)[
+                    'image_path' => 'images/hero/hero-sipi.webp',
+                    'title' => 'Sipi Falls. / Majestic Cascades.',
+                    'subtitle' => 'Trek the legendary triple waterfalls on the lush slopes of volcanic Mount Elgon.',
+                    'link' => '/destinations/sipi-falls',
+                ],
             ]);
         }
 

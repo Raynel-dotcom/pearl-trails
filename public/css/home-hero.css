@@ -26,7 +26,7 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
 
@@ -39,31 +39,35 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center right;
-  transform: scale(1.02);
-  transition: transform 7s ease-out;
+  object-position: center;
+  transform: scale(1.04);
+  transition: transform 4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 .hero-slide-item.active .hero-slide-media {
   transform: scale(1);
 }
 
-/* Dark Green Gradient Overlay on the left for text contrast */
+/* Dark Green Gradient Overlay on the left for text contrast — refined for crisp 1080p photo clarity */
 .hero-gradient-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(18, 48, 31, 0.94) 0%,
-    rgba(18, 48, 31, 0.82) 38%,
-    rgba(18, 48, 31, 0.45) 65%,
-    rgba(18, 48, 31, 0.2) 100%
+    rgba(18, 48, 31, 0.92) 0%,
+    rgba(18, 48, 31, 0.78) 32%,
+    rgba(18, 48, 31, 0.35) 55%,
+    rgba(18, 48, 31, 0.08) 75%,
+    transparent 100%
   ),
   linear-gradient(
     180deg,
-    rgba(18, 48, 31, 0.4) 0%,
-    transparent 40%,
-    rgba(18, 48, 31, 0.85) 100%
+    rgba(18, 48, 31, 0.35) 0%,
+    transparent 35%,
+    rgba(18, 48, 31, 0.7) 100%
   );
   z-index: 2;
   pointer-events: none;
@@ -286,12 +290,31 @@
   color: var(--gold);
 }
 
-.slide-counter-display {
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--cream);
+.hero-slide-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 0.25rem;
+}
+
+.slide-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: rgba(247, 241, 227, 0.4);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-dot:hover {
+  background: rgba(247, 241, 227, 0.75);
+}
+
+.slide-dot.active {
+  width: 20px;
+  background: var(--gold, #e8a317);
 }
 
 /* ==========================================================================

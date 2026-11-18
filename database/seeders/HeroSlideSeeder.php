@@ -37,10 +37,26 @@ class HeroSlideSeeder extends Seeder
                 'order' => 3,
                 'is_active' => true,
             ],
+            [
+                'image_path' => 'images/hero/hero-savanna.webp',
+                'title' => 'Golden Savannah. / Endless Horizons.',
+                'subtitle' => 'Experience untamed wildlife under breathtaking African sunsets across vast wilderness expanses.',
+                'link' => '/destinations/kidepo-valley',
+                'order' => 4,
+                'is_active' => true,
+            ],
+            [
+                'image_path' => 'images/hero/hero-sipi.webp',
+                'title' => 'Sipi Falls. / Majestic Cascades.',
+                'subtitle' => 'Trek the legendary triple waterfalls on the lush slopes of volcanic Mount Elgon.',
+                'link' => '/destinations/sipi-falls',
+                'order' => 5,
+                'is_active' => true,
+            ],
         ];
 
         foreach ($slides as $slide) {
-            HeroSlide::firstOrCreate(
+            HeroSlide::updateOrCreate(
                 ['image_path' => $slide['image_path']],
                 $slide
             );
