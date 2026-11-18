@@ -3792,3 +3792,51 @@ body.drawer-active {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(232, 163, 23, 0.45);
 }
+
+/* Static Informational Pages (Privacy, Terms) */
+.static-page-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2.5rem 20px 5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.static-content-card {
+  background: var(--forest, #12301f);
+  color: var(--white, #ffffff);
+  border: 1px solid rgba(232, 163, 23, 0.22);
+  border-radius: var(--radius-lg, 24px);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.4);
+  padding: 2.75rem 2.5rem;
+}
+
+@media (max-width: 600px) {
+  .static-content-card {
+    padding: 1.75rem 1.25rem;
+    border-radius: 20px;
+  }
+}
+
+.static-content-card h3 {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--gold, #e8a317);
+  margin: 1.75rem 0 0.6rem;
+}
+
+.static-content-card h3:first-child {
+  margin-top: 0;
+}
+
+.static-content-card p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(247, 241, 227, 0.85);
+  margin: 0 0 1rem;
+}
+
+.static-content-card p:last-child {
+  margin-bottom: 0;
+}
