@@ -15,7 +15,7 @@
             <div class="filters-grid">
                 <!-- Search by Keyword -->
                 <div class="filter-group filter-group-search">
-                    <label for="destSearch">🔍 Search Destination</label>
+                    <label for="destSearch">Search Destination</label>
                     <div class="filter-input-wrapper">
                         <input type="text" name="q" id="destSearch" value="{{ request('q') }}" placeholder="e.g. Bwindi, Gorillas, Jinja..." class="filter-input">
                     </div>
@@ -23,7 +23,7 @@
 
                 <!-- Region Filter -->
                 <div class="filter-group">
-                    <label for="filterRegion">📍 Region</label>
+                    <label for="filterRegion">Region</label>
                     <select name="region" id="filterRegion" class="filter-select" onchange="document.getElementById('destinationsFilterForm').submit()">
                         <option value="">All Regions</option>
                         @foreach($regions as $reg)
@@ -34,7 +34,7 @@
 
                 <!-- Budget Filter -->
                 <div class="filter-group">
-                    <label for="filterBudget">💰 Budget (From)</label>
+                    <label for="filterBudget">Budget (From)</label>
                     <select name="budget_band" id="filterBudget" class="filter-select" onchange="document.getElementById('destinationsFilterForm').submit()">
                         <option value="">Any Budget</option>
                         @foreach($budgetBands as $band)
@@ -47,7 +47,7 @@
 
                 <!-- Duration Filter -->
                 <div class="filter-group">
-                    <label for="filterDuration">⏱️ Duration</label>
+                    <label for="filterDuration">Duration</label>
                     <select name="duration" id="filterDuration" class="filter-select" onchange="document.getElementById('destinationsFilterForm').submit()">
                         <option value="">Any Duration</option>
                         <option value="1" {{ request('duration') == '1' ? 'selected' : '' }}>1 Day Excursion</option>
@@ -60,7 +60,7 @@
 
                 <!-- Interest Filter -->
                 <div class="filter-group">
-                    <label for="filterInterest">🌿 Interest</label>
+                    <label for="filterInterest">Interest</label>
                     <select name="interest" id="filterInterest" class="filter-select" onchange="document.getElementById('destinationsFilterForm').submit()">
                         <option value="">All Interests</option>
                         @foreach($interests as $interest)
@@ -71,7 +71,7 @@
 
                 <!-- Style Filter -->
                 <div class="filter-group">
-                    <label for="filterStyle">🎒 Travel Style</label>
+                    <label for="filterStyle">Travel Style</label>
                     <select name="style" id="filterStyle" class="filter-select" onchange="document.getElementById('destinationsFilterForm').submit()">
                         <option value="">Any Style</option>
                         @foreach($styles as $st)
@@ -82,7 +82,7 @@
 
                 <!-- Group Filter -->
                 <div class="filter-group">
-                    <label for="filterGroup">👥 Travel Group</label>
+                    <label for="filterGroup">Travel Group</label>
                     <select name="group" id="filterGroup" class="filter-select" onchange="document.getElementById('destinationsFilterForm').submit()">
                         <option value="">Any Group</option>
                         @foreach($groups as $grp)
@@ -104,25 +104,25 @@
                 <div class="active-filters-row">
                     <span class="active-filters-label">Active Filters:</span>
                     @if(request('q'))
-                        <span class="filter-tag">"{{ request('q') }}" <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}">✕</a></span>
+                        <span class="filter-tag">"{{ request('q') }}" <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}">&times;</a></span>
                     @endif
                     @if(request('region'))
-                        <span class="filter-tag">{{ request('region') }} <a href="{{ request()->fullUrlWithQuery(['region' => null]) }}">✕</a></span>
+                        <span class="filter-tag">{{ request('region') }} <a href="{{ request()->fullUrlWithQuery(['region' => null]) }}">&times;</a></span>
                     @endif
                     @if(request('interest'))
-                        <span class="filter-tag">{{ request('interest') }} <a href="{{ request()->fullUrlWithQuery(['interest' => null]) }}">✕</a></span>
+                        <span class="filter-tag">{{ request('interest') }} <a href="{{ request()->fullUrlWithQuery(['interest' => null]) }}">&times;</a></span>
                     @endif
                     @if(request('style'))
-                        <span class="filter-tag">{{ request('style') }} <a href="{{ request()->fullUrlWithQuery(['style' => null]) }}">✕</a></span>
+                        <span class="filter-tag">{{ request('style') }} <a href="{{ request()->fullUrlWithQuery(['style' => null]) }}">&times;</a></span>
                     @endif
                     @if(request('group'))
-                        <span class="filter-tag">{{ request('group') }} <a href="{{ request()->fullUrlWithQuery(['group' => null]) }}">✕</a></span>
+                        <span class="filter-tag">{{ request('group') }} <a href="{{ request()->fullUrlWithQuery(['group' => null]) }}">&times;</a></span>
                     @endif
                     @if(request('duration'))
-                        <span class="filter-tag">{{ request('duration') }} Days <a href="{{ request()->fullUrlWithQuery(['duration' => null]) }}">✕</a></span>
+                        <span class="filter-tag">{{ request('duration') }} Days <a href="{{ request()->fullUrlWithQuery(['duration' => null]) }}">&times;</a></span>
                     @endif
                     @if(request('budget_band'))
-                        <span class="filter-tag">Budget: {{ request('budget_band') }} <a href="{{ request()->fullUrlWithQuery(['budget_band' => null]) }}">✕</a></span>
+                        <span class="filter-tag">Budget: {{ request('budget_band') }} <a href="{{ request()->fullUrlWithQuery(['budget_band' => null]) }}">&times;</a></span>
                     @endif
                     <a href="{{ route('destinations') }}" class="clear-filters-link">Clear All</a>
                 </div>
@@ -138,7 +138,12 @@
 
     @if($destinations->isEmpty())
         <div class="empty-state-card">
-            <span class="empty-icon">🔍</span>
+            <span class="empty-icon" aria-hidden="true">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </span>
             <h3>No destinations match your active filters</h3>
             <p>Try clearing some filter criteria to explore more locations.</p>
             <a href="{{ route('destinations') }}" class="btn btn-outline">Reset Filters</a>
@@ -148,9 +153,9 @@
             @foreach($destinations as $dest)
                 <div class="dest-card" onclick="window.location='{{ route('destinations.show', $dest->slug) }}'" tabindex="0" role="link" aria-label="Explore {{ $dest->name }} Details">
                     <div class="dest-card-media">
-                        <x-scene-svg :destination="$dest" height="230px" />
-                        <span class="region-badge">📍 {{ $dest->region }} Uganda</span>
-                        <span class="duration-badge">⏱️ {{ $dest->min_days }}-{{ $dest->max_days }} Days</span>
+                        <x-scene-svg :destination="$dest" height="220px" />
+                        <span class="region-badge">{{ $dest->region }} Uganda</span>
+                        <span class="duration-badge">{{ $dest->min_days }}-{{ $dest->max_days }} Days</span>
                     </div>
 
                     <div class="dest-card-body">

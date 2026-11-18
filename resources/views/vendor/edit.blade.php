@@ -13,7 +13,7 @@
         <div class="alert-error-banner">
             <ul>
                 @foreach($errors->all() as $error)
-                    <li>⚠️ {{ $error }}</li>
+                    <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
@@ -103,7 +103,7 @@
                     <div class="activity-input-flex">
                         <input type="text" name="activities[{{ $idx }}][name]" value="{{ $act->name }}" placeholder="Activity Name">
                         <input type="number" name="activities[{{ $idx }}][fee_ugx]" value="{{ $act->fee_ugx }}" placeholder="Fee in UGX" min="0">
-                        <button type="button" class="btn-remove-row" onclick="this.closest('.activity-row').remove()">✕</button>
+                        <button type="button" class="btn-remove-row" onclick="this.closest('.activity-row').remove()">&times;</button>
                     </div>
                 </div>
             @empty
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="activity-input-flex">
                     <input type="text" name="activities[${activityIndex}][name]" placeholder="Activity Name">
                     <input type="number" name="activities[${activityIndex}][fee_ugx]" placeholder="Fee in UGX" min="0">
-                    <button type="button" class="btn-remove-row" onclick="this.closest('.activity-row').remove()">✕</button>
+                    <button type="button" class="btn-remove-row" onclick="this.closest('.activity-row').remove()">&times;</button>
                 </div>
             `;
             container.appendChild(row);

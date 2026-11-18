@@ -7,18 +7,18 @@
     <!-- "Your Picks" Sticky Top Bar -->
     <div class="your-picks-bar">
         <div class="picks-header">
-            <span class="picks-title">🌟 Your Selected Picks:</span>
+            <span class="picks-title">Your Selected Picks:</span>
             <div class="picks-summary-items">
                 <span class="pick-tag">
-                    🛏️ Stay: <strong>{{ $picks['stay']['name'] ?? 'Not chosen yet' }}</strong>
+                    Stay: <strong>{{ $picks['stay']['name'] ?? 'Not chosen yet' }}</strong>
                     @if(!empty($picks['stay'])) (@price($picks['stay']['price_ugx'])/nt) @endif
                 </span>
                 <span class="pick-tag">
-                    🍽️ Eat: <strong>{{ $picks['eat']['name'] ?? 'Not chosen yet' }}</strong>
+                    Eat: <strong>{{ $picks['eat']['name'] ?? 'Not chosen yet' }}</strong>
                     @if(!empty($picks['eat'])) (@price($picks['eat']['price_ugx'])/meal) @endif
                 </span>
                 <span class="pick-tag">
-                    🛶 Activity: <strong>{{ $picks['recreation']['name'] ?? 'Not chosen yet' }}</strong>
+                    Activity: <strong>{{ $picks['recreation']['name'] ?? 'Not chosen yet' }}</strong>
                     @if(!empty($picks['recreation'])) (@price($picks['recreation']['price_ugx'])) @endif
                 </span>
             </div>
@@ -38,7 +38,7 @@
 
     @if(session('success'))
         <div class="alert-success-banner">
-            <span>✓ {{ session('success') }}</span>
+            <span>{{ session('success') }}</span>
         </div>
     @endif
 
@@ -48,7 +48,7 @@
             <div class="filters-grid">
                 <!-- Keyword Search -->
                 <div class="filter-group filter-group-search">
-                    <label for="browseSearch">🔍 Search</label>
+                    <label for="browseSearch">Search</label>
                     <div class="filter-input-wrapper">
                         <input type="text" name="q" id="browseSearch" value="{{ request('q') }}" placeholder="Search by name, site, or specialty..." class="filter-input">
                     </div>
@@ -56,7 +56,7 @@
 
                 <!-- Destination Filter -->
                 <div class="filter-group">
-                    <label for="destSelect">📍 Destination</label>
+                    <label for="destSelect">Destination</label>
                     <select name="destination" id="destSelect" class="filter-select" onchange="document.getElementById('browseFilterForm').submit()">
                         <option value="">All Uganda Destinations</option>
                         @foreach($destinations as $d)
@@ -69,7 +69,7 @@
 
                 <!-- Up to Price Filter -->
                 <div class="filter-group">
-                    <label for="priceSelect">💰 Maximum Spend ({{ $currentCurrency }})</label>
+                    <label for="priceSelect">Maximum Spend ({{ $currentCurrency }})</label>
                     <select name="max_price" id="priceSelect" class="filter-select" onchange="document.getElementById('browseFilterForm').submit()">
                         <option value="">Any Budget</option>
                         @if($currentCurrency === 'UGX')
@@ -104,14 +104,14 @@
                 <div class="active-filters-row">
                     <span class="active-filters-label">Active Filters:</span>
                     @if(request('q'))
-                        <span class="filter-tag">"{{ request('q') }}" <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}">✕</a></span>
+                        <span class="filter-tag">"{{ request('q') }}" <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}">&times;</a></span>
                     @endif
                     @if($selectedDestinationId)
                         @php $activeDest = $destinations->firstWhere('id', $selectedDestinationId); @endphp
-                        <span class="filter-tag">{{ $activeDest->name ?? 'Destination' }} <a href="{{ request()->fullUrlWithQuery(['destination' => null]) }}">✕</a></span>
+                        <span class="filter-tag">{{ $activeDest->name ?? 'Destination' }} <a href="{{ request()->fullUrlWithQuery(['destination' => null]) }}">&times;</a></span>
                     @endif
                     @if($maxPriceUgx)
-                        <span class="filter-tag">Max @price($maxPriceUgx) <a href="{{ request()->fullUrlWithQuery(['max_price' => null]) }}">✕</a></span>
+                        <span class="filter-tag">Max @price($maxPriceUgx) <a href="{{ request()->fullUrlWithQuery(['max_price' => null]) }}">&times;</a></span>
                     @endif
                     <a href="{{ url()->current() }}" class="clear-filters-link">Reset All</a>
                 </div>
@@ -127,7 +127,12 @@
 
     @if($items->isEmpty())
         <div class="empty-state-card">
-            <span class="empty-icon">🔎</span>
+            <span class="empty-icon" aria-hidden="true">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </span>
             <h3>No results found matching your filters</h3>
             <p>Try broadening your price limit or viewing all destinations.</p>
             <a href="{{ url()->current() }}" class="btn btn-outline">Clear Filters</a>
@@ -146,7 +151,7 @@
                                 <span class="fits-plan-badge">Fits your plan</span>
                             @endif
                         </div>
-                        <span class="browse-dest-pill">📍 {{ $item['destination_name'] }}</span>
+                        <span class="browse-dest-pill">{{ $item['destination_name'] }}</span>
                     </div>
 
                     <div class="browse-card-body">
@@ -173,7 +178,7 @@
                         @if($item['website'])
                             <div class="browse-website-link">
                                 <a href="{{ $item['website'] }}" target="_blank" rel="noopener noreferrer">
-                                    🌐 Visit Official Website ↗
+                                    Visit Official Website &rarr;
                                 </a>
                             </div>
                         @endif
@@ -196,7 +201,7 @@
                                 $isChosen = (!empty($picks[$category]) && $picks[$category]['name'] === $item['name']);
                             @endphp
                             <button type="submit" class="btn btn-sm {{ $isChosen ? 'btn-chosen' : 'btn-outline' }}">
-                                {{ $isChosen ? '✓ Selected Pick' : 'Choose' }}
+                                {{ $isChosen ? 'Selected Pick' : 'Choose' }}
                             </button>
                         </form>
                     </div>

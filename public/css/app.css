@@ -687,6 +687,7 @@ body.drawer-active {
 }
 
 .dest-card {
+  position: relative;
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg, 20px);
@@ -707,10 +708,13 @@ body.drawer-active {
 }
 
 .dest-card-media {
-  position: relative;
-  overflow: hidden;
-  height: 230px;
+  position: relative !important;
+  overflow: hidden !important;
+  height: 220px !important;
+  max-height: 220px !important;
+  width: 100% !important;
   background: var(--forest, #12301f);
+  flex-shrink: 0;
 }
 
 .dest-card-media img,

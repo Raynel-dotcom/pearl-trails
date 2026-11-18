@@ -11,7 +11,7 @@
         </p>
         <div class="results-actions-top">
             <a href="{{ route('plan.reset') }}" class="btn btn-outline">
-                🔄 Plan Another Trip
+                Plan Another Trip
             </a>
             <span class="currency-disclaimer-tag">
                 Prices shown in {{ $currency }}. Approximate estimates for planning.
@@ -22,7 +22,6 @@
     <!-- Cheaper Alternative Callout if top choice exceeds budget -->
     @if($cheaperAlternative && !$topRecommendations[0]['is_within_budget'])
         <div class="budget-alert-banner alert-notice">
-            <div class="banner-icon">💡</div>
             <div class="banner-body">
                 <h3>Looking for a budget-friendly alternative?</h3>
                 <p>
@@ -68,12 +67,10 @@
                     <!-- Budget Fit Banner -->
                     @if($rec['is_within_budget'])
                         <div class="budget-fit-banner within-budget">
-                            <span class="fit-icon">✓</span>
                             <span>Within your budget (approx. @price($rec['budget_diff']) remaining)</span>
                         </div>
                     @else
                         <div class="budget-fit-banner over-budget">
-                            <span class="fit-icon">⚠️</span>
                             <span>May exceed target budget by @price(abs($rec['budget_diff']))</span>
                         </div>
                     @endif
@@ -112,7 +109,7 @@
         <p>Try modifying your duration, budget band, or interests to explore other possibilities.</p>
         <div class="bottom-btns">
             <a href="{{ route('plan.reset') }}" class="btn btn-outline">
-                🔄 Plan Another Trip
+                Plan Another Trip
             </a>
             <a href="{{ route('destinations') }}" class="btn btn-primary">
                 Browse All 13 Destinations →

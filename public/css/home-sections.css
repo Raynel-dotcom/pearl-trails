@@ -107,25 +107,29 @@
   box-shadow: var(--shadow-lg);
 }
 
-.dest-card-media {
+.popular-dest-card .dest-card-media,
+.popular-dest-card .popular-dest-media {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
 
-.dest-card-img {
+.popular-dest-card .dest-card-img,
+.popular-dest-card .popular-dest-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.popular-dest-card:hover .dest-card-img {
+.popular-dest-card:hover .dest-card-img,
+.popular-dest-card:hover .popular-dest-img {
   transform: scale(1.08);
 }
 
-.dest-card-gradient {
+.popular-dest-card .dest-card-gradient,
+.popular-dest-card .popular-dest-gradient {
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -138,7 +142,8 @@
 }
 
 /* Card Content Overlay */
-.dest-card-content {
+.popular-dest-card .dest-card-content,
+.popular-dest-card .popular-dest-content {
   position: absolute;
   inset: 0;
   z-index: 3;
@@ -148,7 +153,7 @@
   justify-content: space-between;
 }
 
-.dest-top-pill {
+.popular-dest-card .dest-top-pill {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
@@ -165,13 +170,13 @@
   color: var(--white);
 }
 
-.dest-bottom-info {
+.popular-dest-card .dest-bottom-info {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
 }
 
-.dest-card-name {
+.popular-dest-card .dest-card-name {
   font-family: var(--font-serif);
   font-size: 1.35rem;
   font-weight: 700;
@@ -179,7 +184,7 @@
   line-height: 1.15;
 }
 
-.dest-meta-strip {
+.popular-dest-card .dest-meta-strip {
   display: flex;
   align-items: center;
   gap: 0.85rem;
@@ -188,13 +193,13 @@
   color: #d2e3d9;
 }
 
-.dest-meta-item {
+.popular-dest-card .dest-meta-item {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
 }
 
-.dest-card-cta {
+.popular-dest-card .dest-card-cta {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;

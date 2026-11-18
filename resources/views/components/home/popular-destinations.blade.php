@@ -44,20 +44,20 @@
                 @endphp
 
                 <a href="{{ route('destinations.show', $dest->slug) }}" class="popular-dest-card" aria-label="View {{ $dest->name }} Details">
-                    <div class="dest-card-media">
+                    <div class="popular-dest-media">
                         @if($imageSrc)
                             <img src="{{ $imageSrc }}" 
                                  alt="{{ $dest->name }}" 
-                                 class="dest-card-img" 
+                                 class="popular-dest-img" 
                                  loading="lazy" 
                                  width="320" height="420">
                         @else
                             <x-scene-svg :destination="$dest" height="100%" />
                         @endif
-                        <div class="dest-card-gradient" aria-hidden="true"></div>
+                        <div class="popular-dest-gradient" aria-hidden="true"></div>
                     </div>
 
-                    <div class="dest-card-content">
+                    <div class="popular-dest-content">
                         <!-- Location Pill -->
                         <div class="dest-top-pill">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

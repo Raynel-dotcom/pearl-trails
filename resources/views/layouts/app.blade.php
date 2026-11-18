@@ -15,8 +15,10 @@
     <link rel="stylesheet" href="{{ asset('css/variables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/header-footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/home-hero.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/home-sections.css') }}">
+    @if(request()->routeIs('home'))
+        <link rel="stylesheet" href="{{ asset('css/home-hero.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/home-sections.css') }}">
+    @endif
 
     @if(request()->routeIs('home') && file_exists(public_path('images/hero/hero-gorilla.webp')))
         <link rel="preload" as="image" href="{{ asset('images/hero/hero-gorilla.webp') }}" type="image/webp" fetchpriority="high">
