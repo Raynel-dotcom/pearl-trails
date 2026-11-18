@@ -7,10 +7,10 @@
     <div class="container">
         <!-- Editorial Hero Header -->
         <div class="page-hero-editorial">
-            <span class="glass-badge glass-badge-gold" style="margin-bottom: 1rem;">Destination Discovery</span>
+            <span class="ref-kicker">— DESTINATION DIRECTORY —</span>
             <h1 class="page-hero-title">Explore Uganda's 13 Iconic Destinations</h1>
             <p class="page-hero-subtitle">
-                From the mountain gorillas of Bwindi to the thundering waters of Murchison Falls and the source of the Nile in Jinja—find your ideal adventure across the Pearl of Africa.
+                From the misty mountain gorilla forests of Bwindi to the thunderous gorge of Murchison Falls and the serene islands of Lake Bunyonyi — discover verified Uganda adventures tailored to your budget.
             </p>
         </div>
 
@@ -19,7 +19,10 @@
             <form action="{{ route('destinations') }}" method="GET" class="filters-form" id="destinationsFilterForm">
                 <div class="filter-row-top">
                     <!-- Search Input -->
-                    <input type="text" name="q" id="destSearch" value="{{ request('q') }}" placeholder="Search by destination name, region, or attraction (e.g. Bwindi, Nile, Sipi)..." class="filter-search-input">
+                    <div class="filter-input-wrap">
+                        <span class="filter-input-icon">🔍</span>
+                        <input type="text" name="q" id="destSearch" value="{{ request('q') }}" placeholder="Search by destination name, region, or attraction..." class="filter-search-input">
+                    </div>
 
                     <!-- Region Filter -->
                     <select name="region" id="filterRegion" class="filter-select" onchange="document.getElementById('destinationsFilterForm').submit()">
@@ -74,7 +77,7 @@
                     </select>
 
                     <!-- Submit & Reset -->
-                    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                    <button type="submit" class="btn btn-sm btn-gold">Filter</button>
                     @if(request()->hasAny(['q', 'region', 'budget_band', 'duration', 'interest', 'style', 'group']))
                         <a href="{{ route('destinations') }}" class="btn btn-outline btn-sm">Reset</a>
                     @endif
@@ -82,30 +85,30 @@
 
                 <!-- Active Filter Tags -->
                 @if(request()->hasAny(['q', 'region', 'budget_band', 'duration', 'interest', 'style', 'group']))
-                    <div class="active-filters-row" style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-color);">
-                        <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Active Filters:</span>
+                    <div class="active-filters-row">
+                        <span class="active-filters-label">Active Filters:</span>
                         @if(request('q'))
-                            <span class="dest-tag-pill">"{{ request('q') }}" <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}" style="margin-left: 4px;">✕</a></span>
+                            <span class="dest-tag-pill">"{{ request('q') }}" <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}" class="pill-remove">✕</a></span>
                         @endif
                         @if(request('region'))
-                            <span class="dest-tag-pill">{{ request('region') }} Uganda <a href="{{ request()->fullUrlWithQuery(['region' => null]) }}" style="margin-left: 4px;">✕</a></span>
+                            <span class="dest-tag-pill">{{ request('region') }} Uganda <a href="{{ request()->fullUrlWithQuery(['region' => null]) }}" class="pill-remove">✕</a></span>
                         @endif
                         @if(request('interest'))
-                            <span class="dest-tag-pill">{{ request('interest') }} <a href="{{ request()->fullUrlWithQuery(['interest' => null]) }}" style="margin-left: 4px;">✕</a></span>
+                            <span class="dest-tag-pill">{{ request('interest') }} <a href="{{ request()->fullUrlWithQuery(['interest' => null]) }}" class="pill-remove">✕</a></span>
                         @endif
                         @if(request('style'))
-                            <span class="dest-tag-pill">{{ request('style') }} <a href="{{ request()->fullUrlWithQuery(['style' => null]) }}" style="margin-left: 4px;">✕</a></span>
+                            <span class="dest-tag-pill">{{ request('style') }} <a href="{{ request()->fullUrlWithQuery(['style' => null]) }}" class="pill-remove">✕</a></span>
                         @endif
                         @if(request('group'))
-                            <span class="dest-tag-pill">{{ request('group') }} <a href="{{ request()->fullUrlWithQuery(['group' => null]) }}" style="margin-left: 4px;">✕</a></span>
+                            <span class="dest-tag-pill">{{ request('group') }} <a href="{{ request()->fullUrlWithQuery(['group' => null]) }}" class="pill-remove">✕</a></span>
                         @endif
                         @if(request('duration'))
-                            <span class="dest-tag-pill">{{ request('duration') }} Days <a href="{{ request()->fullUrlWithQuery(['duration' => null]) }}" style="margin-left: 4px;">✕</a></span>
+                            <span class="dest-tag-pill">{{ request('duration') }} Days <a href="{{ request()->fullUrlWithQuery(['duration' => null]) }}" class="pill-remove">✕</a></span>
                         @endif
                         @if(request('budget_band'))
-                            <span class="dest-tag-pill">Budget: {{ request('budget_band') }} <a href="{{ request()->fullUrlWithQuery(['budget_band' => null]) }}" style="margin-left: 4px;">✕</a></span>
+                            <span class="dest-tag-pill">Budget: {{ request('budget_band') }} <a href="{{ request()->fullUrlWithQuery(['budget_band' => null]) }}" class="pill-remove">✕</a></span>
                         @endif
-                        <a href="{{ route('destinations') }}" style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-decoration: underline; margin-left: auto;">Clear All</a>
+                        <a href="{{ route('destinations') }}" class="clear-all-link">Clear All</a>
                     </div>
                 @endif
             </form>
@@ -115,16 +118,16 @@
         <div class="editorial-header-row" style="margin-bottom: 2rem;">
             <div>
                 <h2 style="font-size: 1.65rem;">Showing {{ $destinations->count() }} {{ Str::plural('Destination', $destinations->count()) }}</h2>
-                <p style="font-size: 0.88rem; color: var(--text-muted);">Prices estimated from Kampala (Budget style) • Verified transparent tariffs</p>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">Prices estimated from Kampala • Verified transparent tariffs in {{ $currentCurrency }}</p>
             </div>
         </div>
 
         <!-- Destinations Main Grid -->
         @if($destinations->isEmpty())
-            <div class="empty-state-card" style="text-align: center; padding: 4rem 2rem; background: var(--bg-surface); border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 4rem;">
-                <h3 style="margin-bottom: 0.75rem;">No destinations match your active filters</h3>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Try resetting some filter criteria to explore more locations across Uganda.</p>
-                <a href="{{ route('destinations') }}" class="btn btn-outline">Reset All Filters</a>
+            <div class="empty-state-card">
+                <h3>No destinations match your active filters</h3>
+                <p>Try resetting some filter criteria to explore more locations across Uganda.</p>
+                <a href="{{ route('destinations') }}" class="btn btn-gold">Reset All Filters</a>
             </div>
         @else
             <div class="destinations-main-grid">
@@ -132,8 +135,13 @@
                     <div class="dest-main-card">
                         <div class="dest-main-media">
                             <img src="{{ asset($dest->image_path ?? 'images/destinations/bwindi-gorilla-1.webp') }}" alt="{{ $dest->name }}" class="dest-main-img" loading="lazy">
-                            <span class="glass-badge" style="position: absolute; top: 1rem; left: 1rem;">{{ $dest->region }} Uganda</span>
-                            <span class="glass-badge glass-badge-gold" style="position: absolute; bottom: 1rem; right: 1rem;">{{ $dest->min_days }}–{{ $dest->max_days }} Days</span>
+                            <span class="ref-loc-badge" style="position: absolute; top: 1rem; left: 1rem;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                <span>{{ $dest->region }} Uganda</span>
+                            </span>
+                            <span class="ref-card-pill-gold" style="position: absolute; bottom: 1rem; right: 1rem;">
+                                {{ $dest->min_days }}–{{ $dest->max_days }} Days
+                            </span>
                         </div>
 
                         <div class="dest-main-body">
@@ -152,8 +160,9 @@
                                     <span class="preview-price-label">Estimated from</span>
                                     <span class="preview-price-val">@price($dest->estimated_cost_from_kampala)</span>
                                 </div>
-                                <a href="{{ route('destinations.show', $dest->slug) }}" class="btn btn-sm btn-primary">
-                                    View Details →
+                                <a href="{{ route('destinations.show', $dest->slug) }}" class="ref-view-details-link">
+                                    <span>View Details</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                 </a>
                             </div>
                         </div>

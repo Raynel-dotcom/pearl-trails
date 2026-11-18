@@ -7,9 +7,9 @@
     <div class="container">
 
         <!-- Sticky "Your Selected Picks" Bar -->
-        <div class="picks-glass-toolbar" style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem 1.5rem; margin-top: 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-                <span style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--color-gold); letter-spacing: 1px;">Your Picks:</span>
+        <div class="picks-glass-toolbar">
+            <div class="picks-left-cluster">
+                <span class="picks-label">YOUR PICKS:</span>
                 <span class="dest-tag-pill">
                     Stay: <strong>{{ $picks['stay']['name'] ?? 'None' }}</strong>
                     @if(!empty($picks['stay'])) (@price($picks['stay']['price_ugx'])/nt) @endif
@@ -23,24 +23,24 @@
                     @if(!empty($picks['recreation'])) (@price($picks['recreation']['price_ugx'])) @endif
                 </span>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <span style="font-size: 0.85rem; color: var(--text-muted);">Estimated Total:</span>
-                <strong style="font-size: 1.15rem; color: var(--color-forest);" class="picks-total-val">@price($picksTotal)</strong>
-                <a href="{{ route('plan') }}" class="btn btn-sm btn-primary" style="margin-left: 0.5rem;">Plan Trip</a>
+            <div class="picks-right-cluster">
+                <span class="picks-calc-label">Estimated Total:</span>
+                <strong class="picks-total-val">@price($picksTotal)</strong>
+                <a href="{{ route('plan') }}" class="btn btn-sm btn-gold">Plan Trip →</a>
             </div>
         </div>
 
         <!-- Editorial Hero Header -->
         <div class="page-hero-editorial">
-            <span class="glass-badge glass-badge-gold" style="margin-bottom: 1rem;">
-                @if($category === 'stay') Where to Stay in Uganda @elseif($category === 'eat') Where to Eat in Uganda @else Recreation &amp; Fun Activities @endif
+            <span class="ref-kicker">
+                @if($category === 'stay') — Where to Stay in Uganda — @elseif($category === 'eat') — Where to Eat in Uganda — @else — Recreation &amp; Fun Activities — @endif
             </span>
             <h1 class="page-hero-title">{{ $title }}</h1>
             <p class="page-hero-subtitle">{{ $subtitle }}</p>
         </div>
 
         @if(session('success'))
-            <div style="background: rgba(32, 92, 73, 0.12); border: 1px solid var(--color-safari); border-radius: var(--radius-sm); padding: 0.85rem 1.25rem; color: var(--color-forest); margin-bottom: 2rem; font-weight: 600;">
+            <div class="ref-success-alert">
                 ✓ {{ session('success') }}
             </div>
         @endif
@@ -50,7 +50,10 @@
             <form action="{{ url()->current() }}" method="GET" class="filters-form" id="browseFilterForm">
                 <div class="filter-row-top">
                     <!-- Search Input -->
-                    <input type="text" name="q" id="browseSearch" value="{{ request('q') }}" placeholder="Search by name, site, or specialty..." class="filter-search-input">
+                    <div class="filter-input-wrap">
+                        <span class="filter-input-icon">🔍</span>
+                        <input type="text" name="q" id="browseSearch" value="{{ request('q') }}" placeholder="Search by name, site, or specialty..." class="filter-search-input">
+                    </div>
 
                     <!-- Destination Select -->
                     <select name="destination" id="destSelect" class="filter-select" onchange="document.getElementById('browseFilterForm').submit()">
@@ -80,7 +83,7 @@
                     </select>
 
                     <!-- Submit & Reset -->
-                    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                    <button type="submit" class="btn btn-gold btn-sm">Filter</button>
                     @if(request()->hasAny(['q', 'destination', 'max_price']))
                         <a href="{{ url()->current() }}" class="btn btn-outline btn-sm">Reset</a>
                     @endif
@@ -88,19 +91,19 @@
 
                 <!-- Active Filter Tags -->
                 @if($selectedDestinationId || $maxPriceUgx || request('q'))
-                    <div class="active-filters-row" style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; padding-top: 1rem; border-top: 1px solid var(--border-color);">
-                        <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Active Filters:</span>
+                    <div class="active-filters-row">
+                        <span class="active-filters-label">Active Filters:</span>
                         @if(request('q'))
-                            <span class="dest-tag-pill">"{{ request('q') }}" <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}" style="margin-left: 4px;">✕</a></span>
+                            <span class="dest-tag-pill">"{{ request('q') }}" <a href="{{ request()->fullUrlWithQuery(['q' => null]) }}" class="pill-remove">✕</a></span>
                         @endif
                         @if($selectedDestinationId)
                             @php $activeDest = $destinations->firstWhere('id', $selectedDestinationId); @endphp
-                            <span class="dest-tag-pill">{{ $activeDest->name ?? 'Destination' }} <a href="{{ request()->fullUrlWithQuery(['destination' => null]) }}" style="margin-left: 4px;">✕</a></span>
+                            <span class="dest-tag-pill">{{ $activeDest->name ?? 'Destination' }} <a href="{{ request()->fullUrlWithQuery(['destination' => null]) }}" class="pill-remove">✕</a></span>
                         @endif
                         @if($maxPriceUgx)
-                            <span class="dest-tag-pill">Max @price($maxPriceUgx) <a href="{{ request()->fullUrlWithQuery(['max_price' => null]) }}" style="margin-left: 4px;">✕</a></span>
+                            <span class="dest-tag-pill">Max @price($maxPriceUgx) <a href="{{ request()->fullUrlWithQuery(['max_price' => null]) }}" class="pill-remove">✕</a></span>
                         @endif
-                        <a href="{{ url()->current() }}" style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-decoration: underline; margin-left: auto;">Reset All</a>
+                        <a href="{{ url()->current() }}" class="clear-all-link">Reset All</a>
                     </div>
                 @endif
             </form>
@@ -109,16 +112,16 @@
         <!-- Result Headline -->
         <div class="editorial-header-row" style="margin-bottom: 2rem;">
             <div>
-                <h2 style="font-size: 1.65rem;">Showing {{ $items->count() }} {{ Str::plural('Option', $items->count()) }} (Sorted Cheapest First)</h2>
-                <p style="font-size: 0.88rem; color: var(--text-muted);">All rates labelled as estimates • Verified rack rates</p>
+                <h2 style="font-size: 1.65rem;">Showing {{ $items->count() }} {{ Str::plural('Option', $items->count()) }}</h2>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">Verified local directory rates in {{ $currentCurrency }}</p>
             </div>
         </div>
 
         @if($items->isEmpty())
-            <div class="empty-state-card" style="text-align: center; padding: 4rem 2rem; background: var(--bg-surface); border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 4rem;">
-                <h3 style="margin-bottom: 0.75rem;">No results found matching your filters</h3>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Try broadening your price limit or viewing all destinations.</p>
-                <a href="{{ url()->current() }}" class="btn btn-outline">Clear Filters</a>
+            <div class="empty-state-card">
+                <h3>No results found matching your filters</h3>
+                <p>Try broadening your price limit or viewing all destinations across Uganda.</p>
+                <a href="{{ url()->current() }}" class="btn btn-gold">Clear Filters</a>
             </div>
         @else
             <div class="browse-main-grid">
@@ -150,11 +153,11 @@
 
                             <!-- Activities & Fees list if recreation -->
                             @if(!empty($item['activities']) && count($item['activities']) > 0)
-                                <div style="background: var(--bg-body); border-radius: var(--radius-xs); padding: 0.75rem; margin-bottom: 1rem; font-size: 0.85rem;">
-                                    <strong style="display: block; margin-bottom: 0.35rem; color: var(--text-heading);">Activities & Fees:</strong>
-                                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.25rem;">
+                                <div class="activities-fee-box">
+                                    <strong class="fee-box-title">Activities & Fees:</strong>
+                                    <ul class="fee-box-list">
                                         @foreach($item['activities'] as $act)
-                                            <li style="display: flex; justify-content: space-between;">
+                                            <li>
                                                 <span>{{ $act->name }}</span>
                                                 <strong>@price($act->fee_ugx)</strong>
                                             </li>
