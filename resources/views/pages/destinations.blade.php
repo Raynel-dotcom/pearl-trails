@@ -2,11 +2,11 @@
 @section('title', 'Destinations - Explore All 13 Iconic Uganda Safaris & Sites')
 
 @section('content')
-<div class="destinations-page-container">
-    <div class="page-hero">
-        <span class="quiz-badge">Uganda Destination Guide</span>
-        <h1>Explore Uganda's 13 Iconic Destinations</h1>
-        <p>From the mountain gorillas of Bwindi to the thundering waters of Murchison Falls and the source of the Nile in Jinja—filter and discover your ideal itinerary.</p>
+<div class="destinations-page-container" style="max-width: 1280px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem;">
+    <div class="page-hero" style="text-align: center; max-width: 840px; margin: 0 auto 3rem;">
+        <span class="section-kicker-gold">Destination Directory</span>
+        <h1 class="section-title-serif" style="margin: 0.6rem 0 1rem; font-size: clamp(2.2rem, 3.8vw, 3rem); line-height: 1.15;">Explore Uganda's 13 Iconic Destinations</h1>
+        <p style="font-size: 1.05rem; line-height: 1.6; color: var(--text-muted); margin: 0 auto;">From the mountain gorillas of Bwindi to the thundering waters of Murchison Falls and the source of the Nile in Jinja—filter and discover your ideal itinerary.</p>
     </div>
 
     <!-- Server-Side Filter Bar -->
@@ -146,11 +146,11 @@
     @else
         <div class="destinations-grid">
             @foreach($destinations as $dest)
-                <div class="dest-card">
+                <div class="dest-card" onclick="window.location='{{ route('destinations.show', $dest->slug) }}'" tabindex="0" role="link" aria-label="Explore {{ $dest->name }} Details">
                     <div class="dest-card-media">
-                        <x-scene-svg :destination="$dest" height="210px" />
-                        <span class="region-badge">{{ $dest->region }} Uganda</span>
-                        <span class="duration-badge">{{ $dest->min_days }}-{{ $dest->max_days }} Days</span>
+                        <x-scene-svg :destination="$dest" height="230px" />
+                        <span class="region-badge">📍 {{ $dest->region }} Uganda</span>
+                        <span class="duration-badge">⏱️ {{ $dest->min_days }}-{{ $dest->max_days }} Days</span>
                     </div>
 
                     <div class="dest-card-body">
@@ -170,7 +170,7 @@
                                 <span class="price-amount">@price($dest->estimated_cost_from_kampala)</span>
                             </div>
                             <a href="{{ route('destinations.show', $dest->slug) }}" class="btn btn-sm btn-primary">
-                                View Details →
+                                View Details &rarr;
                             </a>
                         </div>
                     </div>

@@ -146,6 +146,17 @@
                         <div class="dropdown-divider"></div>
                         <a href="{{ route('privacy') }}" class="dropdown-link" role="menuitem">Privacy Policy</a>
                         <a href="{{ route('terms') }}" class="dropdown-link" role="menuitem">Terms of Service</a>
+                        <div class="dropdown-divider"></div>
+                        @auth
+                            <a href="{{ route('profile.edit') }}" class="dropdown-link" role="menuitem">My Account ({{ auth()->user()->name }})</a>
+                            <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
+                                @csrf
+                                <button type="submit" class="dropdown-link" style="width: 100%; text-align: left; background: none; border: none; cursor: pointer; color: inherit; font: inherit;">Log Out</button>
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="dropdown-link" role="menuitem">Log In</a>
+                            <a href="{{ route('register') }}" class="dropdown-link" role="menuitem" style="color: var(--gold); font-weight: 600;">Create Account</a>
+                        @endauth
                     </div>
                 </div>
             </nav>
@@ -302,6 +313,17 @@
                         <a href="{{ route('list-business') }}" class="mobile-sub-link">List Your Business</a>
                         <a href="{{ route('privacy') }}" class="mobile-sub-link">Privacy Policy</a>
                         <a href="{{ route('terms') }}" class="mobile-sub-link">Terms of Service</a>
+                        <div style="height: 1px; background: rgba(247, 241, 227, 0.1); margin: 0.4rem 0;"></div>
+                        @auth
+                            <a href="{{ route('profile.edit') }}" class="mobile-sub-link">My Account ({{ auth()->user()->name }})</a>
+                            <form method="POST" action="{{ route('logout') }}" style="margin: 0.2rem 0 0;">
+                                @csrf
+                                <button type="submit" class="mobile-sub-link" style="width: 100%; text-align: left; background: none; border: none; cursor: pointer; color: inherit; font: inherit; padding: 0.4rem 0;">Log Out</button>
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="mobile-sub-link" style="font-weight: 600;">Log In</a>
+                            <a href="{{ route('register') }}" class="mobile-sub-link" style="color: var(--gold); font-weight: 600;">Create Account</a>
+                        @endauth
                     </div>
                 </div>
             </div>
