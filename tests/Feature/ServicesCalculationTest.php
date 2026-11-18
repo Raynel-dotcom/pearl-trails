@@ -39,8 +39,8 @@ class ServicesCalculationTest extends TestCase
         $this->assertEquals(2, $cost['nights']);
         $this->assertEquals('Moderate', $cost['style']);
 
-        // Check accommodation = 2 nights * 150000 = 300000
-        $this->assertEquals(300000, $cost['accommodation']);
+        // Check accommodation = 2 nights * destination's moderate rate
+        $this->assertEquals($jinja->accommodation_costs['Moderate'] * 2, $cost['accommodation']);
         // Check food = 35000 * 1.0 * 3 = 105000
         $this->assertEquals(105000, $cost['food']);
         // Total should be positive and greater than sum of components

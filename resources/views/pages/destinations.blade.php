@@ -153,7 +153,11 @@
             @foreach($destinations as $dest)
                 <div class="dest-card" onclick="window.location='{{ route('destinations.show', $dest->slug) }}'" tabindex="0" role="link" aria-label="Explore {{ $dest->name }} Details">
                     <div class="dest-card-media">
-                        <x-scene-svg :destination="$dest" height="220px" />
+                        @if(!empty($dest->image_path))
+                            <img src="{{ asset($dest->image_path) }}" alt="{{ $dest->name }}" class="dest-card-img" loading="lazy">
+                        @else
+                            <x-scene-svg :destination="$dest" height="220px" />
+                        @endif
                         <span class="region-badge">{{ $dest->region }} Uganda</span>
                         <span class="duration-badge">{{ $dest->min_days }}-{{ $dest->max_days }} Days</span>
                     </div>

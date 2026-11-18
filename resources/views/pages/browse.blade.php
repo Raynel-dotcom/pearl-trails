@@ -141,18 +141,34 @@
         <div class="browse-cards-grid">
             @foreach($items as $item)
                 <div class="browse-card {{ $item['fits_plan'] ? 'fits-plan-card' : '' }}">
-                    <div class="browse-card-header">
-                        <div class="browse-card-badges">
-                            <span class="type-badge">{{ $item['type'] }}</span>
-                            @if($item['is_community'])
-                                <span class="community-badge">Community Listing</span>
-                            @endif
-                            @if($item['fits_plan'])
-                                <span class="fits-plan-badge">Fits your plan</span>
-                            @endif
+                    @if(!empty($item['image_path']))
+                        <div class="browse-card-media">
+                            <img src="{{ asset($item['image_path']) }}" alt="{{ $item['name'] }}" class="browse-card-img" loading="lazy">
+                            <div class="browse-card-badges">
+                                <span class="type-badge">{{ $item['type'] }}</span>
+                                @if($item['is_community'])
+                                    <span class="community-badge">Community Listing</span>
+                                @endif
+                                @if($item['fits_plan'])
+                                    <span class="fits-plan-badge">Fits your plan</span>
+                                @endif
+                            </div>
+                            <span class="browse-dest-pill">{{ $item['destination_name'] }}</span>
                         </div>
-                        <span class="browse-dest-pill">{{ $item['destination_name'] }}</span>
-                    </div>
+                    @else
+                        <div class="browse-card-header">
+                            <div class="browse-card-badges">
+                                <span class="type-badge">{{ $item['type'] }}</span>
+                                @if($item['is_community'])
+                                    <span class="community-badge">Community Listing</span>
+                                @endif
+                                @if($item['fits_plan'])
+                                    <span class="fits-plan-badge">Fits your plan</span>
+                                @endif
+                            </div>
+                            <span class="browse-dest-pill">{{ $item['destination_name'] }}</span>
+                        </div>
+                    @endif
 
                     <div class="browse-card-body">
                         <h3 class="browse-card-title">{{ $item['name'] }}</h3>
@@ -175,13 +191,20 @@
                             </div>
                         @endif
 
-                        @if($item['website'])
-                            <div class="browse-website-link">
-                                <a href="{{ $item['website'] }}" target="_blank" rel="noopener noreferrer">
-                                    Visit Official Website &rarr;
+                        <div class="browse-card-links">
+                            @if($item['website'])
+                                <a href="{{ $item['website'] }}" target="_blank" rel="noopener noreferrer" class="browse-action-link">
+                                    Official Website &rarr;
                                 </a>
-                            </div>
-                        @endif
+                            @endif
+                            <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($item['name'] . ', ' . $item['destination_name'] . ', Uganda') }}" target="_blank" rel="noopener noreferrer" class="browse-action-link maps-pin-link">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px;">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                View on Maps &rarr;
+                            </a>
+                        </div>
                     </div>
 
                     <div class="browse-card-footer">
