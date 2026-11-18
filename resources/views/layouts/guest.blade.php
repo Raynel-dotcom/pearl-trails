@@ -1,30 +1,24 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+@extends('layouts.app')
+@section('title', config('app.name', 'Pearl Trails') . ' — Authentication')
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+@section('content')
+<div class="auth-page-wrapper">
+    <div class="auth-card">
+        <div class="auth-header">
+            <a href="{{ route('home') }}" class="auth-brand-mark" aria-label="Pearl Trails Home">
+                <svg width="28" height="28" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                    <path d="M4 38L18 14L28 30L34 20L44 38H4Z" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M12 38L22 22L30 38" stroke="var(--gold-soft)" stroke-width="1.8" stroke-linejoin="round"/>
+                    <circle cx="37" cy="12" r="4" fill="var(--gold)"/>
+                </svg>
+            </a>
+            <span class="auth-kicker">Member Access</span>
+            <h1 class="auth-title">Account Assistance</h1>
         </div>
-    </body>
-</html>
+
+        <div class="auth-guest-content">
+            {{ $slot }}
+        </div>
+    </div>
+</div>
+@endsection
