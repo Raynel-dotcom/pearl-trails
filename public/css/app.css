@@ -3567,7 +3567,6 @@ body.drawer-active {
   color: var(--color-primary);
   font-weight: 600;
   text-decoration: underline;
-  margin-top: 0.35rem;
   transition: color 0.15s ease;
 }
 
@@ -3577,4 +3576,68 @@ body.drawer-active {
 
 .dark .pick-website-link {
   color: var(--color-gold);
+}
+
+.browse-card-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.browse-action-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: underline;
+  transition: color 0.15s ease;
+}
+
+.browse-action-link:hover {
+  color: var(--color-emerald);
+}
+
+.dark .browse-action-link {
+  color: var(--color-gold);
+}
+
+.maps-pin-link {
+  color: #0369a1;
+}
+
+.maps-pin-link:hover {
+  color: #0284c7;
+}
+
+.dark .maps-pin-link {
+  color: #38bdf8;
+}
+
+.pick-item-links {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-top: 0.35rem;
+}
+
+.pick-maps-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #0369a1;
+  text-decoration: underline;
+  transition: color 0.15s ease;
+}
+
+.pick-maps-link:hover {
+  color: #0284c7;
+}
+
+.dark .pick-maps-link {
+  color: #38bdf8;
 }

@@ -125,9 +125,17 @@
                                 <span class="pick-item-name">{{ $stay->name }}</span>
                                 <span class="pick-item-type">{{ $stay->type ?? 'Lodge' }}</span>
                                 <span class="pick-item-price">@price($stay->price_ugx) / night</span>
-                                @if($stay->website)
-                                    <a href="{{ $stay->website }}" target="_blank" rel="noopener noreferrer" class="pick-website-link">Official Website ↗</a>
-                                @endif
+                                <div class="pick-item-links">
+                                    @if($stay->website)
+                                        <a href="{{ $stay->website }}" target="_blank" rel="noopener noreferrer" class="pick-website-link">Official Website ↗</a>
+                                    @endif
+                                    <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($stay->name . ', ' . $destination->name . ', Uganda') }}" target="_blank" rel="noopener noreferrer" class="pick-maps-link" title="View on Google Maps">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px;">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>Map ↗
+                                    </a>
+                                </div>
                             </div>
                             <div class="pick-item-actions">
                                 @if($quiz)
@@ -157,9 +165,17 @@
                                 <span class="pick-item-name">{{ $eat->name }}</span>
                                 <span class="pick-item-type">{{ $eat->type ?? 'Restaurant' }}</span>
                                 <span class="pick-item-price">@price($eat->price_ugx) / meal</span>
-                                @if($eat->website)
-                                    <a href="{{ $eat->website }}" target="_blank" rel="noopener noreferrer" class="pick-website-link">Official Website ↗</a>
-                                @endif
+                                <div class="pick-item-links">
+                                    @if($eat->website)
+                                        <a href="{{ $eat->website }}" target="_blank" rel="noopener noreferrer" class="pick-website-link">Official Website ↗</a>
+                                    @endif
+                                    <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($eat->name . ', ' . $destination->name . ', Uganda') }}" target="_blank" rel="noopener noreferrer" class="pick-maps-link" title="View on Google Maps">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px;">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>Map ↗
+                                    </a>
+                                </div>
                             </div>
                             <div class="pick-item-actions">
                                 @if($quiz)
@@ -189,9 +205,17 @@
                                 <span class="pick-item-name">{{ $rec->name }}</span>
                                 <span class="pick-item-type">{{ $rec->type ?? 'Activity' }}</span>
                                 <span class="pick-item-price">@price($rec->price_ugx) / person</span>
-                                @if($rec->website)
-                                    <a href="{{ $rec->website }}" target="_blank" rel="noopener noreferrer" class="pick-website-link">Official Website ↗</a>
-                                @endif
+                                <div class="pick-item-links">
+                                    @if($rec->website)
+                                        <a href="{{ $rec->website }}" target="_blank" rel="noopener noreferrer" class="pick-website-link">Official Website ↗</a>
+                                    @endif
+                                    <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($rec->name . ', ' . $destination->name . ', Uganda') }}" target="_blank" rel="noopener noreferrer" class="pick-maps-link" title="View on Google Maps">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px;">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>Map ↗
+                                    </a>
+                                </div>
                             </div>
                             <div class="pick-item-actions">
                                 @if($quiz)

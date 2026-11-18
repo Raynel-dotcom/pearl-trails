@@ -192,13 +192,20 @@
                             </div>
                         @endif
 
-                        @if($item['website'])
-                            <div class="browse-website-link">
-                                <a href="{{ $item['website'] }}" target="_blank" rel="noopener noreferrer">
-                                    Visit Official Website ↗
+                        <div class="browse-card-links">
+                            @if($item['website'])
+                                <a href="{{ $item['website'] }}" target="_blank" rel="noopener noreferrer" class="browse-action-link">
+                                    Official Website ↗
                                 </a>
-                            </div>
-                        @endif
+                            @endif
+                            <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($item['name'] . ', ' . $item['destination_name'] . ', Uganda') }}" target="_blank" rel="noopener noreferrer" class="browse-action-link maps-pin-link">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px;">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                View on Maps ↗
+                            </a>
+                        </div>
                     </div>
 
                     <div class="browse-card-footer">
