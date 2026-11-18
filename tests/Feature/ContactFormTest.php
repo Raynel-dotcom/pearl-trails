@@ -82,4 +82,27 @@ class ContactFormTest extends TestCase
         $response->assertDontSee('https://wa.me');
         $response->assertDontSee('Hours');
     }
+
+    public function test_email_is_dispatched_to_site_email_on_submission(): void
+    {
+        \Illuminate\Support\Facades\Mail::fake();
+
+        config(['site.email' => 'natukundaraynel@gmail.com']);
+
+        $payload = [
+            'name'    => 'David Ochieng',
+            'email'   => 'david@example.com',
+            'subject' => 'Rwenzori Hiking Gear',
+            'message' => 'Need advice on boots and crampons for Margherita peak.',
+        ];
+
+        $response = $this->post('/contact', $payload);
+        $response->assertRedirect('/contact');
+
+        \Illuminate\Support\Facades\Mail::assertSent(\App\Mail\ContactInquiryMail::class, function ($mail) use ($payload) {
+            return $mail->hasTo('natukundaraynel@gmail.com') &&
+                   $mail->inquiry['email'] === 'david@example.com' &&
+                   $mail->inquiry['subject'] === 'Rwenzori Hiking Gear';
+        });
+    }
 }

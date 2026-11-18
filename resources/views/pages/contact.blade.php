@@ -18,9 +18,27 @@
                     <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
             </span>
-            <div>
+            <div style="flex: 1;">
                 <strong>Message sent successfully!</strong>
                 <p>Thank you for reaching out. We reply within 2 working days.</p>
+                @if(!empty(config('site.whatsapp')))
+                    @php
+                        $msgExcerpt = session('submitted_message') ? ': ' . Str::limit(session('submitted_message'), 80) : '';
+                        $waPrompt = urlencode("Hello Pearl Trails, I just submitted an inquiry" . $msgExcerpt);
+                    @endphp
+                    <div style="margin-top: 0.65rem;">
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', config('site.whatsapp')) }}?text={{ $waPrompt }}" 
+                           target="_blank" 
+                           rel="noopener" 
+                           class="btn-vendor-outline" 
+                           style="background: #25D366; color: #ffffff; border-color: #25D366; font-size: 0.8rem; padding: 0.35rem 0.9rem; text-decoration: none;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                            </svg>
+                            Continue directly on WhatsApp &rarr;
+                        </a>
+                    </div>
+                @endif
             </div>
         </div>
     @endif

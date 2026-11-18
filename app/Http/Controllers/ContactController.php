@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactInquiryMail;
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -16,8 +19,22 @@ class ContactController extends Controller
             'message' => 'required|string|max:5000',
         ]);
 
-        ContactMessage::create($validated);
+        $contactMessage = ContactMessage::create($validated);
 
-        return redirect()->route('contact')->with('contact_success', true);
+        // Dispatch direct email notification to the site administrator
+        $adminEmail = config('site.email');
+        if (!empty($adminEmail)) {
+            try {
+                Mail::to($adminEmail)->send(new ContactInquiryMail($validated));
+            } catch (\Throwable $e) {
+                Log::error("Failed to send contact notification email: " . $e->getMessage());
+            }
+        }
+
+        return redirect()->route('contact')->with([
+            'contact_success'   => true,
+            'submitted_name'    => $validated['name'],
+            'submitted_message' => $validated['message'],
+        ]);
     }
 }
