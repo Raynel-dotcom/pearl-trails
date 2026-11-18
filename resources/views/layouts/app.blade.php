@@ -3,246 +3,444 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', config('app.name', 'Pearl Trails')) - Pearl of Africa</title>
-    <meta name="description" content="A comprehensive tourism decision assistant for Uganda. Explore destinations, costs, lodges, and custom itineraries across the Pearl of Africa.">
+    <title>@yield('title', 'Pearl Trails — The Pearl of Africa')</title>
+    <meta name="description" content="@yield('meta_description', 'Pearl Trails is Uganda\'s premier tourism decision platform. Explore national parks, misty gorilla forests, stays, restaurants, and custom itineraries.')">
 
-    <!-- Styles -->
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <!-- CSS Design System Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('css/variables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    
+    <link rel="stylesheet" href="{{ asset('css/header-footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home-hero.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home-sections.css') }}">
+
+    @if(request()->routeIs('home') && file_exists(public_path('images/hero/hero-gorilla.webp')))
+        <link rel="preload" as="image" href="{{ asset('images/hero/hero-gorilla.webp') }}" type="image/webp" fetchpriority="high">
+    @endif
+
+    <!-- Dark Mode Preference Script (Default to Light Mode) -->
     <script>
-        // Check for saved dark mode preference
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+        (function() {
+            const savedTheme = localStorage.getItem('pt_theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
     </script>
 </head>
-<body>
-    <!-- 4. SITE HEADER (Sticky with hamburger <900px, normal row >=900px) -->
-    <header class="site-header">
-        <div class="container nav-wrapper">
+<body class="{{ request()->routeIs('home') ? 'is-home-page' : 'is-internal-page' }}">
+
+    <!-- 1. STICKY HEADER (Transparent over hero, turns solid forest green on scroll) -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-container">
             <!-- Brand Logo -->
-            <a href="{{ route('home') }}" class="brand-logo">
-                <span class="logo-emblem">🇺🇬</span>
-                <span class="logo-title">Pearl Trails</span>
+            <a href="{{ route('home') }}" class="brand-link" aria-label="Pearl Trails Home">
+                <svg width="38" height="38" viewBox="0 0 48 48" fill="none" class="brand-icon-svg" aria-hidden="true">
+                    <path d="M4 38L18 14L28 30L34 20L44 38H4Z" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M12 38L22 22L30 38" stroke="var(--gold-soft)" stroke-width="1.8" stroke-linejoin="round"/>
+                    <circle cx="37" cy="12" r="4" fill="var(--gold)"/>
+                    <path d="M6 42C16 39 32 44 42 41" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div class="brand-text-col">
+                    <span class="brand-name">Pearl Trails</span>
+                    <span class="brand-tagline">The Pearl of Africa</span>
+                </div>
             </a>
 
-            <!-- Primary Navigation Links (Clean, compact desktop row) -->
-            <nav class="nav-primary-desktop" aria-label="Main Navigation">
-                <a href="{{ route('destinations') }}" class="nav-link {{ request()->routeIs('destinations*') ? 'active' : '' }}">Destinations</a>
-                <a href="{{ route('stays') }}" class="nav-link {{ request()->routeIs('stays*') ? 'active' : '' }}">Stays</a>
-                <a href="{{ route('eat') }}" class="nav-link {{ request()->routeIs('eat*') ? 'active' : '' }}">Eat</a>
-                <a href="{{ route('recreation') }}" class="nav-link {{ request()->routeIs('recreation*') ? 'active' : '' }}">Recreation</a>
+            <!-- Centre: Pill-Shaped Glass Navigation Bar -->
+            <nav class="glass-nav-pill" aria-label="Primary Navigation">
+                <!-- Home -->
+                <div class="nav-item">
+                    <a href="{{ route('home') }}" class="nav-link-btn {{ request()->routeIs('home') ? 'active' : '' }}">
+                        Home
+                    </a>
+                </div>
+
+                <!-- Destinations Dropdown -->
+                <div class="nav-item">
+                    <button type="button" class="nav-link-btn {{ request()->routeIs('destinations*') ? 'active' : '' }}" aria-haspopup="true" aria-expanded="false">
+                        Destinations
+                        <span class="nav-chevron" aria-hidden="true">&#9662;</span>
+                    </button>
+                    <div class="nav-dropdown" role="menu">
+                        <a href="{{ route('destinations') }}" class="dropdown-link" role="menuitem">All Destinations</a>
+                        <a href="{{ route('interest') }}" class="dropdown-link" role="menuitem">Explore by Interest</a>
+                        <a href="{{ route('destinations') }}#map-view" class="dropdown-link" role="menuitem">Map View</a>
+                    </div>
+                </div>
+
+                <!-- Where to Stay Dropdown -->
+                <div class="nav-item">
+                    <button type="button" class="nav-link-btn {{ request()->routeIs('stays*') ? 'active' : '' }}" aria-haspopup="true" aria-expanded="false">
+                        Where to Stay
+                        <span class="nav-chevron" aria-hidden="true">&#9662;</span>
+                    </button>
+                    <div class="nav-dropdown" role="menu">
+                        <a href="{{ route('stays') }}" class="dropdown-link" role="menuitem">All Accommodations</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('stays', ['style' => 'Budget']) }}" class="dropdown-link" role="menuitem">Budget Lodging</a>
+                        <a href="{{ route('stays', ['style' => 'Moderate']) }}" class="dropdown-link" role="menuitem">Moderate Stays</a>
+                        <a href="{{ route('stays', ['style' => 'Luxury']) }}" class="dropdown-link" role="menuitem">Luxury Retreats</a>
+                    </div>
+                </div>
+
+                <!-- Where to Eat Dropdown -->
+                <div class="nav-item">
+                    <button type="button" class="nav-link-btn {{ request()->routeIs('eat*') ? 'active' : '' }}" aria-haspopup="true" aria-expanded="false">
+                        Where to Eat
+                        <span class="nav-chevron" aria-hidden="true">&#9662;</span>
+                    </button>
+                    <div class="nav-dropdown" role="menu">
+                        <a href="{{ route('eat') }}" class="dropdown-link" role="menuitem">All Restaurants & Dining</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('eat', ['price' => 'budget']) }}" class="dropdown-link" role="menuitem">Casual & Local Eats</a>
+                        <a href="{{ route('eat', ['price' => 'moderate']) }}" class="dropdown-link" role="menuitem">Bistros & Cafes</a>
+                        <a href="{{ route('eat', ['price' => 'fine_dining']) }}" class="dropdown-link" role="menuitem">Fine Dining</a>
+                    </div>
+                </div>
+
+                <!-- Recreation & Fun Dropdown -->
+                <div class="nav-item">
+                    <button type="button" class="nav-link-btn {{ request()->routeIs('recreation*') ? 'active' : '' }}" aria-haspopup="true" aria-expanded="false">
+                        Recreation &amp; Fun
+                        <span class="nav-chevron" aria-hidden="true">&#9662;</span>
+                    </button>
+                    <div class="nav-dropdown" role="menu">
+                        <a href="{{ route('recreation') }}" class="dropdown-link" role="menuitem">All Activities</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('recreation', ['activity_type' => 'Adventure']) }}" class="dropdown-link" role="menuitem">Adventure & Rafting</a>
+                        <a href="{{ route('recreation', ['activity_type' => 'Wildlife']) }}" class="dropdown-link" role="menuitem">Wildlife Encounters</a>
+                        <a href="{{ route('recreation', ['activity_type' => 'Culture']) }}" class="dropdown-link" role="menuitem">Cultural Tours</a>
+                        <a href="{{ route('recreation', ['activity_type' => 'Water']) }}" class="dropdown-link" role="menuitem">Water & Boat Safaris</a>
+                    </div>
+                </div>
+
+                <!-- Plan My Trip Dropdown -->
+                <div class="nav-item">
+                    <button type="button" class="nav-link-btn {{ request()->routeIs('plan*') || request()->routeIs('saved*') ? 'active' : '' }}" aria-haspopup="true" aria-expanded="false">
+                        Plan My Trip
+                        <span class="nav-chevron" aria-hidden="true">&#9662;</span>
+                    </button>
+                    <div class="nav-dropdown" role="menu">
+                        <a href="{{ route('plan') }}" class="dropdown-link" role="menuitem">Start the Quiz</a>
+                        <a href="{{ route('saved') }}" class="dropdown-link" role="menuitem">Saved Trips</a>
+                    </div>
+                </div>
+
+                <!-- More Dropdown -->
+                <div class="nav-item">
+                    <button type="button" class="nav-link-btn" aria-haspopup="true" aria-expanded="false">
+                        More
+                        <span class="nav-chevron" aria-hidden="true">&#9662;</span>
+                    </button>
+                    <div class="nav-dropdown dropdown-right" role="menu">
+                        <a href="{{ route('about') }}" class="dropdown-link" role="menuitem">About Pearl Trails</a>
+                        <a href="{{ route('contact') }}" class="dropdown-link" role="menuitem">Contact Us</a>
+                        <a href="{{ route('list-business') }}" class="dropdown-link" role="menuitem">List Your Business</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ route('privacy') }}" class="dropdown-link" role="menuitem">Privacy Policy</a>
+                        <a href="{{ route('terms') }}" class="dropdown-link" role="menuitem">Terms of Service</a>
+                    </div>
+                </div>
             </nav>
 
-            <!-- Header Right Controls -->
-            <div class="nav-actions-right">
-                <!-- Currency Dropdown -->
-                <div class="currency-dropdown-wrapper">
-                    <label for="currencySelect" class="sr-only">Currency</label>
-                    <select id="currencySelect" class="currency-select" onchange="window.location.href='/currency/' + this.value">
-                        @foreach($supportedCurrencies ?? ['UGX', 'USD', 'EUR', 'GBP'] as $curr)
-                            <option value="{{ $curr }}" {{ ($currentCurrency ?? 'UGX') === $curr ? 'selected' : '' }}>
+            <!-- Right Controls -->
+            <div class="header-actions-right">
+                <div class="action-pill-group">
+                    <!-- Light / Dark Mode Toggle -->
+                    <button type="button" class="icon-btn" id="headerThemeToggle" title="Toggle Light / Dark Mode" aria-label="Toggle Light or Dark Mode">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="themeSunIcon">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </button>
+
+                    <!-- Search Icon Button -->
+                    <a href="{{ route('destinations') }}" class="icon-btn" title="Search Destinations" aria-label="Search Destinations">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </a>
+
+                    <!-- Currency Selector -->
+                    <label for="headerCurrencySelect" class="sr-only">Choose Currency</label>
+                    <select id="headerCurrencySelect" class="currency-select-inline" onchange="window.location.href='/currency/' + this.value" aria-label="Select Currency">
+                        @foreach(['UGX', 'USD', 'EUR', 'GBP'] as $curr)
+                            <option value="{{ $curr }}" {{ (session('currency') ?? 'UGX') === $curr ? 'selected' : '' }}>
                                 {{ $curr }}
                             </option>
                         @endforeach
                     </select>
                 </div>
 
-                <!-- Prominent "Plan My Trip" Button -->
-                <a href="{{ route('plan') }}" class="btn-plan-trip-header">
-                    ✨ Plan My Trip
+                <!-- Gold Pill CTA: Plan Your Trip -->
+                <a href="{{ route('plan') }}" class="btn-gold-pill">
+                    <span>Plan Your Trip</span>
+                    <span aria-hidden="true">&rarr;</span>
                 </a>
 
-                <!-- Theme Toggle Button -->
-                <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Light / Dark Theme" aria-label="Toggle Theme">
-                    🌙
-                </button>
-
-                <!-- Hamburger Menu Button -->
-                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
-                    <span id="hamburgerIcon">☰</span>
-                    <span class="hamburger-label">Menu</span>
+                <!-- Mobile Hamburger Toggle (<1024px) -->
+                <button type="button" class="hamburger-toggle-btn" id="mobileHamburgerBtn" aria-label="Open Mobile Menu" aria-expanded="false">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
                 </button>
             </div>
-
-            <!-- Hamburger Drawer Menu (Secondary links on desktop, all links on mobile) -->
-            <div class="nav-drawer" id="navDrawer" role="dialog" aria-label="Site Navigation">
-                <div class="drawer-header">
-                    <div class="drawer-brand">
-                        <span class="logo-emblem">🇺🇬</span>
-                        <span>Pearl Trails Menu</span>
-                    </div>
-                    <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Navigation Menu">✕</button>
-                </div>
-
-                <div class="drawer-content">
-                    <!-- Mobile-only Explore links -->
-                    <div class="drawer-section mobile-only-section">
-                        <span class="drawer-section-title">Explore</span>
-                        <a href="{{ route('home') }}" class="drawer-link {{ request()->routeIs('home') ? 'active' : '' }}">🏡 Home</a>
-                        <a href="{{ route('destinations') }}" class="drawer-link {{ request()->routeIs('destinations*') ? 'active' : '' }}">🗺️ Destinations</a>
-                        <a href="{{ route('stays') }}" class="drawer-link {{ request()->routeIs('stays*') ? 'active' : '' }}">🛏️ Where to Stay</a>
-                        <a href="{{ route('eat') }}" class="drawer-link {{ request()->routeIs('eat*') ? 'active' : '' }}">🍽️ Where to Eat</a>
-                        <a href="{{ route('recreation') }}" class="drawer-link {{ request()->routeIs('recreation*') ? 'active' : '' }}">🛶 Recreation & Fun</a>
-                    </div>
-
-                    <!-- Planning & Tools -->
-                    <div class="drawer-section">
-                        <span class="drawer-section-title">Planning Tools</span>
-                        <a href="{{ route('plan') }}" class="drawer-link {{ request()->routeIs('plan*') ? 'active' : '' }}">✨ Plan My Trip Wizard</a>
-                        <a href="{{ route('interest') }}" class="drawer-link {{ request()->routeIs('interest*') ? 'active' : '' }}">🏷️ Explore by Interest</a>
-                        <a href="{{ route('saved') }}" class="drawer-link {{ request()->routeIs('saved*') ? 'active' : '' }}">⭐ Saved Trips</a>
-                    </div>
-
-                    <!-- Business & Information -->
-                    <div class="drawer-section">
-                        <span class="drawer-section-title">Partners & Info</span>
-                        <a href="{{ route('list-your-business') }}" class="drawer-link {{ request()->routeIs('list-your-business*') || request()->routeIs('list-business*') ? 'active' : '' }}">🏪 List Your Business</a>
-                        <a href="{{ route('about') }}" class="drawer-link {{ request()->routeIs('about*') ? 'active' : '' }}">ℹ️ About Pearl Trails</a>
-                        <a href="{{ route('contact') }}" class="drawer-link {{ request()->routeIs('contact*') ? 'active' : '' }}">📬 Contact Us</a>
-                        <a href="{{ route('privacy') }}" class="drawer-link {{ request()->routeIs('privacy*') ? 'active' : '' }}">🔒 Privacy Policy</a>
-                        <a href="{{ route('terms') }}" class="drawer-link {{ request()->routeIs('terms*') ? 'active' : '' }}">📜 Terms of Service</a>
-                    </div>
-
-                    <!-- Account / Moderation -->
-                    <div class="drawer-section drawer-auth-section">
-                        <span class="drawer-section-title">My Account</span>
-                        @auth
-                            @if(auth()->user()->isAdmin())
-                                <a href="{{ route('admin.listings') }}" class="drawer-link {{ request()->routeIs('admin*') ? 'active' : '' }}">🛡️ Admin Moderation</a>
-                            @elseif(auth()->user()->isVendor())
-                                <a href="{{ route('vendor.listings') }}" class="drawer-link {{ request()->routeIs('vendor*') ? 'active' : '' }}">💼 Vendor Dashboard</a>
-                            @endif
-                            <a href="{{ route('profile.edit') }}" class="drawer-link {{ request()->routeIs('profile*') ? 'active' : '' }}">👤 Profile Settings</a>
-                            <form action="{{ route('logout') }}" method="POST" class="drawer-logout-form">
-                                @csrf
-                                <button type="submit" class="drawer-link drawer-logout-btn">🚪 Log Out ({{ auth()->user()->name }})</button>
-                            </form>
-                        @else
-                            <div class="drawer-auth-buttons">
-                                <a href="{{ route('login') }}" class="btn btn-outline btn-sm">Log In</a>
-                                <a href="{{ route('register') }}" class="btn btn-gold btn-sm">Sign Up</a>
-                            </div>
-                        @endauth
-                    </div>
-                </div>
-            </div>
-
-            <!-- Backdrop Overlay -->
-            <div class="drawer-backdrop" id="drawerBackdrop"></div>
         </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div class="mobile-nav-drawer" id="mobileNavDrawer" role="dialog" aria-label="Mobile Navigation">
+            <div class="drawer-top-bar">
+                <span class="brand-name" style="font-size: 1.2rem;">PEARL TRAILS</span>
+                <button type="button" class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mobile-nav-accordion">
+                <!-- Home -->
+                <div class="accordion-item">
+                    <a href="{{ route('home') }}" class="accordion-trigger" style="text-decoration:none;">Home</a>
+                </div>
+
+                <!-- Destinations Accordion -->
+                <div class="accordion-item">
+                    <button type="button" class="accordion-trigger">
+                        <span>Destinations</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="{{ route('destinations') }}" class="mobile-sub-link">All Destinations</a>
+                        <a href="{{ route('interest') }}" class="mobile-sub-link">Explore by Interest</a>
+                        <a href="{{ route('destinations') }}#map-view" class="mobile-sub-link">Map View</a>
+                    </div>
+                </div>
+
+                <!-- Where to Stay Accordion -->
+                <div class="accordion-item">
+                    <button type="button" class="accordion-trigger">
+                        <span>Where to Stay</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="{{ route('stays') }}" class="mobile-sub-link">All Accommodations</a>
+                        <a href="{{ route('stays', ['style' => 'Budget']) }}" class="mobile-sub-link">Budget Lodging</a>
+                        <a href="{{ route('stays', ['style' => 'Moderate']) }}" class="mobile-sub-link">Moderate Stays</a>
+                        <a href="{{ route('stays', ['style' => 'Luxury']) }}" class="mobile-sub-link">Luxury Retreats</a>
+                    </div>
+                </div>
+
+                <!-- Where to Eat Accordion -->
+                <div class="accordion-item">
+                    <button type="button" class="accordion-trigger">
+                        <span>Where to Eat</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="{{ route('eat') }}" class="mobile-sub-link">All Restaurants</a>
+                        <a href="{{ route('eat', ['price' => 'budget']) }}" class="mobile-sub-link">Casual & Local Eats</a>
+                        <a href="{{ route('eat', ['price' => 'moderate']) }}" class="mobile-sub-link">Bistros & Cafes</a>
+                        <a href="{{ route('eat', ['price' => 'fine_dining']) }}" class="mobile-sub-link">Fine Dining</a>
+                    </div>
+                </div>
+
+                <!-- Recreation & Fun Accordion -->
+                <div class="accordion-item">
+                    <button type="button" class="accordion-trigger">
+                        <span>Recreation &amp; Fun</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="{{ route('recreation') }}" class="mobile-sub-link">All Activities</a>
+                        <a href="{{ route('recreation', ['activity_type' => 'Adventure']) }}" class="mobile-sub-link">Adventure</a>
+                        <a href="{{ route('recreation', ['activity_type' => 'Wildlife']) }}" class="mobile-sub-link">Wildlife</a>
+                        <a href="{{ route('recreation', ['activity_type' => 'Culture']) }}" class="mobile-sub-link">Culture</a>
+                        <a href="{{ route('recreation', ['activity_type' => 'Water']) }}" class="mobile-sub-link">Water Safaris</a>
+                    </div>
+                </div>
+
+                <!-- Plan My Trip Accordion -->
+                <div class="accordion-item">
+                    <button type="button" class="accordion-trigger">
+                        <span>Plan My Trip</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="{{ route('plan') }}" class="mobile-sub-link">Start the Quiz</a>
+                        <a href="{{ route('saved') }}" class="mobile-sub-link">Saved Trips</a>
+                    </div>
+                </div>
+
+                <!-- More Accordion -->
+                <div class="accordion-item">
+                    <button type="button" class="accordion-trigger">
+                        <span>More</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <a href="{{ route('about') }}" class="mobile-sub-link">About Pearl Trails</a>
+                        <a href="{{ route('contact') }}" class="mobile-sub-link">Contact Us</a>
+                        <a href="{{ route('list-business') }}" class="mobile-sub-link">List Your Business</a>
+                        <a href="{{ route('privacy') }}" class="mobile-sub-link">Privacy Policy</a>
+                        <a href="{{ route('terms') }}" class="mobile-sub-link">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(247, 241, 227, 0.1);">
+                <a href="{{ route('plan') }}" class="btn-gold-pill" style="width: 100%; justify-content: center;">
+                    Plan Your Trip &rarr;
+                </a>
+            </div>
+        </div>
+        <div class="drawer-backdrop" id="drawerBackdrop"></div>
     </header>
 
     <!-- Main Content Area -->
-    <main class="main-content">
-        <div class="container">
-            @yield('content')
-        </div>
+    <main class="{{ request()->routeIs('home') ? 'main-home-flow' : 'main-internal-flow' }}">
+        @yield('content')
     </main>
 
-    <!-- Site Footer -->
+    <!-- 9. FOOTER (Dark Green, 4 Columns, Clean & Informative) -->
     <footer class="site-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>Pearl Trails 🇺🇬</h3>
-                    <p>The intelligent tourism decision assistant for Uganda. Discover national parks, gorillas, crater lakes, and custom itineraries tailored to your budget and travel style.</p>
-                    <p class="footer-disclaimer">Prices are always labelled as estimates at approximate rates.</p>
+        <div class="footer-container">
+            <div class="footer-columns-grid">
+                <!-- Col 1: Brand & Short Description -->
+                <div class="footer-col-brand">
+                    <div class="footer-brand-title">
+                        <svg width="28" height="28" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                            <path d="M4 38L18 14L28 30L34 20L44 38H4Z" stroke="var(--gold)" stroke-width="2.5" stroke-linejoin="round"/>
+                            <path d="M12 38L22 22L30 38" stroke="var(--gold-soft)" stroke-width="1.8" stroke-linejoin="round"/>
+                            <circle cx="37" cy="12" r="4" fill="var(--gold)"/>
+                        </svg>
+                        <span>Pearl Trails</span>
+                    </div>
+                    <p class="footer-desc">
+                        Uganda's premier travel discovery platform. Explore national parks, misty gorilla highlands, tranquil lakes, and custom itineraries crafted with honest local intelligence.
+                    </p>
                 </div>
 
-                <div class="footer-section">
-                    <h4>Explore Uganda</h4>
-                    <ul class="footer-links">
-                        <li><a href="{{ route('destinations') }}">Destinations</a></li>
-                        <li><a href="{{ route('plan') }}">Plan My Trip</a></li>
-                        <li><a href="{{ route('interest') }}">Explore by Interest</a></li>
-                        <li><a href="{{ route('stays') }}">Stays & Lodges</a></li>
-                        <li><a href="{{ route('eat') }}">Where to Eat</a></li>
-                        <li><a href="{{ route('recreation') }}">Recreation & Fun</a></li>
+                <!-- Col 2: Explore -->
+                <div class="footer-col">
+                    <h3 class="footer-col-title">Explore</h3>
+                    <ul class="footer-links-list">
+                        <li class="footer-link-item"><a href="{{ route('destinations') }}">Destinations</a></li>
+                        <li class="footer-link-item"><a href="{{ route('stays') }}">Where to Stay</a></li>
+                        <li class="footer-link-item"><a href="{{ route('eat') }}">Where to Eat</a></li>
+                        <li class="footer-link-item"><a href="{{ route('recreation') }}">Recreation &amp; Fun</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-section">
-                    <h4>Platform & Legal</h4>
-                    <ul class="footer-links">
-                        <li><a href="{{ route('about') }}">About</a></li>
-                        <li><a href="{{ route('destinations') }}">Destinations</a></li>
-                        <li><a href="{{ route('plan') }}">Plan My Trip</a></li>
-                        <li><a href="{{ route('contact') }}">Contact</a></li>
-                        <li><a href="{{ route('privacy') }}">Privacy</a></li>
-                        <li><a href="{{ route('terms') }}">Terms</a></li>
-                        <li><a href="{{ route('list-business') }}">List Your Business</a></li>
+                <!-- Col 3: Plan -->
+                <div class="footer-col">
+                    <h3 class="footer-col-title">Plan</h3>
+                    <ul class="footer-links-list">
+                        <li class="footer-link-item"><a href="{{ route('plan') }}">Trip Planning Quiz</a></li>
+                        <li class="footer-link-item"><a href="{{ route('saved') }}">Saved Trips</a></li>
+                        <li class="footer-link-item"><a href="{{ route('list-business') }}">List Your Business</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Company -->
+                <div class="footer-col">
+                    <h3 class="footer-col-title">Company</h3>
+                    <ul class="footer-links-list">
+                        <li class="footer-link-item"><a href="{{ route('about') }}">About Pearl Trails</a></li>
+                        <li class="footer-link-item"><a href="{{ route('contact') }}">Contact Us</a></li>
+                        <li class="footer-link-item"><a href="{{ route('privacy') }}">Privacy Policy</a></li>
+                        <li class="footer-link-item"><a href="{{ route('terms') }}">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
 
-            <div class="footer-bottom">
-                <p>&copy; {{ date('Y') }} {{ config('app.name', 'Pearl Trails') }}. All rights reserved.</p>
+            <!-- Footer Bottom Bar -->
+            <div class="footer-bottom-bar">
+                <span class="footer-disclaimer-text">
+                    Prices are estimates and may change. Confirm with the provider.
+                </span>
+                <span class="footer-copyright">
+                    &copy; {{ date('Y') }} Pearl Trails. All rights reserved.
+                </span>
             </div>
         </div>
     </footer>
 
-    <!-- Interactive Navigation & Theme Scripts -->
+    <!-- Interactive Navigation Scripts -->
     <script>
-        // Theme toggle
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-        function updateThemeIcon() {
-            themeToggleBtn.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
-        }
-        themeToggleBtn.addEventListener('click', () => {
-            const isDark = document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            updateThemeIcon();
-        });
-        updateThemeIcon();
-
-        // Drawer & Hamburger Navigation
-        const hamburgerBtn = document.getElementById('hamburgerBtn');
-        const hamburgerIcon = document.getElementById('hamburgerIcon');
-        const navDrawer = document.getElementById('navDrawer');
-        const drawerBackdrop = document.getElementById('drawerBackdrop');
-        const drawerCloseBtn = document.getElementById('drawerCloseBtn');
-
-        function openDrawer() {
-            navDrawer.classList.add('open');
-            drawerBackdrop.classList.add('open');
-            document.body.classList.add('drawer-active');
-            hamburgerBtn.setAttribute('aria-expanded', 'true');
-            if (hamburgerIcon) hamburgerIcon.textContent = '✕';
-        }
-
-        function closeDrawer() {
-            navDrawer.classList.remove('open');
-            drawerBackdrop.classList.remove('open');
-            document.body.classList.remove('drawer-active');
-            hamburgerBtn.setAttribute('aria-expanded', 'false');
-            if (hamburgerIcon) hamburgerIcon.textContent = '☰';
-        }
-
-        function toggleDrawer() {
-            if (navDrawer.classList.contains('open')) {
-                closeDrawer();
-            } else {
-                openDrawer();
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Sticky header turns solid dark green after scrolling
+            const header = document.getElementById('siteHeader');
+            function checkScroll() {
+                if (window.scrollY > 40) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
             }
-        }
+            window.addEventListener('scroll', checkScroll, { passive: true });
+            checkScroll();
 
-        if (hamburgerBtn) hamburgerBtn.addEventListener('click', toggleDrawer);
-        if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
-        if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
-
-        // Close on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navDrawer && navDrawer.classList.contains('open')) {
-                closeDrawer();
+            // 2. Theme Toggle (Stores in localStorage, light mode is default)
+            const themeBtn = document.getElementById('headerThemeToggle');
+            if (themeBtn) {
+                themeBtn.addEventListener('click', () => {
+                    const isDark = document.documentElement.classList.toggle('dark');
+                    localStorage.setItem('pt_theme', isDark ? 'dark' : 'light');
+                });
             }
-        });
 
-        // Close drawer when any link inside is tapped
-        document.querySelectorAll('.drawer-link').forEach(link => {
-            link.addEventListener('click', closeDrawer);
+            // 3. Mobile Navigation Drawer & Accordions
+            const hamburgerBtn = document.getElementById('mobileHamburgerBtn');
+            const drawer = document.getElementById('mobileNavDrawer');
+            const backdrop = document.getElementById('drawerBackdrop');
+            const closeBtn = document.getElementById('drawerCloseBtn');
+
+            function openDrawer() {
+                drawer.classList.add('open');
+                backdrop.classList.add('open');
+                hamburgerBtn.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                backdrop.classList.remove('open');
+                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+
+            if (hamburgerBtn) hamburgerBtn.addEventListener('click', openDrawer);
+            if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+            if (backdrop) backdrop.addEventListener('click', closeDrawer);
+
+            // Accordion toggle
+            document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                    const parent = trigger.closest('.accordion-item');
+                    if (parent) {
+                        parent.classList.toggle('active');
+                    }
+                });
+            });
         });
     </script>
 </body>
