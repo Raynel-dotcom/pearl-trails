@@ -49,6 +49,7 @@ Route::get('/terms', [PageController::class, 'terms'])->name('terms');
 Route::get('/list-your-business', [VendorListingController::class, 'create'])->name('list-your-business');
 Route::get('/list-business', fn() => redirect()->route('list-your-business', request()->query(), 301))->name('list-business');
 Route::post('/list-your-business', [VendorListingController::class, 'store'])->middleware('auth')->name('list-your-business.store');
+Route::post('/list-business', [VendorListingController::class, 'store'])->middleware('auth')->name('list-business.store');
 
 // Vendor Dashboard
 Route::middleware('auth')->prefix('vendor')->name('vendor.')->group(function () {

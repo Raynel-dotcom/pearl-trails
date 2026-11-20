@@ -63,7 +63,7 @@
         </div>
     @else
         <!-- Authenticated Listing Submission Form -->
-        <form action="{{ route('list-business.store') }}" method="POST" enctype="multipart/form-data" class="vendor-listing-form">
+        <form action="{{ route('list-your-business.store') }}" method="POST" enctype="multipart/form-data" class="vendor-listing-form">
             @csrf
 
             <!-- Section 1: Business Basics -->

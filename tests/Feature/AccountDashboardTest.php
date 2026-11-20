@@ -40,6 +40,16 @@ class AccountDashboardTest extends TestCase
         $response->assertRedirect('/login');
     }
 
+    public function test_authenticated_user_can_view_listing_submission_form(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/list-your-business');
+        $response->assertStatus(200);
+        $response->assertSee('List Your Uganda Tourism Business');
+        $response->assertSee('Submit Property for Review');
+    }
+
     public function test_vendor_listing_supports_photo_upload(): void
     {
         $vendor = User::factory()->create([
