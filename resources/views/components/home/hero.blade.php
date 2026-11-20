@@ -1,3 +1,4 @@
+
 @props(['slides' => [], 'hasVideo' => false])
 
 <section class="hero-editorial-section" id="heroSection" aria-label="Hero Introduction">
