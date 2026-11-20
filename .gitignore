@@ -25,3 +25,5 @@ Thumbs.db
 
 /database/database.sqlite
 *.sqlite
+*.zip
+/scratch/

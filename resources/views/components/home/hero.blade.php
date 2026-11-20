@@ -6,7 +6,14 @@
         @foreach($slides as $index => $slide)
             <div class="hero-slide-item {{ $index === 0 ? 'active' : '' }}" data-slide-index="{{ $index }}">
                 @if(!empty($slide->image_path) && file_exists(public_path($slide->image_path)))
-                    <img src="{{ asset($slide->image_path) }}?v={{ file_exists(public_path($slide->image_path)) ? filemtime(public_path($slide->image_path)) : time() }}" 
+                    @php
+                        $img1x = $slide->image_path;
+                        $img2x = str_replace('.webp', '@2x.webp', $slide->image_path);
+                        $v1x = file_exists(public_path($img1x)) ? filemtime(public_path($img1x)) : time();
+                        $v2x = file_exists(public_path($img2x)) ? filemtime(public_path($img2x)) : $v1x;
+                    @endphp
+                    <img src="{{ asset($img1x) }}?v={{ $v1x }}" 
+                         srcset="{{ asset($img1x) }}?v={{ $v1x }} 1x, {{ asset($img2x) }}?v={{ $v2x }} 2x"
                          alt="{{ $slide->title ?? 'Uganda Landscape' }}" 
                          class="hero-slide-media"
                          {{ $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' }}
@@ -34,13 +41,13 @@
             </div>
 
             <!-- Headline -->
-            <h1 class="hero-headline">
+            <h1 class="hero-headline" id="heroHeadline">
                 Discover Uganda.
-                <span class="hero-headline-italic">Feel Alive.</span>
+                <span class="hero-headline-italic" id="heroHeadlineItalic">Feel Alive.</span>
             </h1>
 
             <!-- Subtitle -->
-            <p class="hero-subtext">
+            <p class="hero-subtext" id="heroSubtext">
                 From mist-covered mountains and breathtaking wildlife to hidden lakes and unforgettable adventures.
             </p>
 
@@ -92,17 +99,27 @@
 <!-- Hero Slider Vanilla JS -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const section = document.getElementById('heroSection');
     const slides = document.querySelectorAll('.hero-slide-item');
     const dots = document.querySelectorAll('.slide-dot');
     const prevBtn = document.getElementById('heroPrevBtn');
     const nextBtn = document.getElementById('heroNextBtn');
+    const headline = document.getElementById('heroHeadline');
+    const subtext = document.getElementById('heroSubtext');
     if (!slides.length) return;
+
+    const slideData = @json($slides->map(function($s) {
+        $parts = explode('/', $s->title ?? 'Discover Uganda. / Feel Alive.');
+        return [
+            'main' => trim($parts[0] ?? 'Discover Uganda.'),
+            'italic' => trim($parts[1] ?? 'Feel Alive.'),
+            'subtitle' => $s->subtitle ?? 'From mist-covered mountains and breathtaking wildlife to hidden lakes and unforgettable adventures.'
+        ];
+    }));
 
     let current = 0;
     const total = slides.length;
     let timer = null;
-    const intervalTime = 4000;
+    const intervalTime = 4500;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function showSlide(index) {
@@ -111,7 +128,23 @@ document.addEventListener('DOMContentLoaded', () => {
         current = (index + total) % total;
         slides[current].classList.add('active');
         if (dots[current]) dots[current].classList.add('active');
+
+        // Update headline and subtitle smoothly
+        if (headline && subtext && slideData[current]) {
+            headline.style.opacity = '0';
+            subtext.style.opacity = '0';
+            setTimeout(() => {
+                const data = slideData[current];
+                headline.innerHTML = `${data.main} <span class="hero-headline-italic">${data.italic}</span>`;
+                subtext.textContent = data.subtitle;
+                headline.style.opacity = '1';
+                subtext.style.opacity = '1';
+            }, 250);
+        }
     }
+
+    if (headline) headline.style.transition = 'opacity 0.25s ease';
+    if (subtext) subtext.style.transition = 'opacity 0.25s ease';
 
     function startAutoSlide() {
         if (prefersReducedMotion || total <= 1) return;
@@ -145,11 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
             startAutoSlide();
         });
     });
-
-    if (section) {
-        section.addEventListener('mouseenter', stopAutoSlide);
-        section.addEventListener('mouseleave', startAutoSlide);
-    }
 
     startAutoSlide();
 });

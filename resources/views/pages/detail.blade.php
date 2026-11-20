@@ -9,7 +9,10 @@
     <div class="detail-hero-card">
         <div class="detail-hero-media">
             @if(!empty($destination->image_path))
-                <img src="{{ asset($destination->image_path) }}" alt="{{ $destination->name }}" class="detail-hero-img">
+                <img src="{{ asset($destination->image_path) }}" 
+                     srcset="{{ asset($destination->image_path) }} 1x, {{ asset(str_replace('.webp', '@2x.webp', $destination->image_path)) }} 2x" 
+                     alt="{{ $destination->name }}" 
+                     class="detail-hero-img">
             @else
                 <x-scene-svg :destination="$destination" height="340px" />
             @endif

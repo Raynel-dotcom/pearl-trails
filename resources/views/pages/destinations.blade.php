@@ -156,7 +156,11 @@
                 <div class="dest-card" onclick="window.location='{{ route('destinations.show', $dest->slug) }}'" tabindex="0" role="link" aria-label="Explore {{ $dest->name }} Details">
                     <div class="dest-card-media">
                         @if(!empty($dest->image_path))
-                            <img src="{{ asset($dest->image_path) }}" alt="{{ $dest->name }}" class="dest-card-img" loading="lazy">
+                            <img src="{{ asset($dest->image_path) }}" 
+                                 srcset="{{ asset($dest->image_path) }} 1x, {{ asset(str_replace('.webp', '@2x.webp', $dest->image_path)) }} 2x" 
+                                 alt="{{ $dest->name }}" 
+                                 class="dest-card-img" 
+                                 loading="lazy">
                         @else
                             <x-scene-svg :destination="$dest" height="220px" />
                         @endif

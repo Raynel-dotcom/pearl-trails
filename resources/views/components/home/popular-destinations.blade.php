@@ -46,7 +46,11 @@
                 <a href="{{ route('destinations.show', $dest->slug) }}" class="popular-dest-card" aria-label="View {{ $dest->name }} Details">
                     <div class="popular-dest-media">
                         @if($imageSrc)
+                            @php
+                                $img2x = str_replace('.webp', '@2x.webp', $imageSrc);
+                            @endphp
                             <img src="{{ $imageSrc }}" 
+                                 srcset="{{ $imageSrc }} 1x, {{ $img2x }} 2x"
                                  alt="{{ $dest->name }}" 
                                  class="popular-dest-img" 
                                  loading="lazy" 

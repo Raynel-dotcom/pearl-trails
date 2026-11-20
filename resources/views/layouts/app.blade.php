@@ -21,7 +21,7 @@
     @endif
 
     @if(request()->routeIs('home') && file_exists(public_path('images/hero/hero-gorilla.webp')))
-        <link rel="preload" as="image" href="{{ asset('images/hero/hero-gorilla.webp') }}?v={{ filemtime(public_path('images/hero/hero-gorilla.webp')) }}" type="image/webp" fetchpriority="high">
+        <link rel="preload" as="image" href="{{ asset('images/hero/hero-gorilla.webp') }}?v={{ filemtime(public_path('images/hero/hero-gorilla.webp')) }}" imagesrcset="{{ asset('images/hero/hero-gorilla.webp') }}?v={{ filemtime(public_path('images/hero/hero-gorilla.webp')) }} 1x, {{ asset('images/hero/hero-gorilla@2x.webp') }}?v={{ file_exists(public_path('images/hero/hero-gorilla@2x.webp')) ? filemtime(public_path('images/hero/hero-gorilla@2x.webp')) : time() }} 2x" type="image/webp" fetchpriority="high">
     @endif
 
     <!-- Dark Mode Preference Script (Default to Light Mode) -->
