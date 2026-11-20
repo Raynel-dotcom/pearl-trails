@@ -47,10 +47,15 @@
                     <div class="popular-dest-media">
                         @if($imageSrc)
                             @php
-                                $img2x = str_replace('.webp', '@2x.webp', $imageSrc);
+                                $popImg2x = str_replace('.webp', '@2x.webp', $imageSrc);
+                                // Parse local relative path for file_exists check
+                                $localRelPath = parse_url($imageSrc, PHP_URL_PATH);
+                                $localRelPath = ltrim($localRelPath, '/');
+                                $localRelPath2x = str_replace('.webp', '@2x.webp', $localRelPath);
+                                $popHas2x = file_exists(public_path($localRelPath2x));
                             @endphp
                             <img src="{{ $imageSrc }}" 
-                                 srcset="{{ $imageSrc }} 1x, {{ $img2x }} 2x"
+                                 @if($popHas2x) srcset="{{ $imageSrc }} 1x, {{ $popImg2x }} 2x" @endif
                                  alt="{{ $dest->name }}" 
                                  class="popular-dest-img" 
                                  loading="lazy" 

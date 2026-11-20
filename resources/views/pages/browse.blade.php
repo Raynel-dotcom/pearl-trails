@@ -143,9 +143,14 @@
             @foreach($items as $item)
                 <div class="browse-card {{ $item['fits_plan'] ? 'fits-plan-card' : '' }}">
                     @if(!empty($item['image_path']))
+                        @php
+                            $img1x = $item['image_path'];
+                            $img2x = str_replace('.webp', '@2x.webp', $img1x);
+                            $has2x = file_exists(public_path($img2x));
+                        @endphp
                         <div class="browse-card-media">
-                            <img src="{{ asset($item['image_path']) }}" 
-                                 srcset="{{ asset($item['image_path']) }} 1x, {{ asset(str_replace('.webp', '@2x.webp', $item['image_path'])) }} 2x" 
+                            <img src="{{ asset($img1x) }}" 
+                                 @if($has2x) srcset="{{ asset($img1x) }} 1x, {{ asset($img2x) }} 2x" @endif
                                  alt="{{ $item['name'] }}" 
                                  class="browse-card-img" 
                                  loading="lazy">

@@ -20,10 +20,11 @@
                         $img1x = $slide->image_path;
                         $img2x = str_replace('.webp', '@2x.webp', $slide->image_path);
                         $v1x = file_exists(public_path($img1x)) ? filemtime(public_path($img1x)) : time();
-                        $v2x = file_exists(public_path($img2x)) ? filemtime(public_path($img2x)) : $v1x;
+                        $hasHero2x = file_exists(public_path($img2x));
+                        $v2x = $hasHero2x ? filemtime(public_path($img2x)) : $v1x;
                     @endphp
                     <img src="{{ asset($img1x) }}?v={{ $v1x }}" 
-                         srcset="{{ asset($img1x) }}?v={{ $v1x }} 1x, {{ asset($img2x) }}?v={{ $v2x }} 2x"
+                         @if($hasHero2x) srcset="{{ asset($img1x) }}?v={{ $v1x }} 1x, {{ asset($img2x) }}?v={{ $v2x }} 2x" @endif
                          alt="{{ $slide->title ?? 'Uganda Landscape' }}" 
                          class="hero-slide-media"
                          {{ $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' }}

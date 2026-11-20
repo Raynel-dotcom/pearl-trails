@@ -9,8 +9,13 @@
     <div class="detail-hero-card">
         <div class="detail-hero-media">
             @if(!empty($destination->image_path))
-                <img src="{{ asset($destination->image_path) }}" 
-                     srcset="{{ asset($destination->image_path) }} 1x, {{ asset(str_replace('.webp', '@2x.webp', $destination->image_path)) }} 2x" 
+                @php
+                    $detImg1x = $destination->image_path;
+                    $detImg2x = str_replace('.webp', '@2x.webp', $detImg1x);
+                    $detHas2x = file_exists(public_path($detImg2x));
+                @endphp
+                <img src="{{ asset($detImg1x) }}" 
+                     @if($detHas2x) srcset="{{ asset($detImg1x) }} 1x, {{ asset($detImg2x) }} 2x" @endif
                      alt="{{ $destination->name }}" 
                      class="detail-hero-img">
             @else

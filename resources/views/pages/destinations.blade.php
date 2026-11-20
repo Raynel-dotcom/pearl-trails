@@ -156,8 +156,13 @@
                 <div class="dest-card" onclick="window.location='{{ route('destinations.show', $dest->slug) }}'" tabindex="0" role="link" aria-label="Explore {{ $dest->name }} Details">
                     <div class="dest-card-media">
                         @if(!empty($dest->image_path))
-                            <img src="{{ asset($dest->image_path) }}" 
-                                 srcset="{{ asset($dest->image_path) }} 1x, {{ asset(str_replace('.webp', '@2x.webp', $dest->image_path)) }} 2x" 
+                            @php
+                                $dImg1x = $dest->image_path;
+                                $dImg2x = str_replace('.webp', '@2x.webp', $dImg1x);
+                                $dHas2x = file_exists(public_path($dImg2x));
+                            @endphp
+                            <img src="{{ asset($dImg1x) }}" 
+                                 @if($dHas2x) srcset="{{ asset($dImg1x) }} 1x, {{ asset($dImg2x) }} 2x" @endif
                                  alt="{{ $dest->name }}" 
                                  class="dest-card-img" 
                                  loading="lazy">
