@@ -70,6 +70,9 @@
             <form method="POST" action="{{ route('login') }}" id="loginForm">
                 @csrf
                 <input type="hidden" name="_form" value="login">
+                @if(request('redirect_to') || old('redirect_to'))
+                    <input type="hidden" name="redirect_to" value="{{ old('redirect_to', request('redirect_to')) }}">
+                @endif
 
                 <!-- Email -->
                 <div class="auth-field-group">
@@ -169,6 +172,12 @@
             <form method="POST" action="{{ route('register') }}" id="registerForm">
                 @csrf
                 <input type="hidden" name="_form" value="register">
+                @if(request('redirect_to') || old('redirect_to'))
+                    <input type="hidden" name="redirect_to" value="{{ old('redirect_to', request('redirect_to')) }}">
+                @endif
+                @if(request('role') || old('role'))
+                    <input type="hidden" name="role" value="{{ old('role', request('role')) }}">
+                @endif
 
                 <!-- Full Name -->
                 <div class="auth-field-group">

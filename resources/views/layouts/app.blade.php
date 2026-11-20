@@ -150,14 +150,13 @@
                         <a href="{{ route('terms') }}" class="dropdown-link" role="menuitem">Terms of Service</a>
                         <div class="dropdown-divider"></div>
                         @auth
-                            <a href="{{ route('profile.edit') }}" class="dropdown-link" role="menuitem">My Account ({{ auth()->user()->name }})</a>
+                            <a href="{{ route('dashboard') }}" class="dropdown-link" role="menuitem">My Account ({{ auth()->user()->name }})</a>
                             <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
                                 @csrf
                                 <button type="submit" class="dropdown-link" style="width: 100%; text-align: left; background: none; border: none; cursor: pointer; color: inherit; font: inherit;">Log Out</button>
                             </form>
                         @else
                             <a href="{{ route('login') }}" class="dropdown-link" role="menuitem">Log In</a>
-                            <a href="{{ route('register') }}" class="dropdown-link" role="menuitem" style="color: var(--gold); font-weight: 600;">Create Account</a>
                         @endauth
                     </div>
                 </div>
@@ -198,6 +197,16 @@
                             </option>
                         @endforeach
                     </select>
+
+                    @auth
+                        <!-- User Account Shortcut Button -->
+                        <a href="{{ route('dashboard') }}" class="icon-btn" title="My Account ({{ auth()->user()->name }})" aria-label="My Account ({{ auth()->user()->name }})" style="color: var(--gold);">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </a>
+                    @endauth
                 </div>
 
                 <!-- Gold Pill CTA: Plan Your Trip -->
@@ -317,14 +326,13 @@
                         <a href="{{ route('terms') }}" class="mobile-sub-link">Terms of Service</a>
                         <div style="height: 1px; background: rgba(247, 241, 227, 0.1); margin: 0.4rem 0;"></div>
                         @auth
-                            <a href="{{ route('profile.edit') }}" class="mobile-sub-link">My Account ({{ auth()->user()->name }})</a>
+                            <a href="{{ route('dashboard') }}" class="mobile-sub-link">My Account ({{ auth()->user()->name }})</a>
                             <form method="POST" action="{{ route('logout') }}" style="margin: 0.2rem 0 0;">
                                 @csrf
                                 <button type="submit" class="mobile-sub-link" style="width: 100%; text-align: left; background: none; border: none; cursor: pointer; color: inherit; font: inherit; padding: 0.4rem 0;">Log Out</button>
                             </form>
                         @else
                             <a href="{{ route('login') }}" class="mobile-sub-link" style="font-weight: 600;">Log In</a>
-                            <a href="{{ route('register') }}" class="mobile-sub-link" style="color: var(--gold); font-weight: 600;">Create Account</a>
                         @endauth
                     </div>
                 </div>

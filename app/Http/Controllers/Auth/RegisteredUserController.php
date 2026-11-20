@@ -48,6 +48,14 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        if ($request->filled('redirect_to') && str_starts_with($request->input('redirect_to'), '/')) {
+            return redirect($request->input('redirect_to'));
+        }
+
+        if ($user->isVendor()) {
+            return redirect()->route('list-your-business');
+        }
+
         return redirect(route('dashboard', absolute: false));
     }
 }

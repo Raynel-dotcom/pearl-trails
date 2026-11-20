@@ -70,17 +70,10 @@ Route::middleware(['auth', EnsureAdmin::class])->prefix('admin')->name('admin.')
     Route::delete('/listings/{listing}', [AdminListingController::class, 'destroy'])->name('listings.destroy');
 });
 
-// User Profile & Dashboard
+// User Profile & Account Dashboard
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        if (auth()->user()->isAdmin()) {
-            return redirect()->route('admin.listings');
-        } elseif (auth()->user()->isVendor()) {
-            return redirect()->route('vendor.listings');
-        }
-        return redirect()->route('saved');
-    })->name('dashboard');
-
+    Route::get('/dashboard', [ProfileController::class, 'dashboard'])->name('dashboard');
+    Route::get('/account', [ProfileController::class, 'dashboard'])->name('account');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

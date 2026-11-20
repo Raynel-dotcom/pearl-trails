@@ -27,8 +27,12 @@ class VendorListingController extends Controller
      */
     public function store(Request $request)
     {
+        $types = implode(',', config('explore.listing_types', [
+            'Hotel', 'Lodge', 'Hostel', 'Restaurant', 'Tourist site', 'Recreation centre'
+        ]));
+
         $validated = $request->validate([
-            'type' => 'required|in:Hotel,Lodge,Hostel,Restaurant,Tourist site,Recreation centre',
+            'type' => "required|in:{$types}",
             'name' => 'required|string|max:255',
             'destination_id' => 'nullable|exists:destinations,id',
             'custom_location' => 'nullable|string|max:255',
@@ -36,12 +40,21 @@ class VendorListingController extends Controller
             'description' => 'nullable|string',
             'website' => ['nullable', 'regex:/^https?:\/\/.+/i'],
             'contact' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:8192',
             'activities' => 'nullable|array',
             'activities.*.name' => 'nullable|string|max:255',
             'activities.*.fee_ugx' => 'nullable|integer|min:0',
         ], [
             'website.regex' => 'Website URL must begin with http:// or https://',
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = time() . '_' . \Illuminate\Support\Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/listings'), $fileName);
+            $imagePath = 'images/listings/' . $fileName;
+        }
 
         $user = auth()->user();
         if ($user && $user->role === 'visitor') {
@@ -56,6 +69,7 @@ class VendorListingController extends Controller
             'custom_location' => $validated['custom_location'] ?? null,
             'price_ugx' => $validated['price_ugx'],
             'description' => $validated['description'] ?? null,
+            'image_path' => $imagePath,
             'website' => $validated['website'] ?? null,
             'contact' => $validated['contact'],
             'status' => 'pending',
@@ -116,8 +130,12 @@ class VendorListingController extends Controller
             abort(403);
         }
 
+        $types = implode(',', config('explore.listing_types', [
+            'Hotel', 'Lodge', 'Hostel', 'Restaurant', 'Tourist site', 'Recreation centre'
+        ]));
+
         $validated = $request->validate([
-            'type' => 'required|in:Hotel,Lodge,Hostel,Restaurant,Tourist site,Recreation centre',
+            'type' => "required|in:{$types}",
             'name' => 'required|string|max:255',
             'destination_id' => 'nullable|exists:destinations,id',
             'custom_location' => 'nullable|string|max:255',
@@ -125,10 +143,19 @@ class VendorListingController extends Controller
             'description' => 'nullable|string',
             'website' => ['nullable', 'regex:/^https?:\/\/.+/i'],
             'contact' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:8192',
             'activities' => 'nullable|array',
             'activities.*.name' => 'nullable|string|max:255',
             'activities.*.fee_ugx' => 'nullable|integer|min:0',
         ]);
+
+        $imagePath = $listing->image_path;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = time() . '_' . \Illuminate\Support\Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('images/listings'), $fileName);
+            $imagePath = 'images/listings/' . $fileName;
+        }
 
         $listing->update([
             'type' => $validated['type'],
@@ -137,6 +164,7 @@ class VendorListingController extends Controller
             'custom_location' => $validated['custom_location'] ?? null,
             'price_ugx' => $validated['price_ugx'],
             'description' => $validated['description'] ?? null,
+            'image_path' => $imagePath,
             'website' => $validated['website'] ?? null,
             'contact' => $validated['contact'],
             'status' => 'pending', // Re-verify on edit

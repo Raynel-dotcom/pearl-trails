@@ -19,7 +19,7 @@
         </div>
     @endif
 
-    <form action="{{ route('vendor.listings.update', $listing->id) }}" method="POST" class="vendor-listing-form">
+    <form action="{{ route('vendor.listings.update', $listing->id) }}" method="POST" enctype="multipart/form-data" class="vendor-listing-form">
         @csrf
         @method('PUT')
 
@@ -69,6 +69,17 @@
         <div class="form-group">
             <label for="priceUgx">Standard Price (UGX) *</label>
             <input type="number" name="price_ugx" id="priceUgx" value="{{ old('price_ugx', $listing->price_ugx) }}" required min="0">
+        </div>
+
+        <div class="form-group">
+            <label for="businessPhoto">Property Photo / Cover Picture</label>
+            @if($listing->image_path)
+                <div style="margin-bottom: 0.75rem; max-width: 260px; border-radius: 10px; overflow: hidden; border: 1px solid var(--gold);">
+                    <img src="{{ asset($listing->image_path) }}" alt="{{ $listing->name }}" style="width: 100%; height: auto; display: block;">
+                </div>
+            @endif
+            <input type="file" name="image" id="businessPhoto" accept="image/webp,image/jpeg,image/png,image/jpg">
+            <span class="field-hint">Upload a new picture to replace the current property photo (optional).</span>
         </div>
 
         <div class="form-group">

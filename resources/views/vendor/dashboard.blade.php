@@ -39,6 +39,7 @@
             <table class="dashboard-table">
                 <thead>
                     <tr>
+                        <th>Photo</th>
                         <th>Business Name</th>
                         <th>Type</th>
                         <th>Location</th>
@@ -51,6 +52,13 @@
                 <tbody>
                     @foreach($listings as $listing)
                         <tr>
+                            <td>
+                                @if($listing->image_path)
+                                    <img src="{{ asset($listing->image_path) }}" alt="{{ $listing->name }}" style="width: 48px; height: 36px; object-fit: cover; border-radius: 6px; border: 1px solid var(--gold);">
+                                @else
+                                    <div style="width: 48px; height: 36px; background: rgba(255,255,255,0.05); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; color: rgba(255,255,255,0.4);">No pic</div>
+                                @endif
+                            </td>
                             <td>
                                 <strong>{{ $listing->name }}</strong>
                                 @if($listing->website)

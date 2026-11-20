@@ -12,13 +12,34 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     /**
+     * Display the comprehensive user account & member dashboard.
+     */
+    public function dashboard(Request $request): View
+    {
+        $user = $request->user();
+
+        $savedTrips = \App\Models\SavedTrip::with('destination')
+            ->where(function ($query) use ($user) {
+                $query->where('user_id', $user->id)
+                      ->orWhere('session_id', session()->getId());
+            })
+            ->latest()
+            ->get();
+
+        $listings = \App\Models\Listing::with(['destination', 'activities'])
+            ->where('user_id', $user->id)
+            ->latest()
+            ->get();
+
+        return view('pages.account', compact('user', 'savedTrips', 'listings'));
+    }
+
+    /**
      * Display the user's profile form.
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        return $this->dashboard($request);
     }
 
     /**
