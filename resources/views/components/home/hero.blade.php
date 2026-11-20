@@ -6,7 +6,7 @@
         @foreach($slides as $index => $slide)
             <div class="hero-slide-item {{ $index === 0 ? 'active' : '' }}" data-slide-index="{{ $index }}">
                 @if(!empty($slide->image_path) && file_exists(public_path($slide->image_path)))
-                    <img src="{{ asset($slide->image_path) }}" 
+                    <img src="{{ asset($slide->image_path) }}?v={{ file_exists(public_path($slide->image_path)) ? filemtime(public_path($slide->image_path)) : time() }}" 
                          alt="{{ $slide->title ?? 'Uganda Landscape' }}" 
                          class="hero-slide-media"
                          {{ $index === 0 ? 'fetchpriority="high"' : 'loading="lazy"' }}
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let current = 0;
     const total = slides.length;
     let timer = null;
-    const intervalTime = 3000;
+    const intervalTime = 4000;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function showSlide(index) {
