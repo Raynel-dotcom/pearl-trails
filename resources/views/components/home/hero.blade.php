@@ -4,7 +4,17 @@
     <!-- Background Slides Container -->
     <div class="hero-slider-bg" id="heroSliderBg" aria-live="polite">
         @foreach($slides as $index => $slide)
-            <div class="hero-slide-item {{ $index === 0 ? 'active' : '' }}" data-slide-index="{{ $index }}">
+            @php
+                $parts = explode('/', $slide->title ?? 'Discover Uganda. / Feel Alive.');
+                $mainText = trim($parts[0] ?? 'Discover Uganda.');
+                $italicText = trim($parts[1] ?? 'Feel Alive.');
+                $subText = $slide->subtitle ?? 'From mist-covered mountains and breathtaking wildlife to hidden lakes and unforgettable adventures.';
+            @endphp
+            <div class="hero-slide-item {{ $index === 0 ? 'active' : '' }}" 
+                 data-slide-index="{{ $index }}"
+                 data-main="{{ $mainText }}"
+                 data-italic="{{ $italicText }}"
+                 data-subtitle="{{ $subText }}">
                 @if(!empty($slide->image_path) && file_exists(public_path($slide->image_path)))
                     @php
                         $img1x = $slide->image_path;
@@ -107,15 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const subtext = document.getElementById('heroSubtext');
     if (!slides.length) return;
 
-    const slideData = @json($slides->map(function($s) {
-        $parts = explode('/', $s->title ?? 'Discover Uganda. / Feel Alive.');
-        return [
-            'main' => trim($parts[0] ?? 'Discover Uganda.'),
-            'italic' => trim($parts[1] ?? 'Feel Alive.'),
-            'subtitle' => $s->subtitle ?? 'From mist-covered mountains and breathtaking wildlife to hidden lakes and unforgettable adventures.'
-        ];
-    }));
-
     let current = 0;
     const total = slides.length;
     let timer = null;
@@ -126,17 +127,20 @@ document.addEventListener('DOMContentLoaded', () => {
         slides[current].classList.remove('active');
         if (dots[current]) dots[current].classList.remove('active');
         current = (index + total) % total;
-        slides[current].classList.add('active');
+        const activeSlide = slides[current];
+        activeSlide.classList.add('active');
         if (dots[current]) dots[current].classList.add('active');
 
         // Update headline and subtitle smoothly
-        if (headline && subtext && slideData[current]) {
+        if (headline && subtext && activeSlide.dataset) {
             headline.style.opacity = '0';
             subtext.style.opacity = '0';
             setTimeout(() => {
-                const data = slideData[current];
-                headline.innerHTML = `${data.main} <span class="hero-headline-italic">${data.italic}</span>`;
-                subtext.textContent = data.subtitle;
+                const main = activeSlide.dataset.main || 'Discover Uganda.';
+                const italic = activeSlide.dataset.italic || 'Feel Alive.';
+                const sub = activeSlide.dataset.subtitle || '';
+                headline.innerHTML = `${main} <span class="hero-headline-italic">${italic}</span>`;
+                subtext.textContent = sub;
                 headline.style.opacity = '1';
                 subtext.style.opacity = '1';
             }, 250);
