@@ -12,16 +12,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
     <!-- CSS Design System Stylesheets -->
-    <link rel="stylesheet" href="{{ asset('css/variables.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/header-footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/variables.css') }}?v={{ file_exists(public_path('css/variables.css')) ? filemtime(public_path('css/variables.css')) : time() }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ file_exists(public_path('css/app.css')) ? filemtime(public_path('css/app.css')) : time() }}">
+    <link rel="stylesheet" href="{{ asset('css/header-footer.css') }}?v={{ file_exists(public_path('css/header-footer.css')) ? filemtime(public_path('css/header-footer.css')) : time() }}">
     @if(request()->routeIs('home'))
-        <link rel="stylesheet" href="{{ asset('css/home-hero.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/home-sections.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/home-hero.css') }}?v={{ file_exists(public_path('css/home-hero.css')) ? filemtime(public_path('css/home-hero.css')) : time() }}">
+        <link rel="stylesheet" href="{{ asset('css/home-sections.css') }}?v={{ file_exists(public_path('css/home-sections.css')) ? filemtime(public_path('css/home-sections.css')) : time() }}">
     @endif
 
     @if(request()->routeIs('home') && file_exists(public_path('images/hero/hero-gorilla.webp')))
-        <link rel="preload" as="image" href="{{ asset('images/hero/hero-gorilla.webp') }}" type="image/webp" fetchpriority="high">
+        <link rel="preload" as="image" href="{{ asset('images/hero/hero-gorilla.webp') }}?v={{ filemtime(public_path('images/hero/hero-gorilla.webp')) }}" type="image/webp" fetchpriority="high">
     @endif
 
     <!-- Dark Mode Preference Script (Default to Light Mode) -->
