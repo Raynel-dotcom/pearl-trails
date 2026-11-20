@@ -9,16 +9,17 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 0.9rem 1.5rem;
+  padding: 0.8rem 1.25rem;
   transition: background-color 0.35s ease, padding 0.3s ease, box-shadow 0.35s ease;
   background: transparent;
+  box-sizing: border-box;
 }
 
 /* On internal pages, header is always solid dark green to prevent glitching backgrounds */
 .is-internal-page .site-header,
 .site-header.scrolled {
   background: var(--forest) !important;
-  padding: 0.75rem 1.5rem;
+  padding: 0.65rem 1.25rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   border-bottom: 1px solid rgba(247, 241, 227, 0.08);
 }
@@ -37,20 +38,21 @@
 }
 
 .header-container {
-  max-width: 1400px;
+  max-width: 1440px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.65rem;
+  gap: 0.5rem;
+  box-sizing: border-box;
 }
 
 /* --- Brand Logo --- */
 .brand-link {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
   text-decoration: none;
   color: var(--white);
   transition: transform 0.2s ease, opacity 0.2s ease;
@@ -62,8 +64,8 @@
 }
 
 .brand-icon-svg {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   fill: var(--gold);
   flex-shrink: 0;
 }
@@ -75,7 +77,7 @@
 
 .brand-name {
   font-family: var(--font-serif);
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1.1;
@@ -85,9 +87,9 @@
 
 .brand-tagline {
   font-family: var(--font-sans);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   color: var(--gold-soft);
   text-transform: uppercase;
   margin-top: 2px;
@@ -97,14 +99,15 @@
 .glass-nav-pill {
   display: flex;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.15rem;
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-full);
-  padding: 0.35rem 0.65rem;
+  padding: 0.28rem 0.5rem;
   box-shadow: var(--shadow-sm);
+  flex-shrink: 1;
 }
 
 .nav-item {
@@ -114,14 +117,14 @@
 .nav-link-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.2rem;
   background: transparent;
   border: none;
   color: var(--white);
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: 0.79rem;
   font-weight: 500;
-  padding: 0.38rem 0.65rem;
+  padding: 0.32rem 0.52rem;
   border-radius: var(--radius-full);
   text-decoration: none;
   cursor: pointer;
@@ -278,13 +281,13 @@
 .btn-gold-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   background: var(--gold);
   color: var(--forest);
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 0.82rem;
-  padding: 0.48rem 0.95rem;
+  font-size: 0.8rem;
+  padding: 0.44rem 0.85rem;
   border-radius: var(--radius-full);
   text-decoration: none;
   transition: all 0.25s ease;
@@ -311,129 +314,233 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hamburger-toggle-btn:hover {
+  background: rgba(247, 241, 227, 0.15);
+  transform: scale(1.04);
 }
 
 /* --- Mobile Drawer Menu --- */
 .mobile-nav-drawer {
-  display: none;
+  display: block;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  max-width: min(380px, 86vw);
+  height: 100vh;
+  height: 100dvh;
+  background: var(--forest);
+  border-left: 1px solid var(--glass-border);
+  z-index: 1100;
+  padding: 1.25rem 1.25rem 2rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-glass);
 }
 
-@media (max-width: 1180px) {
+.mobile-nav-drawer.open {
+  right: 0;
+}
+
+.drawer-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid rgba(247, 241, 227, 0.1);
+  margin-bottom: 1.15rem;
+}
+
+.drawer-close-btn {
+  background: rgba(247, 241, 227, 0.08);
+  border: none;
+  color: var(--white);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.drawer-close-btn:hover {
+  background: rgba(247, 241, 227, 0.18);
+}
+
+.mobile-nav-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.accordion-item {
+  border-bottom: 1px solid rgba(247, 241, 227, 0.06);
+  padding-bottom: 0.4rem;
+}
+
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  font-weight: 600;
+  padding: 0.75rem 0.25rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.accordion-content {
+  display: none;
+  padding-left: 0.85rem;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.accordion-item.active .accordion-content {
+  display: flex;
+}
+
+.accordion-item.active .accordion-trigger svg {
+  transform: rotate(180deg);
+}
+
+.mobile-sub-link {
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 0.88rem;
+  padding: 0.45rem 0;
+  transition: color 0.2s ease;
+  display: block;
+}
+
+.mobile-sub-link:hover {
+  color: var(--gold);
+}
+
+.drawer-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1090;
+}
+
+.drawer-backdrop.open {
+  display: block;
+}
+
+/* ==========================================================================
+   RESPONSIVE NAVBAR BREAKPOINTS (Prevent Clipping on All Screens)
+   ========================================================================== */
+
+/* Compact Desktop (1240px to 1380px): Tighten padding and hide tagline so Plan Your Trip button NEVER overflows */
+@media (max-width: 1380px) and (min-width: 1241px) {
+  .brand-tagline {
+    display: none;
+  }
+  .glass-nav-pill {
+    padding: 0.22rem 0.35rem;
+    gap: 0.08rem;
+  }
+  .nav-link-btn {
+    padding: 0.28rem 0.42rem;
+    font-size: 0.76rem;
+  }
+  .btn-gold-pill {
+    padding: 0.4rem 0.72rem;
+    font-size: 0.76rem;
+  }
+}
+
+/* Tablet & Compact Breakpoint (<= 1240px): Switch to mobile drawer to prevent ANY collision */
+@media (max-width: 1240px) {
   .glass-nav-pill {
     display: none;
   }
   .hamburger-toggle-btn {
     display: inline-flex;
   }
+}
 
-  .mobile-nav-drawer {
-    display: block;
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    max-width: 380px;
-    height: 100vh;
-    background: var(--forest);
-    border-left: 1px solid var(--glass-border);
-    z-index: 1100;
-    padding: 1.5rem;
-    overflow-y: auto;
-    transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: var(--shadow-glass);
+/* Tablets (769px to 1240px): Show compact "Plan Trip" button with hamburger */
+@media (max-width: 1240px) and (min-width: 769px) {
+  .btn-gold-pill {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.78rem;
   }
+}
 
-  .mobile-nav-drawer.open {
-    right: 0;
+/* Mobile Devices (<= 768px):
+   Hide .btn-gold-pill in sticky header to keep header perfectly proportional.
+   (The full-width gold button is right inside the drawer and in page flows)
+*/
+@media (max-width: 768px) {
+  .site-header {
+    padding: 0.6rem 0.85rem;
   }
-
-  .drawer-top-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid rgba(247, 241, 227, 0.1);
-    margin-bottom: 1.25rem;
+  .header-container {
+    gap: 0.35rem;
   }
-
-  .drawer-close-btn {
-    background: rgba(247, 241, 227, 0.08);
-    border: none;
-    color: var(--white);
+  .brand-tagline {
+    display: none;
+  }
+  .brand-icon-svg {
+    width: 30px;
+    height: 30px;
+  }
+  .brand-name {
+    font-size: 1.1rem;
+  }
+  .header-actions-right .btn-gold-pill {
+    display: none !important;
+  }
+  .action-pill-group {
+    padding: 0.2rem 0.35rem;
+    gap: 0.15rem;
+  }
+  .icon-btn {
+    width: 28px;
+    height: 28px;
+  }
+  .currency-select-inline {
+    font-size: 0.72rem;
+    padding: 0.15rem 0.25rem;
+  }
+  .hamburger-toggle-btn {
     width: 36px;
     height: 36px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
+}
 
-  .mobile-nav-accordion {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+/* Extra small mobile phones (<= 380px) */
+@media (max-width: 380px) {
+  .site-header {
+    padding: 0.5rem 0.65rem;
   }
-
-  .accordion-item {
-    border-bottom: 1px solid rgba(247, 241, 227, 0.06);
-    padding-bottom: 0.5rem;
-  }
-
-  .accordion-trigger {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: transparent;
-    border: none;
-    color: var(--white);
-    font-family: var(--font-sans);
+  .brand-name {
     font-size: 1rem;
-    font-weight: 600;
-    padding: 0.75rem 0.25rem;
-    cursor: pointer;
-    text-align: left;
+    letter-spacing: 0.02em;
   }
-
-  .accordion-content {
+  .brand-icon-svg {
+    width: 26px;
+    height: 26px;
+  }
+  .action-pill-group .icon-btn:not(#headerThemeToggle) {
     display: none;
-    padding-left: 1rem;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .accordion-item.active .accordion-content {
-    display: flex;
-  }
-
-  .accordion-item.active .accordion-trigger svg {
-    transform: rotate(180deg);
-  }
-
-  .mobile-sub-link {
-    color: var(--cream);
-    text-decoration: none;
-    font-size: 0.9rem;
-    padding: 0.4rem 0;
-    transition: color 0.2s ease;
-  }
-
-  .mobile-sub-link:hover {
-    color: var(--gold);
-  }
-
-  .drawer-backdrop {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    z-index: 1090;
-  }
-
-  .drawer-backdrop.open {
-    display: block;
   }
 }
 
