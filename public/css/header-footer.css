@@ -445,12 +445,12 @@
 
 /* ==========================================================================
    RESPONSIVE NAVBAR BREAKPOINTS
-   Desktop / Laptops (>= 992px): ALWAYS show full horizontal menu bar (NO hamburger)
-   Mobile / Small Tablets (<= 991px): Show hamburger menu drawer
+   Laptops & Bigger Screens (>= 1025px): Full horizontal menu bar (NO hamburger)
+   Tablets Going Down (<= 1024px): Hamburger menu drawer starts here
    ========================================================================== */
 
-/* Laptops & Standard Desktops (992px to 1380px): Compact styling so full desktop nav bar NEVER overflows or clips */
-@media (max-width: 1380px) and (min-width: 992px) {
+/* Laptops & Compact Desktops (1025px to 1380px): Compact styling so full desktop nav bar fits seamlessly without clipping */
+@media (max-width: 1380px) and (min-width: 1025px) {
   .brand-tagline {
     display: none;
   }
@@ -478,15 +478,15 @@
   }
 }
 
-/* Compact Laptops (992px to 1150px): Hide duplicate right-side button since "Plan My Trip" is already inside the center menu */
-@media (max-width: 1150px) and (min-width: 992px) {
+/* Compact Laptops (1025px to 1180px): Hide right gold pill button since "Plan My Trip" is already inside the center pill */
+@media (max-width: 1180px) and (min-width: 1025px) {
   .header-actions-right .btn-gold-pill {
     display: none !important;
   }
 }
 
-/* Mobile Devices & Small Tablets (<= 991px): Switch to mobile drawer */
-@media (max-width: 991px) {
+/* Tablets Going Down (<= 1024px): Hamburger menu starts here for all tablets & phones */
+@media (max-width: 1024px) {
   .glass-nav-pill {
     display: none !important;
   }
@@ -495,8 +495,8 @@
   }
 }
 
-/* Tablets (769px to 991px): Show compact "Plan Trip" button alongside hamburger */
-@media (max-width: 991px) and (min-width: 769px) {
+/* Tablets (769px to 1024px): Show compact "Plan Trip" button alongside hamburger */
+@media (max-width: 1024px) and (min-width: 769px) {
   .btn-gold-pill {
     padding: 0.4rem 0.75rem;
     font-size: 0.78rem;
