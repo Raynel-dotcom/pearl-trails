@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminInquiryController;
 use App\Http\Controllers\AdminListingController;
 use App\Http\Controllers\BrowseController;
 use App\Http\Controllers\ContactController;
@@ -77,6 +78,10 @@ Route::middleware(['auth', EnsureAdmin::class])->prefix('admin')->name('admin.')
     Route::post('/listings/{listing}/approve', [AdminListingController::class, 'approve'])->name('listings.approve');
     Route::post('/listings/{listing}/reject', [AdminListingController::class, 'reject'])->name('listings.reject');
     Route::delete('/listings/{listing}', [AdminListingController::class, 'destroy'])->name('listings.destroy');
+
+    // Customer Inquiries & Messages
+    Route::get('/messages', [AdminInquiryController::class, 'index'])->name('messages');
+    Route::delete('/messages/{message}', [AdminInquiryController::class, 'destroy'])->name('messages.destroy');
 });
 
 // User Profile & Account Dashboard

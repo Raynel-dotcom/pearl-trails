@@ -15,6 +15,12 @@
         </div>
     @endif
 
+    <!-- Admin Portal Sections -->
+    <div class="moderation-tabs-bar" style="margin-bottom: 1.25rem; border-bottom: 2px solid rgba(232, 163, 23, 0.25); padding-bottom: 0.5rem;">
+        <a href="{{ route('admin.listings') }}" class="tab-link active">Vendor Listings</a>
+        <a href="{{ route('admin.messages') }}" class="tab-link">Customer Inquiries</a>
+    </div>
+
     <!-- Moderation Tabs -->
     <div class="moderation-tabs-bar">
         <a href="{{ route('admin.listings') }}" class="tab-link {{ empty($status) ? 'active' : '' }}">All Submissions</a>

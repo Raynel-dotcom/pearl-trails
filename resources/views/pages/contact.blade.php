@@ -217,6 +217,22 @@
                             Send Message &rarr;
                         </button>
                     </div>
+
+                    @if(!empty(config('site.whatsapp')))
+                    <div style="text-align: center; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(247, 241, 227, 0.1);">
+                        <p style="font-size: 0.85rem; color: #a0aec0; margin-bottom: 0.6rem;">Need an instant answer or prefer mobile messaging?</p>
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', config('site.whatsapp')) }}?text={{ urlencode('Hello Pearl Trails, I have an inquiry about Uganda travel') }}" 
+                           target="_blank" 
+                           rel="noopener"
+                           class="btn-vendor-outline"
+                           style="background: #25D366; color: #ffffff; border-color: #25D366; font-size: 0.88rem; padding: 0.55rem 1.25rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 9999px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                            </svg>
+                            Chat with us directly on WhatsApp &rarr;
+                        </a>
+                    </div>
+                    @endif
                 </form>
             </div>
         </div>
