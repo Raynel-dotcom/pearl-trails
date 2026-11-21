@@ -444,40 +444,59 @@
 }
 
 /* ==========================================================================
-   RESPONSIVE NAVBAR BREAKPOINTS (Prevent Clipping on All Screens)
+   RESPONSIVE NAVBAR BREAKPOINTS
+   Desktop / Laptops (>= 992px): ALWAYS show full horizontal menu bar (NO hamburger)
+   Mobile / Small Tablets (<= 991px): Show hamburger menu drawer
    ========================================================================== */
 
-/* Compact Desktop (1281px to 1420px): Tighten padding and hide tagline so Plan Your Trip button NEVER overflows */
-@media (max-width: 1420px) and (min-width: 1281px) {
+/* Laptops & Standard Desktops (992px to 1380px): Compact styling so full desktop nav bar NEVER overflows or clips */
+@media (max-width: 1380px) and (min-width: 992px) {
   .brand-tagline {
     display: none;
   }
+  .brand-name {
+    font-size: 1.15rem;
+  }
+  .header-container {
+    gap: 0.35rem;
+  }
   .glass-nav-pill {
-    padding: 0.22rem 0.35rem;
-    gap: 0.08rem;
+    display: flex !important;
+    padding: 0.2rem 0.32rem;
+    gap: 0.05rem;
   }
   .nav-link-btn {
-    padding: 0.26rem 0.4rem;
-    font-size: 0.75rem;
+    padding: 0.24rem 0.36rem;
+    font-size: 0.72rem;
   }
   .btn-gold-pill {
-    padding: 0.38rem 0.68rem;
-    font-size: 0.76rem;
-  }
-}
-
-/* Tablet & Compact Desktop Breakpoint (<= 1280px): Switch to mobile drawer to prevent ANY collision */
-@media (max-width: 1280px) {
-  .glass-nav-pill {
-    display: none;
+    padding: 0.35rem 0.65rem;
+    font-size: 0.74rem;
   }
   .hamburger-toggle-btn {
-    display: inline-flex;
+    display: none !important;
   }
 }
 
-/* Tablets (769px to 1280px): Show compact "Plan Trip" button with hamburger */
-@media (max-width: 1280px) and (min-width: 769px) {
+/* Compact Laptops (992px to 1150px): Hide duplicate right-side button since "Plan My Trip" is already inside the center menu */
+@media (max-width: 1150px) and (min-width: 992px) {
+  .header-actions-right .btn-gold-pill {
+    display: none !important;
+  }
+}
+
+/* Mobile Devices & Small Tablets (<= 991px): Switch to mobile drawer */
+@media (max-width: 991px) {
+  .glass-nav-pill {
+    display: none !important;
+  }
+  .hamburger-toggle-btn {
+    display: inline-flex !important;
+  }
+}
+
+/* Tablets (769px to 991px): Show compact "Plan Trip" button alongside hamburger */
+@media (max-width: 991px) and (min-width: 769px) {
   .btn-gold-pill {
     padding: 0.4rem 0.75rem;
     font-size: 0.78rem;
