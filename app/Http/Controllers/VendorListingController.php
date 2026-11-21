@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewListingNotificationMail;
 use App\Models\Destination;
 use App\Models\Listing;
 use App\Models\ListingActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class VendorListingController extends Controller
 {
@@ -84,6 +87,16 @@ class VendorListingController extends Controller
                         'fee_ugx' => (int) ($act['fee_ugx'] ?? 0),
                     ]);
                 }
+            }
+        }
+
+        // Notify site admin that a new business has been listed
+        $adminEmail = config('site.email');
+        if (!empty($adminEmail)) {
+            try {
+                Mail::to($adminEmail)->send(new NewListingNotificationMail($listing));
+            } catch (\Throwable $e) {
+                Log::error("Failed to send vendor listing notification email: " . $e->getMessage());
             }
         }
 

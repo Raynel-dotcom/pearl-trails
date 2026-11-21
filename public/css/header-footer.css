@@ -447,8 +447,8 @@
    RESPONSIVE NAVBAR BREAKPOINTS (Prevent Clipping on All Screens)
    ========================================================================== */
 
-/* Compact Desktop (1240px to 1380px): Tighten padding and hide tagline so Plan Your Trip button NEVER overflows */
-@media (max-width: 1380px) and (min-width: 1241px) {
+/* Compact Desktop (1281px to 1420px): Tighten padding and hide tagline so Plan Your Trip button NEVER overflows */
+@media (max-width: 1420px) and (min-width: 1281px) {
   .brand-tagline {
     display: none;
   }
@@ -457,17 +457,17 @@
     gap: 0.08rem;
   }
   .nav-link-btn {
-    padding: 0.28rem 0.42rem;
-    font-size: 0.76rem;
+    padding: 0.26rem 0.4rem;
+    font-size: 0.75rem;
   }
   .btn-gold-pill {
-    padding: 0.4rem 0.72rem;
+    padding: 0.38rem 0.68rem;
     font-size: 0.76rem;
   }
 }
 
-/* Tablet & Compact Breakpoint (<= 1240px): Switch to mobile drawer to prevent ANY collision */
-@media (max-width: 1240px) {
+/* Tablet & Compact Desktop Breakpoint (<= 1280px): Switch to mobile drawer to prevent ANY collision */
+@media (max-width: 1280px) {
   .glass-nav-pill {
     display: none;
   }
@@ -476,8 +476,8 @@
   }
 }
 
-/* Tablets (769px to 1240px): Show compact "Plan Trip" button with hamburger */
-@media (max-width: 1240px) and (min-width: 769px) {
+/* Tablets (769px to 1280px): Show compact "Plan Trip" button with hamburger */
+@media (max-width: 1280px) and (min-width: 769px) {
   .btn-gold-pill {
     padding: 0.4rem 0.75rem;
     font-size: 0.78rem;

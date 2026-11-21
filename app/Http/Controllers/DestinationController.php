@@ -113,7 +113,13 @@ class DestinationController extends Controller
     {
         $destination = Destination::with(['places', 'listings' => function ($q) {
             $q->where('status', 'approved')->with('activities');
-        }])->where('slug', $slug)->firstOrFail();
+        }])->where('slug', $slug)
+           ->orWhere('slug', $slug . '-np')
+           ->first();
+
+        if (!$destination) {
+            abort(404);
+        }
 
         $quiz = session('quiz');
         $origin = $quiz['origin'] ?? 'Kampala';

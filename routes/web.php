@@ -26,8 +26,16 @@ Route::get('/plan/reset', [QuizController::class, 'reset'])->name('plan.reset');
 
 // Stays, Eat, Recreation
 Route::get('/stays', [BrowseController::class, 'stays'])->name('stays');
+Route::get('/where-to-stay', fn() => redirect()->route('stays', request()->query(), 301));
+
 Route::get('/eat', [BrowseController::class, 'eat'])->name('eat');
+Route::get('/where-to-eat', fn() => redirect()->route('eat', request()->query(), 301));
+
 Route::get('/recreation', [BrowseController::class, 'recreation'])->name('recreation');
+Route::get('/recreation/{activity_type}', function (\Illuminate\Http\Request $request, string $activity_type) {
+    $request->merge(['activity_type' => ucfirst($activity_type)]);
+    return app(BrowseController::class)->recreation($request);
+});
 Route::post('/picks', [BrowseController::class, 'savePick'])->name('picks.save');
 
 // Saved Trips
